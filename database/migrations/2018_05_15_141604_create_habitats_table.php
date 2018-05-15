@@ -23,9 +23,9 @@ class CreateHabitatsTable extends Migration
             $table->string('adresse');
             $table->integer('code_postal');
             $table->string('ville');
-            $table->int('nb_lit_simple');
-            $table->int('nb_lit_double');
-            $table->int('nb_personne_max');
+            $table->integer('nb_lit_simple');
+            $table->integer('nb_lit_double');
+            $table->integer('nb_personne_max');
             $table->string('prix');
             $table->foreign('id_utilisateur')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('id_type_habitat')->references('id')->on('type_habitat')->onDelete('cascade');
