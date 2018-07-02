@@ -15,20 +15,22 @@ class CreateHabitatsTable extends Migration
     {
         Schema::create('habitats', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('id_utilisateur')->unsigned();
+            $table->integer('id_proprietaire')->unsigned();
             $table->integer('id_type_habitat')->unsigned();
             $table->string('titre');
             $table->string('description');
-            $table->string('photo');
+            $table->string('photo')->nullable();
             $table->string('adresse');
             $table->integer('code_postal');
             $table->string('ville');
             $table->integer('nb_lit_simple');
             $table->integer('nb_lit_double');
             $table->integer('nb_personne_max');
+            $table->date('date_debut_dispo');
+            $table->date('date_fin_dispo');
             $table->string('prix');
-            $table->foreign('id_utilisateur')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('id_type_habitat')->references('id')->on('type_habitat')->onDelete('cascade');
+            $table->foreign('id_proprietaire')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('id_type_habitat')->references('id')->on('type_habitats')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -41,7 +43,7 @@ class CreateHabitatsTable extends Migration
     public function down()
     {
         Schema::table('habitats', function(Blueprint $table) {
-            $table->dropForeign('habitats_id_utilisateur_foreign');
+            $table->dropForeign('habitats_id_proprietaire_foreign');
         });
 
         Schema::table('habitats', function(Blueprint $table) {

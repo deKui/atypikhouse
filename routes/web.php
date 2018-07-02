@@ -11,10 +11,25 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');
+
+Route::get('recherche', 'RechercheController@index')->name('recherche');
+
+Route::get('habitat/{id}', 'HabitatController@show')->name('habitat.show');
+
+Route::get('habitat', 'HabitatController@index')->name('habitat.index');
+
+Route::middleware('auth')->group(function () {
+
+	Route::get('profil/{id}', 'UserController@index')->name('profil.index');
+
+	Route::get('profil/{id}/edit', 'UserController@edit')->name('profil.edit');
+
+	Route::resource('profil', 'UserController', [
+        'only' => ['update'],
+    ]);
+
+
+});
