@@ -11,8 +11,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(TypeHabitatsTableSeeder::class);
-        $this->call(UsersTableSeeder::class);
-        $this->call(HabitatsTableSeeder::class);
+        //$this->call(TypeHabitatsTableSeeder::class);
+        //$this->call(HabitatsTableSeeder::class);
+        //$this->call(UsersTableSeeder::class);
+        
+
+        factory(App\Models\User::class, 5)->create();
+        factory(App\Models\Habitat::class, 5)->create();
     }
 }
