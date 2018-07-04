@@ -13,7 +13,7 @@
 							<li class="list-group-item"> Informations personnelles</li>
 						    <li class="list-group-item">Nom : {{ $user->name }}</li>
 						    <li class="list-group-item">Mail : {{ $user->email }}</li>  
-						    <li class="list-group-item"> <a href="{{ route('messages.conversation', $user->name) }}" class="btn btn-primary"> Contacter </a></li>  
+						    <li class="list-group-item"> <a href="{{ route('messages.conversation', [$user->name, auth()->user()->id]) }}" class="btn btn-primary"> Contacter </a></li>  
 						</ul>
 					</div>
 				</div>

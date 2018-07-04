@@ -33,7 +33,8 @@ Route::middleware('auth')->group(function () {
         'only' => ['update'],
     ]);
 
-    Route::get('message/{name}', 'MessageController@conversation')->name('messages.conversation');
+    Route::get('message/{name}/{id_user}', 'MessageController@conversation')->name('messages.conversation');
 
+    Route::post('message/{id_propri}/{id_user}', 'MessageController@store')->name('messages.store');
 
 });
