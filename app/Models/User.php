@@ -27,10 +27,25 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-
+    /**
+     * Auteur : Lucas
+     * Retourne un user à partir de son id
+    */
     public function getUser($id_user)
     {
         $user = User::where('id', $id_user)->first();
+
+        return $user;
+    }
+
+
+    /**
+     * Auteur : Lucas
+     * Retourne un user à partir de son nom
+    */
+    public function getUserByName($name_user)
+    {
+        $user = User::where('name', $name_user)->first();
 
         return $user;
     }

@@ -9,6 +9,7 @@ class Habitat extends Model
 {
 
 	/**
+     * Auteur : Lucas 
      * Return le nom d'un utilisateur à partir de son id
      */
     public function getNameUser($id_user) {
@@ -20,6 +21,7 @@ class Habitat extends Model
 
 
     /**
+     * Auteur : Lucas
      * Return le nom d'un type à partir de son id
      */
     public function getNameType($id_type) {
@@ -30,6 +32,7 @@ class Habitat extends Model
     }
 
     /**
+     * Auteur : Lucas
      * Return un habitat à partir de son id
      */
     public function getHabitat($id_habitat) {

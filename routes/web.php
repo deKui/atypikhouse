@@ -27,9 +27,13 @@ Route::middleware('auth')->group(function () {
 
 	Route::get('profil/{id}/edit', 'UserController@edit')->name('profil.edit');
 
+	Route::get('profil/public/{name}', 'UserController@show')->name('profil.show');
+
 	Route::resource('profil', 'UserController', [
         'only' => ['update'],
     ]);
+
+    Route::get('message/{name}', 'MessageController@conversation')->name('messages.conversation');
 
 
 });
