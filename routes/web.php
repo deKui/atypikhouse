@@ -30,6 +30,8 @@ Route::middleware('auth')->group(function () {
 	Route::resource('profil', 'UserController', [
         'only' => ['update'],
     ]);
+	
+	Route::get('voyage/{id}','VoyageController@index')->name('voyage.index');
 
 
 });
