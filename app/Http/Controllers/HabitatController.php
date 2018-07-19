@@ -2,19 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\HabitatRepository;
 use Illuminate\Http\Request;
 use App\Models\Habitat;
+use App\Models\Avis;
 
 class HabitatController extends Controller
 {
-    protected $habitat;
+    /**
+     * @var HabitatRepository
+     */
+    protected $repo;
 
     /**
      * Create a new HabitatController instance.
      */
-    public function __construct(Habitat $habitat)
+    public function __construct(HabitatRepository $habitatRepository)
     {
-        $this->habitat = $habitat;
+        $this->repo = $habitatRepository;
     }
 
     /**
@@ -29,12 +34,14 @@ class HabitatController extends Controller
 
 
     /**
-     * Affiche un habitat à partir de son id
+     * Affiche un habitat
      */
-    public function show($id_habitat) {
+    public function show(Habitat $habitat) {
+        
+    	$habitats = $this->repo->getHabitat($habitat->id);
+        
+        $messages = Avis::where('id_habitat', $habitat->id)->get();
 
-    	$habitat = $this->habitat->getHabitat($id_habitat);
-
-        return view('habitat.show', compact('habitat'));
+        return view('habitat.show', compact('habitats', 'messages'));
     }
 }

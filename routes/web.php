@@ -17,24 +17,21 @@ Route::get('/', 'HomeController@index')->name('home');
 
 Route::get('recherche', 'RechercheController@index')->name('recherche');
 
-Route::get('habitat/{id}', 'HabitatController@show')->name('habitat.show');
+Route::get('habitats/{habitat}', 'HabitatController@show')->name('habitat.show');
 
-Route::get('habitat', 'HabitatController@index')->name('habitat.index');
+Route::get('habitats', 'HabitatController@index')->name('habitat.index');
 
 Route::middleware('auth')->group(function () {
+
+	Route::post('habitats/{habitat}', 'AvisController@store');
 
 	Route::get('profil/{id}', 'UserController@index')->name('profil.index');
 
 	Route::get('profil/{id}/edit', 'UserController@edit')->name('profil.edit');
 
-	Route::get('profil/public/{name}', 'UserController@show')->name('profil.show');
+	Route::get('profil/public/{user}', 'UserController@show')->name('profil.show');
 
 	Route::resource('profil', 'UserController', [
         'only' => ['update'],
     ]);
-
-    Route::get('message/{name}/{id_user}', 'MessageController@conversation')->name('messages.conversation');
-
-    Route::post('message/{id_propri}/{id_user}', 'MessageController@store')->name('messages.store');
-
 });

@@ -26,7 +26,6 @@ class HabitatsTableSeeder extends Seeder
             'date_debut_dispo' => '2018-06-29',
             'date_fin_dispo' => '2018-07-29',
             'prix' => '20€ / nuit',
-
          ]);
     }
 }

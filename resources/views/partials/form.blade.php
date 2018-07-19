@@ -1,8 +1,8 @@
-<div class="form-group{{ $errors->has($name) ? ' has-error' : '' }}">
+<div class="form-group {{ $errors->has($name) ? ' has-error' : '' }}">
 
-	<label for="{{ $name }}" class="col-md-4 control-label">{{ $title }}</label>
+	<label for="{{ $name }}">{{ $title }}</label>
 		
-		<div class="col-md-6">
+		
 
 		    	<input id="{{ $name }}" type="{{ $type }}" class="form-control" name="{{ $name }}" value="{{ old($name, isset($value) ? $value : ' ') }}" {{ $required ? 'required' : ''}}>
 
@@ -12,5 +12,5 @@
                     </span>
                 @endif
                 
-		</div>
+		
 </div>

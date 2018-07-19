@@ -34,11 +34,11 @@ class UserController extends Controller
      * Auteur : Lucas
      * Affiche le profil public d'un utilisateur à partir d'un pseudo (à faire)
      */
-    public function show($user_name) 
+    public function show(User $user) 
     {
-        $user = $this->user->getUserByName($user_name);
-
-        return view('profil.show', compact('user'));   
+        $users = User::find($user->id);
+        
+        return view('profil.show', compact('users'));   
     }
 
 

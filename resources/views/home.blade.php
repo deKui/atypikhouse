@@ -4,14 +4,14 @@
 
 <div class="container">
     
-    <div class="row">
+    <!-- <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     Dashboard
                 </div>
 
-                <!-- <div class="panel-body">
+                <div class="panel-body">
                     @if (session('status'))
                         <div class="alert alert-success">
                             {{ session('status') }}
@@ -19,19 +19,19 @@
                     @endif
 
                     You are logged in !
-                </div> -->
+                </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
 
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Réserver votre séjour</div>
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">Réserver votre séjour</div>
 
-                <div class="panel-body">
-                    <form class="form-horizontal" method="GET" action="{{ route('recherche') }}">
+                <div class="card-body">
+                    <form method="GET" action="{{ route('recherche') }}">
 
                         @include('partials.form', [
                             'title' => __('Destination'),
@@ -41,8 +41,7 @@
                             ])
 
                         <div class="form-group">
-                            <label class="col-md-4 control-label" for="voyageurs"> Voyageurs</label>
-                            <div class="col-md-6">
+                            <label for="voyageurs"> Voyageurs</label>
                                 <select id="voyageurs" name="voyageurs" class="form-control">
 
                                     <option value="1">1</option>
@@ -55,7 +54,6 @@
                                     <option value="8">8</option>
                                     
                                 </select>
-                            </div>
                         </div> 
 
                         @include('partials.form', [
@@ -75,11 +73,9 @@
                         
 
                         <div class="form-group">
-                            <div class="col-md-8 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Rechercher
-                                </button>
-                            </div>
+                            <button type="submit" class="btn btn-primary">
+                                Rechercher
+                            </button>
                         </div>
                     </form>
                 </div>
