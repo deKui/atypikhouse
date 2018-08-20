@@ -37,4 +37,11 @@ class HabitatController extends Controller
 
         return view('habitat.show', compact('habitat'));
     }
+
+    public function showAllProprietaire($id_proprietaire){
+
+         $habitat = $this->habitat->getHabitatProprio($id_proprietaire);
+
+        return view('habitat.showAllProprietaire', compact('habitatProprio'));
+    }
 }

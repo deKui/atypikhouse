@@ -38,4 +38,13 @@ class Habitat extends Model
 
         return $habitat;
     }
+
+    /*** Retourne les habitats d'un propriétaire ***/
+
+    public function getHabitatProprio($id_proprietaire) {
+
+        $habitat = Habitat::where('id_proprietaire', $id_proprietaire)->get();
+
+        return $habitat;
+    }
 }

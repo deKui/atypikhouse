@@ -31,7 +31,9 @@ Route::middleware('auth')->group(function () {
         'only' => ['update'],
     ]);
 	
-	Route::get('voyage/{id}','VoyageController@index')->name('voyage.index');
+	Route::get('reservation/{id}','ReservationController@index')->name('reservation.index');
+
+	Route::get('habitat/{id_proprietaire}','HabitatController@showAllProprietaire')->name('habitat.showAllProprietaire');
 
 
 });
