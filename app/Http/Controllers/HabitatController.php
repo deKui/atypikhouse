@@ -40,7 +40,7 @@ class HabitatController extends Controller
 
 
     /**
-     * Affiche un habitat
+     * Affiche un seul habitat
      */
     public function show(Habitat $habitat) {
         
@@ -71,8 +71,6 @@ class HabitatController extends Controller
         $proprio = Auth::user()->id;
 
         $image = Storage::disk('public')->put('', $request->file('image'));
-
-        //dd($image);
 
         Habitat::create([
             'id_proprietaire' => $proprio,

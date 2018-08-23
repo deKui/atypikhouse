@@ -16,7 +16,7 @@
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">Titre : {{ $habitat->titre }} </li>
                         <li class="list-group-item">Description : {{ $habitat->description }} </li>
-                        <li class="list-group-item">Propriétaire : {{ $habitat->proprio->name }} </li>
+                        <li class="list-group-item">Propriétaire : {{ $habitat->proprio->pseudo }} </li>
                         <li class="list-group-item">Type : {{ $habitat->type->nom }} </li>
                         <li class="list-group-item">Adresse : {{ $habitat->adresse }} {{ $habitat->code_postal }} {{ $habitat->ville }} </li>
                         <li class="list-group-item">Lit(s) simple(s) : {{ $habitat->nb_lit_simple }} </li>

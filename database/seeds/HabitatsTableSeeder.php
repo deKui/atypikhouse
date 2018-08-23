@@ -13,7 +13,7 @@ class HabitatsTableSeeder extends Seeder
     public function run()
     {
         Habitat::create([
-        	'id_proprietaire' => 3,
+        	'id_proprietaire' => 1,
             'id_type_habitat' => 1,
             'titre' => 'Cabane en bois',
             'description' => 'Ceci est une belle cabane',

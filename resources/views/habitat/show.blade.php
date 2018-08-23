@@ -14,7 +14,7 @@
                         <li class="list-group-item">Nous sommes sur la page de cet habitat </li>
                         <li class="list-group-item">Titre : {{ $habitats->titre }} </li>
                         <li class="list-group-item">Description : {{ $habitats->description }} </li>
-                        <li class="list-group-item">Propriétaire : <a href="{{ route('profil.show', $habitats->id_proprietaire) }}"> {{ $habitats->proprio->name }} </a></li>
+                        <li class="list-group-item">Propriétaire : <a href="{{ route('profil.show', $habitats->id_proprietaire) }}"> {{ $habitats->proprio->pseudo }} </a></li>
                         <li class="list-group-item">Type : {{ $habitats->type->nom }} </li>
                         <li class="list-group-item">Adresse : {{ $habitats->adresse }} {{ $habitats->code_postal }} {{ $habitats->ville }} </li>
                         <li class="list-group-item">Lit(s) simple(s) : {{ $habitats->nb_lit_simple }} </li>

@@ -11,7 +11,7 @@
 					<div class="card-body">
 						<ul class="list-group list-group-flush">
 							<li class="list-group-item"> Informations personnelles</li>
-						    <li class="list-group-item">Nom : {{ $users->name }}</li>
+						    <li class="list-group-item">Nom : {{ $users->pseudo }}</li>
 						    <li class="list-group-item">Mail : {{ $users->email }}</li>
 						</ul>
 					</div>
