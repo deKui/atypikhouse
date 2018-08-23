@@ -68,6 +68,10 @@
                                     <li class="dropdown-item">
                                         <a href="{{ route('profil.index', auth()->user()->id) }}"> Mon profil </a>
                                     </li>
+
+                                    <li class="dropdown-item">
+                                        <a href="{{ route('habitat.create') }}"> Enregistrer un habitat </a>
+                                    </li>
                                 </ul>
                             </li>
                         @endguest

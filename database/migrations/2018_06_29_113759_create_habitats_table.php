@@ -28,7 +28,7 @@ class CreateHabitatsTable extends Migration
             $table->integer('nb_personne_max');
             $table->date('date_debut_dispo');
             $table->date('date_fin_dispo');
-            $table->string('prix');
+            $table->integer('prix');
             $table->foreign('id_proprietaire')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('id_type_habitat')->references('id')->on('type_habitats')->onDelete('cascade');
             $table->timestamps();
