@@ -41,19 +41,21 @@
                             ])
 
                         <div class="form-group">
-                            <label for="voyageurs"> Voyageurs</label>
-                                <select id="voyageurs" name="voyageurs" class="form-control">
+                            <label class="col-md-4" for="voyageurs"> Voyageurs</label>
+                                <div class="col-md-12">
+                                    <select id="voyageurs" name="voyageurs" class="form-control">
 
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                    <option value="6">6</option>
-                                    <option value="7">7</option>
-                                    <option value="8">8</option>
-                                    
-                                </select>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        
+                                    </select>    
+                                </div>
                         </div> 
 
                         @include('partials.form', [
@@ -73,9 +75,11 @@
                         
 
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary">
-                                Rechercher
-                            </button>
+                            <div class="col-md-12">
+                                <button type="submit" class="btn btn-primary">
+                                    Rechercher
+                                </button>    
+                            </div>
                         </div>
                     </form>
                 </div>

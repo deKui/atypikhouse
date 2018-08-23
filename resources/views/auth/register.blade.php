@@ -3,18 +3,18 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Register</div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">Register</div>
 
-                <div class="panel-body">
+                <div class="card-body">
                     <form class="form-horizontal" method="POST" action="{{ route('register') }}">
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('pseudo') ? ' has-error' : '' }}">
                             <label for="pseudo" class="col-md-4 control-label">Pseudo</label>
 
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <input id="pseudo" type="text" class="form-control" name="pseudo" value="{{ old('pseudo') }}" required autofocus>
 
                                 @if ($errors->has('pseudo'))
@@ -28,7 +28,7 @@
                         <div class="form-group{{ $errors->has('prenom') ? ' has-error' : '' }}">
                             <label for="prenom" class="col-md-4 control-label">Prenom</label>
 
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <input id="prenom" type="text" class="form-control" name="prenom" value="{{ old('prenom') }}" required autofocus>
 
                                 @if ($errors->has('prenom'))
@@ -42,7 +42,7 @@
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                             <label for="email" class="col-md-4 control-label">E-Mail Address</label>
 
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
 
                                 @if ($errors->has('email'))
@@ -56,7 +56,7 @@
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                             <label for="password" class="col-md-4 control-label">Password</label>
 
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <input id="password" type="password" class="form-control" name="password" required>
 
                                 @if ($errors->has('password'))
@@ -70,7 +70,7 @@
                         <div class="form-group">
                             <label for="password-confirm" class="col-md-4 control-label">Confirm Password</label>
 
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
                             </div>
                         </div>
@@ -78,7 +78,7 @@
                         <div class="form-group{{ $errors->has('date_naissance') ? ' has-error' : '' }}">
                             <label for="date_naissance" class="col-md-4 control-label">Date de naissance</label>
 
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <input id="pseudo" type="date" class="form-control" name="date_naissance" value="{{ old('date_naissance') }}" required autofocus>
 
                                 @if ($errors->has('date_naissance'))
@@ -90,7 +90,7 @@
                         </div>
 
                         <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
+                            <div class="col-md-12 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
                                     Register
                                 </button>
