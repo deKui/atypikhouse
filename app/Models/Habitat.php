@@ -16,7 +16,7 @@ class Habitat extends Model
      * @var array
      */
     protected $fillable = [
-        'id_proprietaire', 'id_type_habitat', 'titre', 'description', 'adresse', 'code_postal', 'ville', 'nb_lit_simple', 'nb_lit_double', 'nb_personne_max', 'date_debut_dispo', 'date_fin_dispo', 'prix',
+        'id_proprietaire', 'id_type_habitat', 'titre', 'description', 'photo', 'adresse', 'code_postal', 'ville', 'nb_lit_simple', 'nb_lit_double', 'nb_personne_max', 'date_debut_dispo', 'date_fin_dispo', 'prix',
     ];
 
 

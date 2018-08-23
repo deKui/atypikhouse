@@ -19,6 +19,6 @@ class DatabaseSeeder extends Seeder
         
         $this->call(HabitatsTableSeeder::class);
         
-        factory(App\Models\Habitat::class, 5)->create();
+        //factory(App\Models\Habitat::class, 5)->create();
     }
 }

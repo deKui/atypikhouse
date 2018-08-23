@@ -17,6 +17,7 @@ class HabitatsTableSeeder extends Seeder
             'id_type_habitat' => 1,
             'titre' => 'Cabane en bois',
             'description' => 'Ceci est une belle cabane',
+            'photo' => 'cabane.jpg',
             'adresse' => '5 rue de toulouse',
             'code_postal' => 31000,
             'ville' => 'Toulouse',

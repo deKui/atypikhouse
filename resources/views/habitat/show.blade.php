@@ -8,6 +8,8 @@
             <div class="col-md-4">
                 <div class="card">
 
+                    <img class="card-img-top" src="{{ asset('storage/' . $habitats->photo) }}">
+
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">Nous sommes sur la page de cet habitat </li>
                         <li class="list-group-item">Titre : {{ $habitats->titre }} </li>

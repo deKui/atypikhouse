@@ -19,7 +19,7 @@ class CreateHabitatsTable extends Migration
             $table->integer('id_type_habitat')->unsigned();
             $table->string('titre');
             $table->string('description');
-            $table->string('photo')->nullable();
+            $table->string('photo');
             $table->string('adresse');
             $table->integer('code_postal');
             $table->string('ville');

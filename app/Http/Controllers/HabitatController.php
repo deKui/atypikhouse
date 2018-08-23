@@ -72,7 +72,7 @@ class HabitatController extends Controller
 
         $image = Storage::disk('public')->put('', $request->file('image'));
 
-        dd($image);
+        //dd($image);
 
         Habitat::create([
             'id_proprietaire' => $proprio,
