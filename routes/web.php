@@ -34,4 +34,8 @@ Route::middleware('auth')->group(function () {
 	Route::resource('profil', 'UserController', [
         'only' => ['update'],
     ]);
+
+    Route::get('habitat/create', 'HabitatController@create')->name('habitat.create');
+
+    Route::post('habitat/store', 'HabitatController@store')->name('habitat.store');
 });

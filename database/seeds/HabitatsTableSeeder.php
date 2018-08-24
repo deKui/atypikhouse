@@ -13,10 +13,11 @@ class HabitatsTableSeeder extends Seeder
     public function run()
     {
         Habitat::create([
-        	'id_proprietaire' => 3,
+        	'id_proprietaire' => 1,
             'id_type_habitat' => 1,
             'titre' => 'Cabane en bois',
             'description' => 'Ceci est une belle cabane',
+            'photo' => 'cabane.jpg',
             'adresse' => '5 rue de toulouse',
             'code_postal' => 31000,
             'ville' => 'Toulouse',
@@ -25,7 +26,7 @@ class HabitatsTableSeeder extends Seeder
             'nb_personne_max' => 5,
             'date_debut_dispo' => '2018-06-29',
             'date_fin_dispo' => '2018-07-29',
-            'prix' => '20€ / nuit',
+            'prix' => 20,
          ]);
     }
 }

@@ -4,7 +4,7 @@ use Faker\Generator as Faker;
 
 $factory->define(App\Models\Habitat::class, function (Faker $faker) {
     return [
-        'id_proprietaire' => $faker->numberBetween(3, 8),
+        'id_proprietaire' => $faker->numberBetween(3, 7),
         'id_type_habitat' => $faker->numberBetween(1, 3),
         'titre' => $faker->sentence(2),
         'description' => $faker->text,
@@ -16,6 +16,6 @@ $factory->define(App\Models\Habitat::class, function (Faker $faker) {
         'nb_personne_max' => $faker->randomDigitNotNull,
         'date_debut_dispo' => $faker->date,
         'date_fin_dispo' => $faker->date,
-        'prix' => $faker->word,
+        'prix' => $faker->randomDigitNotNull,
     ];
 });

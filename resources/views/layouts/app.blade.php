@@ -49,7 +49,7 @@
 
                             <li class="nav-item dropdown">
                                 <a href="#" id="navbarDropdown" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                    {{ Auth::user()->pseudo }} <span class="caret"></span>
                                 </a>
 
                                 <ul class="dropdown-menu">
@@ -67,6 +67,10 @@
 
                                     <li class="dropdown-item">
                                         <a href="{{ route('profil.index', auth()->user()->id) }}"> Mon profil </a>
+                                    </li>
+
+                                    <li class="dropdown-item">
+                                        <a href="{{ route('habitat.create') }}"> Enregistrer un habitat </a>
                                     </li>
                                 </ul>
                             </li>

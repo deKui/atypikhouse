@@ -26,7 +26,7 @@
 
 				<div class="card">
 				  	<div class="card-header">
-				    	{{ auth()->user()->name }}
+				    	{{ auth()->user()->pseudo }}
 				  	</div>
 					<div class="card-body">
 					    <blockquote class="blockquote mb-0">
