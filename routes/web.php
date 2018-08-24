@@ -34,6 +34,12 @@ Route::middleware('auth')->group(function () {
 	Route::resource('profil', 'UserController', [
         'only' => ['update'],
     ]);
+	
+	Route::get('reservation/{id}','ReservationController@index')->name('reservation.index');
+
+	Route::get('reservation/{id_utilisateur}','ReservationController@show')->name('reservation.show');
+	
+	//Route::get('habitat/{id_proprietaire}','HabitatController@showAllProprietaire')->name('habitat.showAllProprietaire');
 
     Route::get('habitat/create', 'HabitatController@create')->name('habitat.create');
 

@@ -37,4 +37,7 @@ class Habitat extends Model
     {
         return $this->belongsTo(TypeHabitats::class, 'id_type_habitat');
     }
+
+
+
 }

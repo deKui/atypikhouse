@@ -57,6 +57,7 @@ class HabitatController extends Controller
      */
     public function create()
     {
+
         $type_habitat = TypeHabitats::all();
 
         return view('habitat.create', compact('type_habitat'));
@@ -90,6 +91,16 @@ class HabitatController extends Controller
         ]);
 
         return redirect(route('home'));
+    }
+
+
+	/* ATT - Mettre le nom de de la variable pareil que dans (compact) */
+	
+    public function showAllProprietaire($id_proprietaire){
+
+         $habitatProprio = $this->repo->getHabitatProprio($id_proprietaire);
+
+        return view('habitat.showAllProprietaire', compact('habitatProprio'));
     }
 
 }
