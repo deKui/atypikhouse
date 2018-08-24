@@ -21,6 +21,11 @@ Route::get('habitats/{habitat}', 'HabitatController@show')->name('habitat.show')
 
 Route::get('habitats', 'HabitatController@index')->name('habitat.index');
 
+
+Route::get('/redirect', 'SocialAuthFacebookController@redirect');
+
+Route::get('/callback', 'SocialAuthFacebookController@callback');
+
 Route::middleware('auth')->group(function () {
 
 	Route::post('habitats/{habitat}', 'AvisController@store');
