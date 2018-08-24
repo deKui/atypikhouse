@@ -38,7 +38,7 @@ return [
 	'facebook' => [
     'client_id' => '2071115666252140',
     'client_secret' => '0c141ca3ff5280556371fce27b626bce',
-    'redirect' => 'http://localhost/atypikhousem2/public/callback',
+    'redirect' => 'http://localhost/atypikhouse/public/callback',
 	],
 
 ];
