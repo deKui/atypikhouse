@@ -69,7 +69,7 @@
                                         <a href="{{ route('profil.index', auth()->user()->id) }}"> Mon profil </a>
                                     </li>
 
-									<li>
+									<li class="dropdown-item">
                                         <a href="{{ route('reservation.show', auth()->user()->id) }}"> Mes réservations </a>
 									</li> 
 

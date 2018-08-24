@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+
 use App\Models\User;
+use App\Http\Requests\UserRequest;
 
 class UserController extends Controller
 {
@@ -58,26 +61,21 @@ class UserController extends Controller
      * Auteur : Lucas
      * Modification des informations du profil
      */
-    public function update(Request $request, $id_user) 
+    public function update(UserRequest $request, $id_user) 
     {
-        // Vérification des nouvelles informations 
-    	$request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
-        ]);
-
         $user = $this->user->getUser($id_user);
+
+        $avatar = Storage::disk('public')->put('', $request->file('avatar'));
         
         // on remplace les anciens champs par les nouveaux dans la bdd
         $user->update([
-            'name' => $request->name,
-            'email' => $request->email
+            'prenom' => $request->prenom,
+            'nom' => $request->nom,
+            'avatar' => $avatar,
         ]);
         
         // Enregistre les modifications de la bdd
         $user->save();
-
-        //dd($user);
 
     	return redirect('profil/' . $user->id);	
     }
