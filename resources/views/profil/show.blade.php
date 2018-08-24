@@ -11,14 +11,10 @@
 					<div class="card-body">
 						<ul class="list-group list-group-flush">
 							<li class="list-group-item"> Informations personnelles</li>
-						    <li class="list-group-item">Nom : {{ $user->pseudo }}</li>
-						    <li class="list-group-item">Mail : {{ $user->email }}</li>  
+						    <li class="list-group-item">Nom : {{ $users->pseudo }}</li>
+						    <li class="list-group-item">Mail : {{ $users->email }}</li>
 						</ul>
 					</div>
-
-					<div class="card-footer">
-						<a class="btn btn-primary" href="{{ route('profil.edit', auth()->user()->id) }}"> Modifier </a>
-					</div>	
 				</div>
 			</div>
 

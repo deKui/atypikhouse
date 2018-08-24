@@ -2,40 +2,39 @@
 
 namespace App\Models;
 
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
 class Habitat extends Model
 {
+    use Notifiable;
 
-	/**
-     * Return le nom d'un utilisateur à partir de son id
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
      */
-    public function getNameUser($id_user) {
-
-    	$user = DB::table('users')->where('id', $id_user)->first();
-
-        return $user->name;
-    }
+    protected $fillable = [
+        'id_proprietaire', 'id_type_habitat', 'titre', 'description', 'photo', 'adresse', 'code_postal', 'ville', 'nb_lit_simple', 'nb_lit_double', 'nb_personne_max', 'date_debut_dispo', 'date_fin_dispo', 'prix',
+    ];
 
 
     /**
-     * Return le nom d'un type à partir de son id
+     * Auteur : Lucas 
+     * Obtient le proprietaire d'un habitat
      */
-    public function getNameType($id_type) {
-
-    	$type = DB::table('type_habitats')->where('id', $id_type)->first();
-
-        return $type->nom;
+	public function proprio()
+    {
+        return $this->belongsTo(User::class, 'id_proprietaire');
     }
 
     /**
-     * Return un habitat à partir de son id
+     * Auteur : Lucas 
+     * Obtient le type d'un habitat
      */
-    public function getHabitat($id_habitat) {
-
-    	$habitat = Habitat::where('id', $id_habitat)->first();
-
-        return $habitat;
+    public function type()
+    {
+        return $this->belongsTo(TypeHabitats::class, 'id_type_habitat');
     }
 }
