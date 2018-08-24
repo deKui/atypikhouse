@@ -71,7 +71,7 @@
 
 									<li>
                                         <a href="{{ route('reservation.show', auth()->user()->id) }}"> Mes réservations </a>
-									</li>
+									</li> 
 
                                     <li class="dropdown-item">
                                         <a href="{{ route('habitat.create') }}"> Enregistrer un habitat </a>

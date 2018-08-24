@@ -37,7 +37,9 @@ Route::middleware('auth')->group(function () {
 	
 	Route::get('reservation/{id}','ReservationController@index')->name('reservation.index');
 
-	Route::get('habitat/{id_proprietaire}','HabitatController@showAllProprietaire')->name('habitat.showAllProprietaire');
+	Route::get('reservation/{id_utilisateur}','ReservationController@show')->name('reservation.show');
+	
+	//Route::get('habitat/{id_proprietaire}','HabitatController@showAllProprietaire')->name('habitat.showAllProprietaire');
 
     Route::get('habitat/create', 'HabitatController@create')->name('habitat.create');
 
