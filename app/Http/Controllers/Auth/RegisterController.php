@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Auth;
 
+use DateTime;
+use DateInterval;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
@@ -47,11 +49,24 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
-            'name' => 'required|string|max:255',
+        // date aujourd'hui
+        $date = new DateTime();
+        // date - 18 ans
+        $date_18 = $date->sub(new DateInterval('P18Y'));
+
+        $rules = [
+            'pseudo' => 'required|string|max:255|unique:users',
+            'prenom' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
-        ]);
+            'date_naissance' => 'required|date_format:Y-m-d|before:' . $date_18->format('Y-m-d'),
+        ];
+
+        $messages = [
+            'date_naissance.before' => 'Vous devez avoir 18 ans pour vous inscrire !',
+        ];
+
+        return Validator::make($data, $rules, $messages);
     }
 
     /**
@@ -62,10 +77,14 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        //dd($data);
+
         return User::create([
-            'name' => $data['name'],
+            'pseudo' => $data['pseudo'],
+            'prenom' => $data['prenom'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'date_naissance' => $data['date_naissance'],
         ]);
     }
 }

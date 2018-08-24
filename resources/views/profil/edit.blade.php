@@ -15,11 +15,11 @@
             				{{ method_field('PUT') }}
 
 	                        @include('partials.form', [
-	                            'title' => __('Nom'),
+	                            'title' => __('Pseudo'),
 	                            'type' => 'text',
-	                            'name' => 'name',
+	                            'name' => 'pseudo',
 	                            'required' => true,
-	                            'value' => $user->name,
+	                            'value' => $user->pseudo,
 	                            ])
 
 	                        @include('partials.form', [

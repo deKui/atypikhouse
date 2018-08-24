@@ -12,7 +12,7 @@ class RechercheController extends Controller
      */
     public function index(Request $request) 
     {
-    	$request->validate([
+        $request->validate([
             'destination' => 'required|string|max:255',
             'voyageurs' => 'required|integer|max:50',
             'depart' => 'required|date_format:Y-m-d',
