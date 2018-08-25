@@ -14,7 +14,9 @@
 
                         <!-- Type d'habitat -->
                         <div class="form-group">
-                            <label for="type_habitat"> Type d'habitat </label>
+                            <label class="col-md-4" for="type_habitat"> Type d'habitat </label>
+                            
+                            <div class="col-md-12">
                                 <select id="type_habitat" name="type_habitat" class="form-control">
 
                                     @foreach($type_habitat as $type)
@@ -22,6 +24,7 @@
                                     @endforeach
 
                                 </select>
+                            </div>
                         </div>
 
                         <!-- Titre -->
@@ -74,46 +77,52 @@
                         
                         <!-- Nombre de lit(s) simple(s) -->
                         <div class="form-group">
-                            <label for="nb_lit_simple"> Nombre de lit(s) simple(s)</label>
-                                <select id="nb_lit_simple" name="nb_lit_simple" class="form-control">
-                                    <option value="0">0</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                </select>
+                            <label class="col-md-4" for="nb_lit_simple"> Nombre de lit(s) simple(s)</label>
+                                <div class="col-md-12">
+                                    <select id="nb_lit_simple" name="nb_lit_simple" class="form-control">
+                                        <option value="0">0</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                    </select>
+                                </div>
                         </div>
 
                         <!-- Nombre de lit(s) simple(s) -->
                         <div class="form-group">
-                            <label for="nb_lit_double"> Nombre de lit(s) double(s)</label>
-                                <select id="nb_lit_double" name="nb_lit_double" class="form-control">
-                                    <option value="0">0</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                </select>
+                            <label class="col-md-4" for="nb_lit_double"> Nombre de lit(s) double(s)</label>
+                                <div class="col-md-12">
+                                    <select id="nb_lit_double" name="nb_lit_double" class="form-control">
+                                        <option value="0">0</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                    </select>
+                                </div>
                         </div> 
 
                         <!-- Nombre de personnes maximales -->
                         <div class="form-group">
-                            <label for="nb_personne_max"> Nombre de personnes maximales</label>
-                                <select id="nb_personne_max" name="nb_personne_max" class="form-control">
-                                    <option value="0">0</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                    <option value="6">6</option>
-                                    <option value="7">7</option>
-                                    <option value="8">8</option>
-                                    <option value="9">9</option>
-                                    <option value="10">10</option>
-                                </select>
+                            <label class="col-md-4" for="nb_personne_max"> Nombre de personnes maximales</label>
+                                <div class="col-md-12">
+                                    <select id="nb_personne_max" name="nb_personne_max" class="form-control">
+                                        <option value="0">0</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
+                                    </select>
+                                </div>
                         </div>   
 
                         <!-- Date de début de disponibilité -->
