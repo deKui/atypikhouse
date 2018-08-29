@@ -31,6 +31,10 @@ Route::middleware('auth')->group(function () {
 
 	Route::get('profil/public/{user}', 'UserController@show')->name('profil.show');
 
+	Route::get('profil/noter/{user}', 'UserController@noter')->name('profil.noter');
+
+	Route::post('profil/eval/{user}', 'UserController@eval')->name('profil.eval');
+
 	Route::resource('profil', 'UserController', [
         'only' => ['update'],
     ]);

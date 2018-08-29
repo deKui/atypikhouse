@@ -35,13 +35,49 @@ class UserController extends Controller
 
     /**
      * Auteur : Lucas
-     * Affiche le profil public d'un utilisateur à partir d'un pseudo (à faire)
+     * Affiche le profil public d'un utilisateur à partir d'un pseudo 
      */
     public function show(User $user) 
     {
         $users = User::find($user->id);
         
         return view('profil.show', compact('users'));   
+    }
+
+    /**
+     * Auteur : Lucas
+     * Affiche la page pour noter un utilisateur
+     */
+    public function noter(User $user) 
+    {
+        $users = User::find($user->id);
+        
+        return view('profil.noter', compact('users'));   
+    }
+
+    /**
+     * Auteur : Lucas
+     * Note un utilisateur
+     */
+    public function eval(Request $request, User $user) 
+    {
+        $from_id = Auth()->user()->id;
+
+        $to_id = User::find($user->id);
+
+        $request->validate([
+            'note' => 'required|integer|max:5',
+        ]);
+
+        $to_id->update([
+            'note_eval' => $request->note,
+        ]);
+
+        $to_id->save();
+
+        //dd($to_id);
+        
+        return redirect('profil/' . $user->id);   
     }
 
 
