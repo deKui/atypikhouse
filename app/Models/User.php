@@ -49,4 +49,17 @@ class User extends Authenticatable
 
         return $user;
     }
+
+    /**
+     * Auteur : Valériane
+     * Retourne les utlisateurs signalés
+    */
+    public function getUserSignale()
+    {
+        $userSignale = User::where('signale', true)->get();
+
+        return $userSignale;
+    }
+
+
 }

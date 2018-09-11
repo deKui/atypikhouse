@@ -15,4 +15,18 @@ class Avis extends Model
     {
     	return $this->belongsTo(User::class, 'id_utilisateur');
     }
+
+    /**
+     * Auteur : Valériane
+     * Retourne les avis signalés
+    */
+    public function getAvisSignale()
+    {
+        $avisSignale = Avis::where('signale', true)->get();
+
+        return $avisSignale;
+    }
+
+
+
 }

@@ -115,4 +115,19 @@ class UserController extends Controller
 
     	return redirect('profil/' . $user->id);	
     }
+
+
+    /**
+     * Auteur : Valériane
+     * Affiche les infos sur la page gérant
+     */
+    public function showInfoGerant(){
+
+        $userSignale = $this->user->getUserSignale();
+
+        return redirect('gerant'); 
+
+    }
+
+
 }
