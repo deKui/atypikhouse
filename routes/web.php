@@ -40,11 +40,10 @@ Route::middleware('auth')->group(function () {
 	// Page profil public
 	Route::get('profil/public/{user}', 'UserController@show')->name('profil.show');
 
-<<<<<<< Updated upstream
 	Route::resource('profil', 'UserController', [
         'only' => ['update'],
     ]);
-=======
+
 	// Page noter un utilisateur
 	Route::get('profil/noter/{user}', 'UserController@noter')->name('profil.noter');
 
@@ -63,7 +62,6 @@ Route::middleware('auth')->group(function () {
 	Route::get('reservation/{id_utilisateur}','ReservationController@show')->name('reservation.show');
 	
 	//Route::get('habitat/{id_proprietaire}','HabitatController@showAllProprietaire')->name('habitat.showAllProprietaire');
->>>>>>> Stashed changes
 
 	// Formulaire pour ajouter un habitat
     Route::get('habitat/create', 'HabitatController@create')->name('habitat.create');
