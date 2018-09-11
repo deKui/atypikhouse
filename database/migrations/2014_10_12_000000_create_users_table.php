@@ -24,6 +24,7 @@ class CreateUsersTable extends Migration
             $table->date('date_naissance');
             $table->integer('note_eval')->nullable();
             $table->enum('role', ['user', 'gerant'])->default('user');
+            $table->boolean('signale')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });
