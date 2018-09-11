@@ -21,6 +21,7 @@
                         <li class="list-group-item">Lit(s) double(s) : {{ $habitats->nb_lit_double }} </li>
                         <li class="list-group-item">Prévu pour {{ $habitats->nb_personne_max }} personnes maximum </li>
                         <li class="list-group-item">Disponibilité : Du {{ $habitats->date_debut_dispo }} au {{ $habitats->date_fin_dispo }} </li>
+                        <li class="list-group-item"> <a href="#" class="btn btn-primary">Réserver</a> </li>
                     </ul> 
 
                 </div>
