@@ -11,6 +11,7 @@
 |
 */
 
+// Route pour l'authentification
 Auth::routes();
 
 // Page d'accueil
@@ -57,7 +58,7 @@ Route::middleware('auth')->group(function () {
     ]);
 
     // Réserver un habitat
-	Route::get('reserver','ReservationController@create')->name('reservation.create');
+	Route::post('reserver/{habitat}','ReservationController@create')->name('reservation.create');
 	
 	// Affiche une réservation via son id ?
 	Route::get('reservation/{id}','ReservationController@index')->name('reservation.index');

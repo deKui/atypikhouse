@@ -7,6 +7,15 @@ use Illuminate\Support\Facades\DB;
 
 class Reservation extends Model
 {
+	/**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'id_locataire', 'id_habitat', 'date_debut', 'date_fin', 'montant',
+    ];
+
 
 	 /**
      * Return les locations en fonction d'un utisateur
