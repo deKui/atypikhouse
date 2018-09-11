@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 use App\Models\User;
+use App\Models\Note;
 use App\Http\Requests\UserRequest;
 
 class UserController extends Controller
@@ -69,9 +70,7 @@ class UserController extends Controller
             'note' => 'required|integer|max:5',
         ]);
 
-        $to_id->update([
-            'note_eval' => $request->note,
-        ]);
+        
 
         $to_id->save();
 
