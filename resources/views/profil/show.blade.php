@@ -13,6 +13,9 @@
 							<li class="list-group-item"> Informations personnelles</li>
 						    <li class="list-group-item">Nom : {{ $users->pseudo }}</li>
 						    <li class="list-group-item">Mail : {{ $users->email }}</li>
+						    <li class="list-group-item">
+						    	<a class="btn btn-primary" href="{{ route('profil.noter', $users->id) }}"> Noter </a>
+						    </li>
 						</ul>
 					</div>
 				</div>
