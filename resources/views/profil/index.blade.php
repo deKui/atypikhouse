@@ -18,7 +18,7 @@
 						    <li class="list-group-item">Nom : {{ $user->nom }}</li>
 						    <li class="list-group-item">Mail : {{ $user->email }}</li>  
 						    <li class="list-group-item">Date de naissance : {{ $user->date_naissance }}</li>  
-						    <li class="list-group-item">Note : {{ $user->note_eval }}</li>  
+						    <li class="list-group-item">Note : {{ $user->note_eval }} / 5</li>  
 						</ul>
 					</div>
 

@@ -1,7 +1,8 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model;
 
 class Note extends Model
@@ -16,4 +17,5 @@ class Note extends Model
     protected $fillable = [
         'from_id', 'to_id', 'note',
     ];
+    
 }
