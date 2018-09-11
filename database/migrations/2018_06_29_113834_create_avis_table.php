@@ -19,6 +19,7 @@ class CreateAvisTable extends Migration
             $table->integer('id_habitat')->unsigned();
             $table->integer('note');
             $table->string('comment');
+            $table->boolean('signale')->default(false);
             $table->foreign('id_utilisateur')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('id_habitat')->references('id')->on('habitats')->onDelete('cascade');
             $table->timestamps();
