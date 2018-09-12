@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Storage;
 
 use App\Models\User;
 use App\Models\Note;
+use App\Models\Avis;
+use App\Models\Habitat;
 use App\Http\Requests\UserRequest;
 
 class UserController extends Controller
@@ -113,6 +115,7 @@ class UserController extends Controller
     }
 
 
+
     /**
      * Auteur : Lucas
      * Affiche la page pour éditer son profil
@@ -147,4 +150,40 @@ class UserController extends Controller
 
     	return redirect('profil/' . $user->id);	
     }
+
+
+/****** GERANT ******/
+
+    /**
+     * Auteur : Valériane
+     * Affiche les infos sur la page gérant
+     */
+    public function showInfoGerant(){
+
+        $userSignale = $this->user->getUserSignale();
+
+        $avisSignale = $this->user->getAvisSignale();
+
+        $habitatSignale = $this->user->getHabitatSignale();
+
+        return view('profil.gerant', compact('userSignale','avisSignale','habitatSignale')); 
+
+    }
+
+
+    public function updateActiveDesactiveUser($id_user) 
+    {
+        $user = $this->user->getUser($id_user); 
+        // on remplace les anciens champs par les nouveaux dans la bdd
+        $user->update([
+            'active' => false
+        ]);
+        
+        // Enregistre les modifications de la bdd
+        $user->save();
+        return redirect('profil.gerant'); 
+
+    }
+/****** FIN GERANT ******/
+
 }

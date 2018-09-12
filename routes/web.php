@@ -78,4 +78,12 @@ Route::middleware('auth')->group(function () {
 
     // Ajoute un habitat
     Route::post('habitat/store', 'HabitatController@store')->name('habitat.store');
+
+
+    // Accès à la page du gérant
+    Route::get('gerant', 'UserController@showInfoGerant')->name('profil.gerant');
+
+    // Mise à jour utilisateur active/ désactive
+    Route::get('gerant/{id_utilisateur}', 'UserController@updateActiveDesactiveUser')->name('profil.gerantActive');
+
 });
