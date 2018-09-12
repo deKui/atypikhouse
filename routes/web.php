@@ -40,11 +40,6 @@ Route::middleware('auth')->group(function () {
 	// Page profil public
 	Route::get('profil/public/{user}', 'UserController@show')->name('profil.show');
 
-
-	Route::resource('profil', 'UserController', [
-        'only' => ['update'],
-    ]);
-
 	// Page noter un utilisateur
 	Route::get('profil/noter/{user}', 'UserController@noter')->name('profil.noter');
 
@@ -77,5 +72,7 @@ Route::middleware('auth')->group(function () {
     // Accès à la page du gérant
     Route::get('gerant', 'UserController@showInfoGerant')->name('profil.gerant');
 
+    // Mise à jour utilisateur active/ désactive
+    Route::get('gerant/{id_utilisateur}', 'UserController@updateActiveDesactiveUser')->name('profil.gerantActive');
 
 });

@@ -77,9 +77,13 @@
                                         <a href="{{ route('habitat.create') }}"> Enregistrer un habitat </a>
 
                                     </li>
+
+                                <!-- Permet d'afficher uniquement cette page pour les gérant -->
+                                <?php if (Auth::user()->role == 'gerant'){ ?>
                                     <li class="dropdown-item">
-                                        <a href="{{ route('profil.gerant') }}"> Gérant </a>
+                                        <a href="{{ route('profil.gerant') }}"> Gestion du site </a>
                                     </li>
+                                <?php }?>
                                 </ul>
                             </li>
                         @endguest

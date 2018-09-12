@@ -18,11 +18,11 @@
 			            <div class="col-md-4">
 			                <div class="card">
 			                    <ul class="list-group list-group-flush">
-			                    	<li class="list-group-item">Avatar : {{ $user->pseudo }} </li>
+			                    	<img class="card-img-top" src="{{ asset('storage/' . $user->avatar) }}">
 			                        <li class="list-group-item">Pseudo : {{ $user->pseudo }} </li>
 			                        <li class="list-group-item">Description : {{ $user->description }} </li>
 			                        <li class="list-group-item"> <a href="{{ route('profil.index', $user->id) }}" class="btn btn-primary">Voir</a></li>
-			                        <!--<li class="list-group-item"> <a href="{{ route('profil.index', $user->id) }}" class="btn btn-primary">Désactivé</a></li>-->
+			                        <li class="list-group-item"> <a href="{{ route('profil.gerantActive', $user->id) }}" class="btn btn-primary">Désactivé</a></li>
 			                    </ul> 
 			                </div>
 			            </div> 

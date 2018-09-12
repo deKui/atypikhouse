@@ -82,7 +82,6 @@ class UserController extends Controller
     }
 
 
-/****** GERANT ******/
 
     /**
      * Auteur : Lucas
@@ -120,6 +119,8 @@ class UserController extends Controller
     }
 
 
+/****** GERANT ******/
+
     /**
      * Auteur : Valériane
      * Affiche les infos sur la page gérant
@@ -136,6 +137,20 @@ class UserController extends Controller
 
     }
 
+
+    public function updateActiveDesactiveUser($id_user) 
+    {
+        $user = $this->user->getUser($id_user); 
+        // on remplace les anciens champs par les nouveaux dans la bdd
+        $user->update([
+            'active' => false
+        ]);
+        
+        // Enregistre les modifications de la bdd
+        $user->save();
+        return redirect('profil.gerant'); 
+
+    }
 /****** FIN GERANT ******/
 
 }
