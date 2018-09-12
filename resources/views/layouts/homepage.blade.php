@@ -139,8 +139,13 @@
 
                                     <li class="dropdown-item">
                                         <a href="{{ route('habitat.create') }}"> Enregistrer un habitat </a>
-
                                     </li>
+                                    <!-- Permet d'afficher uniquement cette page pour les gérant -->
+                                @gerant
+                                    <li class="dropdown-item">
+                                        <a href="{{ route('profil.gerant') }}"> Gestion du site </a>
+                                    </li>
+                                @endgerant
                                 </ul>
                             </li>
                         @endguest

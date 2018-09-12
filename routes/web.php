@@ -17,14 +17,19 @@ Auth::routes();
 // Page d'accueil
 Route::get('/', 'HomeController@index')->name('home');
 
+// CGU
 Route::get('cgu', 'AtypikController@showcgu')->name('cgu');
 
+// CGV
 Route::get('cgv', 'AtypikController@showcgv')->name('cgv');
 
+// Mention légales
 Route::get('legal', 'AtypikController@showlegal')->name('legal');
 
+// Aide
 Route::get('help', 'AtypikController@showhelp')->name('help');
 
+// En savoir plus sur nous
 Route::get('about', 'AtypikController@showabout')->name('about');
 
 // Résultat d'une recherche
@@ -32,6 +37,9 @@ Route::get('recherche', 'RechercheController@index')->name('recherche');
 
 // Affiche un habitat
 Route::get('habitats/{habitat}', 'HabitatController@show')->name('habitat.show');
+
+// Affiche un habitat après une recherche
+Route::get('habitats/show/{habitat}/{nbpersonne}/{date_debut}/{date_fin}/{duree}', 'HabitatController@showAfterSearch')->name('habitat.showAfterSearch');
 
 // Affiche tous les habitats
 Route::get('habitats', 'HabitatController@index')->name('habitat.index');

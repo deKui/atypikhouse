@@ -109,11 +109,11 @@
                                     </li>
 
                                 <!-- Permet d'afficher uniquement cette page pour les gérant -->
-                                <?php if (Auth::user()->role == 'gerant'){ ?>
+                                @gerant
                                     <li class="dropdown-item">
                                         <a href="{{ route('profil.gerant') }}"> Gestion du site </a>
                                     </li>
-                                <?php }?>
+                                @endgerant
                                 </ul>
                             </li>
                         @endguest

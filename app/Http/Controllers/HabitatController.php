@@ -40,11 +40,30 @@ class HabitatController extends Controller
 
 
     /**
+     * Auteur : Lucas
+     * Affiche un seul habitat après un recherche
+     */
+    public function showAfterSearch(Habitat $habitat, $nb_personne, $date_debut, $date_fin, $duree) {
+        
+    	$habitats = $this->repo->getHabitat($habitat->id);
+        
+        $messages = Avis::where('id_habitat', $habitat->id)->get();
+
+        $voyageurs = $nb_personne;
+
+        $arrivee = $date_debut;
+        $depart = $date_fin;
+
+        return view('habitat.showAfterSearch', compact('habitats', 'messages', 'voyageurs', 'arrivee', 'depart', 'duree'));
+    }
+
+
+    /**
      * Affiche un seul habitat
      */
     public function show(Habitat $habitat) {
         
-    	$habitats = $this->repo->getHabitat($habitat->id);
+        $habitats = $this->repo->getHabitat($habitat->id);
         
         $messages = Avis::where('id_habitat', $habitat->id)->get();
 
