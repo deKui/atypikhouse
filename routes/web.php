@@ -17,6 +17,16 @@ Auth::routes();
 // Page d'accueil
 Route::get('/', 'HomeController@index')->name('home');
 
+Route::get('cgu', 'AtypikController@showcgu')->name('cgu');
+
+Route::get('cgv', 'AtypikController@showcgv')->name('cgv');
+
+Route::get('legal', 'AtypikController@showlegal')->name('legal');
+
+Route::get('help', 'AtypikController@showhelp')->name('help');
+
+Route::get('about', 'AtypikController@showabout')->name('about');
+
 // Résultat d'une recherche
 Route::get('recherche', 'RechercheController@index')->name('recherche');
 

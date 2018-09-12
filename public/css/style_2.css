@@ -1,0 +1,261 @@
+.atypiktools{
+    color:#f8f9fa;
+    background-color: rgba(32, 143, 164, .8);
+    font-family: 'Roboto';
+    letter-spacing: 0.2rem;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    flex-direction: row;
+    padding: 0.2rem;
+}
+.verti-center{
+    display: flex;
+    align-items: center;
+}
+
+.horiz-center{
+    justify-content: center;
+}
+
+.atypikicons{
+    display: block;
+    width: 1.2rem;
+    height: 1.2rem;
+    background-color:#f8f9fa;
+    float: left;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    margin-right: 1em;
+    border-radius:100%;
+}
+
+.facebook{
+    display: block;
+    width: 1.2rem;
+    height: 1.2rem;
+    background-image:url(../images/facebook.png);
+    float: left;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    margin-right: 1em;
+    border-radius:100%;
+    background-position: center top;
+    background-size: 100% auto;
+}
+
+.instagram{
+    display: block;
+    width: 1.2rem;
+    height: 1.2rem;
+    background-image:url(../images/instagram.png);
+    float: left;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    margin-right: 1em;
+    border-radius:100%;
+    background-position: center top;
+    background-size: 100% auto;
+}
+
+.login{
+    display: block;
+    width: 1.2rem;
+    height: 1.2rem;
+    background-image:url(../images/login.png);
+    float: left;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    margin-right: 1em;
+    border-radius:100%;
+    background-position: center top;
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+}
+
+.atypiklinks{
+    color:#16273E;
+    font-size: 0.8rem;
+    text-decoration: none;
+}
+
+.atypiklinks:hover{
+    text-decoration: none;
+}
+
+.atypikmenu{
+    color:#16273E!important;
+    background-color: #f8f9fa!important;
+    font-family: 'Roboto';
+    letter-spacing: 0.2rem;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    flex-direction: row;
+    padding: 0.1rem;
+}
+
+.atypikmenu a{
+    color:#16273E!important;
+}
+
+.dropdown-menu{
+    font-size: 0.7rem;
+}
+
+.atypikfooter{
+    margin-top: 0.7rem;
+    background-color: #f8f9fa;
+    font-family: 'Roboto';
+    letter-spacing: 0.2rem;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    flex-direction: row;
+    padding: 0.4rem;  
+    text-align: center;
+}
+
+.atypikfooter a{
+    color:#16273E;
+    font-size: 0.7rem;
+    text-decoration: none;
+    text-align: center;
+}
+
+body{
+    background-color: transparent;
+    background-image: url(../images/background.jpg);
+}
+
+.atypiklegal{
+    margin-top: 0.7rem;
+    color:#f8f9fa;
+    background-color: transparent;
+    font-family: 'Roboto';
+    letter-spacing: 0.2rem;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    flex-direction: row;
+    padding: 0.4rem;  
+    text-align: center;
+}
+
+.atypikcard{
+    margin-left: 20rem;
+    margin-right: 20rem;
+    color:#f8f9fa;
+    background-color: rgba(32, 143, 164, .8);
+    font-family: 'Roboto';
+    letter-spacing: 0.2rem;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    padding: 0.4rem;  
+    text-align: center;
+    border-radius: 0;
+}
+
+h1{
+    font-family: 'East Sea Dokdo'!important;
+    text-transform: none;
+    color: rgb(32, 143, 164);
+    margin: 0;
+    font-size: 3rem;
+    letter-spacing: 0rem;
+
+}
+
+.roboto{
+    font-family: 'Roboto'!important;
+    letter-spacing: 0.2rem;
+    color:#16273E;
+    text-transform: uppercase;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+::placeholder {
+    color: rgb(32, 143, 164)!important;
+    text-transform: uppercase;
+    font-size: 1em;
+    letter-spacing: 0.2rem;
+    line-height: 1.4rem;
+    font-weight: bold;
+}
+
+.atypikform2{
+    text-align: left;
+    margin: 0;
+    padding: 0;
+    margin-bottom: 0.5rem;
+}
+
+.form-control{
+    color: rgb(32, 143, 164)!important;
+    border-radius: 1.5rem;
+    background-color:#f8f9fa;
+    padding-left: 2.5rem;
+    text-transform: uppercase;
+    font-size: 1.2em;
+    letter-spacing: 0.2rem;
+    font-weight: bold;
+    -webkit-appearance: none;
+
+}
+
+.card-header{
+    background-color:transparent;
+    border-bottom:none;
+}
+
+h3{
+    font-family: 'Roboto'!important;
+    text-align: justify;
+    text-transform: none;
+    color:#f8f9fa;
+    font-size: 1.8em;
+    letter-spacing: 0.2rem;
+    margin:0;
+    padding-top: 1em;
+}
+
+#retour{
+    background-image:url(../images/calendrier.png);
+    background-position: center left;
+    background-repeat: no-repeat;
+    background-size: auto 100%;
+}
+
+#depart{
+    background-image:url(../images/calendrier.png);
+    background-position: center left;
+    background-repeat: no-repeat;
+    background-size: auto 100%;
+}
+
+#destination{
+    background-image:url(../images/destination.png);
+    background-position: center left;
+    background-repeat: no-repeat;
+    background-size: auto 100%;
+}
+
+#voyageurs{
+    background-image:url(../images/voyageurs.png), url(../images/arrow.png);
+    background-position: center left, center right;
+    background-repeat: no-repeat;
+    background-size: auto 100%;
+}
+
+.atypikbutton{
+    border-radius: 1.5rem;  
+    background-color:#16273E;
+    font-family: 'Roboto'!important;
+    text-align: center;
+    text-transform: none;
+    color:#f8f9fa;
+    font-size: 1.2em;
+    letter-spacing: 0.2rem;
+    padding: 1rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    margin-top:2rem; 
+
+}
