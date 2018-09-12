@@ -18,6 +18,40 @@
     <link rel="stylesheet" href="{{ asset('css/style_2.css') }}">
     <link rel="stylesheet" href="{{ asset('css/video.css') }}">
     <!-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> -->
+
+    <style>
+    .atypikfooter{
+        margin-top: 0.7rem;
+        background-color: #f8f9fa;
+        font-family: 'Roboto';
+        letter-spacing: 0.2rem;
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        flex-direction: row;
+        padding: 0.4rem;  
+        text-align: center;
+        width: 100%;
+        position: absolute;
+        bottom: 3rem;
+    }
+
+
+    .atypiklegal{
+        margin-top: 0.7rem;
+        color:#f8f9fa;
+        background-color: transparent;
+        font-family: 'Roboto';
+        letter-spacing: 0.2rem;
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        flex-direction: row;
+        padding: 0.4rem;  
+        text-align: center;
+        width: 100%;
+        position: absolute;
+        bottom: 1rem;
+    }
+    </style>
 </head>
 <body>
     <div id="app">

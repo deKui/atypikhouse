@@ -15,6 +15,16 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
 
+Route::get('cgu', 'AtypikController@showcgu')->name('cgu');
+
+Route::get('cgv', 'AtypikController@showcgv')->name('cgv');
+
+Route::get('legal', 'AtypikController@showlegal')->name('legal');
+
+Route::get('help', 'AtypikController@showhelp')->name('help');
+
+Route::get('about', 'AtypikController@showabout')->name('about');
+
 Route::get('recherche', 'RechercheController@index')->name('recherche');
 
 Route::get('habitats/{habitat}', 'HabitatController@show')->name('habitat.show');

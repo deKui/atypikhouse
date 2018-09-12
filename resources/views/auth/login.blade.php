@@ -3,8 +3,8 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-6">
-            <div class="card">
+        <div class="col-md-12">
+            <div class="card atypikcard">
                 <div class="card-header">Login</div>
 
                 <div class="card-body">
