@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Avis;
+use App\Models\Habitat;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -49,6 +51,33 @@ class User extends Authenticatable
 
         return $user;
     }
+
+
+
+
+    /**
+     * Auteur : Valériane
+     * Retourne les avis signalés
+    */
+    public function getAvisSignale()
+    {
+        $avisSignale = Avis::where('signale', true)->get();
+
+        return $avisSignale;
+    }
+
+
+        /**
+     * Auteur : Valériane
+     * Retourne les habitats signalés
+    */
+    public function getHabitatSignale()
+    {
+        $habitatSignale = Habitat::where('signale', true)->get();
+
+        return $habitatSignale;
+    }
+
 
     /**
      * Auteur : Valériane

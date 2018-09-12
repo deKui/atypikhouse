@@ -77,6 +77,9 @@
                                         <a href="{{ route('habitat.create') }}"> Enregistrer un habitat </a>
 
                                     </li>
+                                    <li class="dropdown-item">
+                                        <a href="{{ route('profil.gerant') }}"> Gérant </a>
+                                    </li>
                                 </ul>
                             </li>
                         @endguest

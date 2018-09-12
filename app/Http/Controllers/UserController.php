@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Storage;
 
 use App\Models\User;
 use App\Models\Note;
+use App\Models\Avis;
+use App\Models\Habitat;
 use App\Http\Requests\UserRequest;
 
 class UserController extends Controller
@@ -80,6 +82,8 @@ class UserController extends Controller
     }
 
 
+/****** GERANT ******/
+
     /**
      * Auteur : Lucas
      * Affiche la page pour éditer son profil
@@ -124,9 +128,14 @@ class UserController extends Controller
 
         $userSignale = $this->user->getUserSignale();
 
-        return redirect('gerant'); 
+        $avisSignale = $this->user->getAvisSignale();
+
+        $habitatSignale = $this->user->getHabitatSignale();
+
+        return view('profil.gerant', compact('userSignale','avisSignale','habitatSignale')); 
 
     }
 
+/****** FIN GERANT ******/
 
 }
