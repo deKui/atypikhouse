@@ -23,7 +23,7 @@ class CreateUsersTable extends Migration
             $table->string('avatar')->nullable();
             $table->date('date_naissance');
             $table->string('description')->nullable();
-            $table->integer('note_eval')->nullable();
+            $table->double('note_eval', 2, 1)->nullable();
             $table->enum('role', ['user', 'gerant'])->default('user');
             $table->boolean('active')->default(true);
             $table->boolean('signale')->default(false);

@@ -54,8 +54,17 @@ class UserController extends Controller
     public function noter(User $user) 
     {
         $users = User::find($user->id);
-        
-        return view('profil.noter', compact('users'));   
+
+        $notes = Note::where('from_id', Auth()->user()->id)->where('to_id', $user->id)->first();
+
+        // Si aucune note de la part de l'utilisateur connecté pour l'user
+        if ($notes == []) {
+            return view('profil.noter', compact('users'));
+
+        // Sinon cela veut dire que l'utilisateur connecté à déjà noté cet user        
+        }else {
+            return redirect('profil/' . $user->id)->with(['ok' => __('Vous avez déjà noté cet utilisateur !')]); 
+        }   
     }
 
     /**
@@ -64,21 +73,45 @@ class UserController extends Controller
      */
     public function eval(Request $request, User $user) 
     {
+        // User qui met la note
         $from_id = Auth()->user()->id;
 
+        // User noté
         $to_id = User::find($user->id);
 
         $request->validate([
             'note' => 'required|integer|max:5',
         ]);
 
-        
+        // Ajout d'une nouvelle note
+        Note::create([
+            'from_id' => $from_id,
+            'to_id' => $to_id->id,
+            'note' => $request->note,
+        ]);
 
+        // On récupère toutes les notes qu'a reçu l'utilisateur
+        $notes = $this->user->getNote($to_id->id);
+
+        $tab_note = [];
+
+        // On récupère unique le champ note pour les mettre dans un tableau 
+        foreach ($notes as $note) {
+            array_push($tab_note, $note->note);
+        }
+
+        // On calcule la moyenne de toute les notes
+        $moyenne_note = array_sum($tab_note) / count($tab_note);
+
+        // On met à jour la note de l'user
+        $to_id->update([
+            'note_eval' => round($moyenne_note, 2)
+        ]);
+
+        // sauvegarde dans la bdd
         $to_id->save();
-
-        //dd($to_id);
         
-        return redirect('profil/' . $user->id);   
+        return redirect('profil/public/' . $user->id);   
     }
 
 

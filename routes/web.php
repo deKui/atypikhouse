@@ -11,10 +11,21 @@
 |
 */
 
+// Route pour l'authentification
 Auth::routes();
 
 // Page d'accueil
 Route::get('/', 'HomeController@index')->name('home');
+
+Route::get('cgu', 'AtypikController@showcgu')->name('cgu');
+
+Route::get('cgv', 'AtypikController@showcgv')->name('cgv');
+
+Route::get('legal', 'AtypikController@showlegal')->name('legal');
+
+Route::get('help', 'AtypikController@showhelp')->name('help');
+
+Route::get('about', 'AtypikController@showabout')->name('about');
 
 // Résultat d'une recherche
 Route::get('recherche', 'RechercheController@index')->name('recherche');
@@ -52,7 +63,7 @@ Route::middleware('auth')->group(function () {
     ]);
 
     // Réserver un habitat
-	Route::get('reserver','ReservationController@create')->name('reservation.create');
+	Route::post('reserver/{habitat}','ReservationController@create')->name('reservation.create');
 	
 	// Affiche une réservation via son id ?
 	Route::get('reservation/{id}','ReservationController@index')->name('reservation.index');
