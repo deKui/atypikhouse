@@ -21,11 +21,63 @@
                         <li class="list-group-item">Lit(s) double(s) : {{ $habitats->nb_lit_double }} </li>
                         <li class="list-group-item">Prévu pour {{ $habitats->nb_personne_max }} personnes maximum </li>
                         <li class="list-group-item">Disponibilité : Du {{ $habitats->date_debut_dispo }} au {{ $habitats->date_fin_dispo }} </li>
-                        <li class="list-group-item"> <a href="#" class="btn btn-primary">Réserver</a> </li>
                     </ul> 
 
                 </div>
             </div> 
+
+            <div class="col-md-4">
+                <div class="card">
+                    <form method="POST" action="{{ route('reservation.create', $habitats) }}" enctype="multipart/form-data">
+                        {{ csrf_field() }}
+
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Prix par nuit : {{ $habitats->prix }} €</li>
+                            <li class="list-group-item">Arrivée : 
+                                <input id="date_debut" type="date" class="form-control" name="date_debut" required>
+
+                                @if ($errors->has('date_debut'))
+                                    <span class="invalide-feedback text-danger">
+                                        <small>{{ $errors->first('date_debut') }}</small>
+                                    </span>
+                                @endif
+                            </li>
+
+                            <li class="list-group-item">Départ : 
+                                <input id="date_fin" type="date" class="form-control" name="date_fin" required>
+
+                                @if ($errors->has('date_fin'))
+                                    <span class="invalide-feedback text-danger">
+                                        <small>{{ $errors->first('date_fin') }}</small>
+                                    </span>
+                                @endif
+                            </li>
+
+                            <li class="list-group-item">Nombre de personnes : 
+                                <select id="nb_personne" name="nb_personne" class="form-control">
+
+                                    <option value=1>1</option>
+                                    <option value=2>2</option>
+                                    <option value=3>3</option>
+                                    <option value=4>4</option>
+                                    <option value=5>5</option>
+
+                                </select>
+                            </li>
+
+                            <li id="prix" class="list-group-item">
+                                <a href="#" id="detail"> Calculer le détail </a>
+                            </li>
+
+                            <li class="list-group-item"> 
+                                <button type="submit" class="btn btn-primary">
+                                    Réserver
+                                </button>
+                            </li>
+                        </ul> 
+                    </form>
+                </div>
+            </div>
     </div>
     <br>
 
@@ -107,6 +159,19 @@
     </div>
 
 </div>
+
+<!-- <script type="text/javascript">
+    let date_debut = document.getElementById('date_debut');
+    let date_fin = document.getElementById('date_fin');
+    let nb_personne = document.getElementById('nb_personne');
+    let detail = document.getElementById('detail');
+
+    detail.addEventListener('click', affichePrix);
+
+    function affichePrix(e) {
+        alert(date_debut);
+    }
+</script> -->
 
 
 @endsection

@@ -24,8 +24,8 @@ class HabitatsTableSeeder extends Seeder
             'nb_lit_simple' => 1,
             'nb_lit_double' => 2,
             'nb_personne_max' => 5,
-            'date_debut_dispo' => '2018-06-29',
-            'date_fin_dispo' => '2018-07-29',
+            'date_debut_dispo' => '2018-09-01',
+            'date_fin_dispo' => '2018-09-29',
             'prix' => 20,
          ]);
 
@@ -41,8 +41,8 @@ class HabitatsTableSeeder extends Seeder
             'nb_lit_simple' => 1,
             'nb_lit_double' => 2,
             'nb_personne_max' => 5,
-            'date_debut_dispo' => '2018-06-29',
-            'date_fin_dispo' => '2018-07-29',
+            'date_debut_dispo' => '2018-09-01',
+            'date_fin_dispo' => '2018-09-29',
             'prix' => 20,
          ]);
     }
