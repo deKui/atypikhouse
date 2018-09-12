@@ -41,11 +41,6 @@ Route::middleware('auth')->group(function () {
 	// Page profil public
 	Route::get('profil/public/{user}', 'UserController@show')->name('profil.show');
 
-
-	Route::resource('profil', 'UserController', [
-        'only' => ['update'],
-    ]);
-
 	// Page noter un utilisateur
 	Route::get('profil/noter/{user}', 'UserController@noter')->name('profil.noter');
 
