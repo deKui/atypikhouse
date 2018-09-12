@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Note;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -48,5 +49,16 @@ class User extends Authenticatable
         $user = User::where('name', $name_user)->first();
 
         return $user;
+    }
+
+
+    /**
+     * Auteur : Lucas
+     * récupère toutes les notes
+     */
+    public function getNote($to_id) {
+        $notes = Note::where('to_id', $to_id)->get();
+
+        return $notes;
     }
 }
