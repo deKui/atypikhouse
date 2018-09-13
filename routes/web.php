@@ -26,11 +26,14 @@ Route::get('cgv', 'AtypikController@showcgv')->name('cgv');
 // Mention légales
 Route::get('legal', 'AtypikController@showlegal')->name('legal');
 
-// Aide
-Route::get('help', 'AtypikController@showhelp')->name('help');
+// Contact
+Route::get('contact', 'AtypikController@showcontact')->name('contact');
 
 // En savoir plus sur nous
 Route::get('about', 'AtypikController@showabout')->name('about');
+
+// Devenir hôte
+Route::get('behost', 'AtypikController@showbehost')->name('behost');
 
 // Résultat d'une recherche
 Route::get('recherche', 'RechercheController@index')->name('recherche');

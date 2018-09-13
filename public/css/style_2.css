@@ -91,6 +91,7 @@
     text-transform: uppercase;
     flex-direction: row;
     padding: 0.1rem;
+    box-shadow: 5px 1px 20px #88888875;
 }
 
 .atypikmenu a{
@@ -121,13 +122,13 @@
 }
 
 body{
-    background-color: transparent;
-    background-image: url(../images/background.jpg);
+    background-color: #f8f9fa;
+    /*background-image: url(../images/background.jpg);*/
 }
 
 .atypiklegal{
     margin-top: 0.7rem;
-    color:#f8f9fa;
+    color: rgb(32, 143, 164);
     background-color: transparent;
     font-family: 'Roboto';
     letter-spacing: 0.2rem;
@@ -162,12 +163,36 @@ h1{
 
 }
 
+h2{
+    font-family: 'Roboto'!important;
+    text-transform: none;
+    color: rgb(32, 143, 164);
+    margin: 0;
+    text-transform: uppercase;
+    font-size: 2.5rem!important;
+    letter-spacing: 0.2rem;
+}
+
+h4{
+    color: #f5b22f!important;
+    font-size: 1.5rem!important;
+}
+
 .roboto{
     font-family: 'Roboto'!important;
     letter-spacing: 0.2rem;
     color:#16273E;
     text-transform: uppercase;
     font-size: 1.1rem;
+    font-weight: bold;
+}
+
+p{
+    font-family: 'Roboto'!important;
+    letter-spacing: 0.2rem;
+    color:#16273E;
+    text-transform: uppercase;
+    font-size: 0.8rem;
     font-weight: bold;
 }
 
@@ -256,6 +281,10 @@ h3{
     padding: 1rem;
     padding-left: 2rem;
     padding-right: 2rem;
-    margin-top:2rem; 
+    margin-top:2rem;
+    border:none; 
+}
 
+.jumbotron{
+    background-color:#f8f9faa4!important;
 }
