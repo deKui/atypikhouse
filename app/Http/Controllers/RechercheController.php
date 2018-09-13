@@ -24,6 +24,15 @@ class RechercheController extends Controller
                             ->distinct()
                             ->get();
 
+        $i = 0;
+        foreach ($habitats as $habitat) {
+            $i++;
+        }
+
+        if ($i == 0) {
+            return redirect('/')->with(['ok' => __("Désolé, aucun logement ne correspond à vos critères, veuillez modifier votre recherche !")]);
+        }
+
     	$nb_personne = $request->voyageurs;
 
         // conversion en type DateTime pour calculer le nombre de nuits

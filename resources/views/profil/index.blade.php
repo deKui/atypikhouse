@@ -22,9 +22,14 @@
 						</ul>
 					</div>
 
+					@if (Auth()->user()->id == $user->id )
+
 					<div class="card-footer">
 						<a class="btn btn-primary" href="{{ route('profil.edit', auth()->user()->id) }}"> Modifier </a>
-					</div>	
+					</div>
+
+					@endif
+						
 				</div>
 		</div>
 	</div>	
