@@ -139,7 +139,6 @@
 
                                     <li class="dropdown-item">
                                         <a href="{{ route('habitat.create') }}"> Enregistrer un habitat </a>
-
                                     </li>
                                 <!-- Permet d'afficher uniquement cette page pour les gérant -->
                                  @gerant
@@ -154,6 +153,19 @@
                 </div>
             </div>
         </nav>
+
+        @if (session('ok'))
+    
+            <div class="container">
+                <div class="alert alert-dismissible alert-success fade show" role="alert">
+                    {{ session('ok') }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+
+        @endif
 
         @yield('content')
 

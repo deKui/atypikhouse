@@ -23,7 +23,7 @@
                         <li class="list-group-item">Lit(s) double(s) : {{ $habitat->nb_lit_double }} </li>
                         <li class="list-group-item">Prévu pour {{ $habitat->nb_personne_max }} personnes maximum </li>
                         <li class="list-group-item">Disponibilité : Du {{ $habitat->date_debut_dispo }} au {{ $habitat->date_fin_dispo }} </li>
-                        <li class="list-group-item"> <a href="{{ route('habitat.show', $habitat->id) }}" class="btn btn-primary">Voir</a> </li>
+                        <li class="list-group-item"> <a href="{{ route('habitat.showAfterSearch', [$habitat->id, $nb_personne, $date_debut, $date_fin, $duree]) }}" class="btn btn-primary">Voir</a> </li>
                     </ul> 
                 </div>
             </div> 
