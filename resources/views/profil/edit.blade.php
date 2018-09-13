@@ -1,48 +1,65 @@
+
 @extends('layouts.app')
 
 @section('content')
 
 
 	<div class="container">
-		<div class="row">
-	        <div class="col-md-8 col-md-offset-2">
-	            <div class="panel panel-default">
-	                <div class="panel-heading">Modifier vos informations personnelles</div>
+		<form method="POST" action="{{ route('profil.update', auth()->user()->id) }}" enctype="multipart/form-data">
+	            {{ csrf_field() }}
+            	{{ method_field('PUT') }}
 
-	                <div class="panel-body">
-	                    <form class="form-horizontal" method="POST" action="{{ route('profil.update', auth()->user()->id) }}">
-	                    	{{ csrf_field() }}
-            				{{ method_field('PUT') }}
+			<div class="row justify-content-md-center">
 
-	                        @include('partials.form', [
-	                            'title' => __('Pseudo'),
-	                            'type' => 'text',
-	                            'name' => 'pseudo',
-	                            'required' => true,
-	                            'value' => $user->pseudo,
-	                            ])
+				<div class="col-md-4">
+					<img class="card-img-top" src="{{ asset('storage/' . $user->avatar) }}">
+					<input id="avatar" type="file" class="form-control" name="avatar" required>
 
-	                        @include('partials.form', [
-	                            'title' => __('Mail'),
-	                            'type' => 'text',
-	                            'name' => 'email',
-	                            'required' => true,
-	                            'value' => $user->email,
-	                            ])
+					@if ($errors->has('avatar'))
+						<span class="invalide-feedback text-danger">
+							<small>{{ $errors->first('avatar') }}</small>
+						</span>
+					@endif
+				</div>
 
-	                    <div class="form-group">
-                            <div class="col-md-8 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Valider
-                                </button>
-                            </div>
-                        </div>
+				<div class="card col-md-6">
 
-	                    </form>
-	                </div>
-	            </div>
-	        </div>
-	    </div>
+					<div class="card-body">
+						<ul class="list-group list-group-flush">
+							<li class="list-group-item">Pseudo : {{ $user->pseudo }}</li>
+						    <li class="list-group-item">Prenom : 
+								<input id="prenom" type="text" class="form-control" name="prenom" value="{{ $user->prenom}}" required>
+
+								@if ($errors->has('prenom'))
+							        <span class="invalide-feedback text-danger">
+							            <small>{{ $errors->first('prenom') }}</small>
+							        </span>
+							    @endif
+						    </li>
+						    <li class="list-group-item">Nom : 
+								<input id="nom" type="text" class="form-control" name="nom" value="{{ $user->nom}}">
+
+								@if ($errors->has('nom'))
+							        <span class="invalide-feedback text-danger">
+							            <small>{{ $errors->first('nom') }}</small>
+							        </span>
+							    @endif
+						    </li>
+						    <li class="list-group-item">Mail : {{ $user->email }}</li>  
+						    <li class="list-group-item">Date de naissance : {{ $user->date_naissance }}</li>  
+						    <li class="list-group-item">Note : {{ $user->note_eval }}</li>  
+						</ul>
+					</div>
+
+					<div class="card-footer">
+						<button type="submit" class="btn btn-primary">
+                            Valider
+                        </button>
+					</div>
+					
+				</div>	
+			</div>
+		</form>
 	</div>	
 
 @endsection

@@ -13,6 +13,13 @@
 							<li class="list-group-item"> Informations personnelles</li>
 						    <li class="list-group-item">Nom : {{ $users->pseudo }}</li>
 						    <li class="list-group-item">Mail : {{ $users->email }}</li>
+						    <li class="list-group-item">
+						    	<a class="btn btn-primary" href="{{ route('profil.noter', $users->id) }}"> Noter </a>
+						    </li>
+						<!-- VAL - L'utilisateur authentifié ne peux pas signaler son profil -->
+						@if ((auth()->user()->id) !== $users->id)
+						    <li class="list-group-item"><a href="{{ route('profil.signaleUtil', $users->id) }}" class="btn btn-primary">Signaler</a></li>
+						@endif
 						</ul>
 					</div>
 				</div>

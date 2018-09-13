@@ -13,15 +13,43 @@
     <!-- Styles -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=East+Sea+Dokdo|Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/style_2.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/video.css') }}">
     <!-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> -->
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="margin-bottom: 40px;">
+    <nav class="atypiktools">
+            <div class="container">
+                <div class="row">
+                    <div class="col-2">
+                    <a href="https://www.facebook.com/voyageavecatypik"><div class="facebook"></div></a>
+                    <a href="https://www.instagram.com/atypik_house_voyage"><div class="instagram"></div></a>
+                    </div>
+                    <div class="col-8 verti-center">
+                    Découvrez des logements adaptés à tous types de voyage
+                    </div>
+
+                    <div class="col-2 verti-center">
+                    @guest
+                        <div class="login"></div>
+                        <a class="atypiklinks" href="{{ route('login') }}">Connexion</a>
+                    @else
+                        <div class="login"></div>
+                        <a class="atypiklinks" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                            document.getElementById('logout-form').submit();">Déconnexion</a>
+                    @endguest
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <nav class="navbar navbar-expand-lg atypikmenu" style="margin-bottom: 40px;">
             <div class="container">
                 <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
+                        <h1>Atypik <span class="roboto">House</span></h1> 
                     </a>
                 
                 <!-- Collapsed Hamburger -->
@@ -39,10 +67,12 @@
                     <ul class="navbar-nav">
                         <!-- Authentication Links -->
                         @guest
-                            <li class="nav-item"><a href="{{ route('login') }}" class="nav-link"> Login </a></li>
-
-                            <li class="nav-item"><a href="{{ route('register') }}" class="nav-link"> Register </a></li>
+                            <li class="nav-item"><a href="{{ route('register') }}" class="nav-link"> Dernières trouvailles </a></li>
+                            <li class="nav-item"><a href="{{ route('register') }}" class="nav-link"> Devenir hôte </a></li>
+                            <li class="nav-item"><a href="{{ route('register') }}" class="nav-link"> M'inscrire </a></li>
                         @else
+                            <li class="nav-item"><a href="{{ route('register') }}" class="nav-link"> Dernières trouvailles </a></li>
+                            <li class="nav-item"><a href="{{ route('register') }}" class="nav-link"> Devenir hôte </a></li>
                             <li class="nav-item">
                                 <a href="{{ route('habitat.index') }}" class="nav-link"> Habitats </a>
                             </li>
@@ -69,9 +99,21 @@
                                         <a href="{{ route('profil.index', auth()->user()->id) }}"> Mon profil </a>
                                     </li>
 
+									<li class="dropdown-item">
+                                        <a href="{{ route('reservation.show', auth()->user()->id) }}"> Mes réservations </a>
+									</li> 
+
                                     <li class="dropdown-item">
                                         <a href="{{ route('habitat.create') }}"> Enregistrer un habitat </a>
+
                                     </li>
+
+                                <!-- Permet d'afficher uniquement cette page pour les gérant -->
+                                @gerant
+                                    <li class="dropdown-item">
+                                        <a href="{{ route('profil.gerant') }}"> Gestion du site </a>
+                                    </li>
+                                @endgerant
                                 </ul>
                             </li>
                         @endguest
@@ -80,13 +122,59 @@
             </div>
         </nav>
 
+        @if (session('ok'))
+    
+            <div class="container">
+                <div class="alert alert-dismissible alert-success fade show" role="alert">
+                    {{ session('ok') }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+
+        @endif
+
         @yield('content')
+
+
+        <nav class="atypikfooter">
+            <div class="container">
+                <div class="row">
+                    <div class="col-3 verti-center horiz-center">
+                        <a href="{{ route('about') }}">A propos</a>
+                    </div>
+                    <div class="col-3 verti-center horiz-center">
+                        <a href="{{ route('legal') }}">Mentions légales</a>
+                    </div>
+                    <div class="col-3 verti-center horiz-center">
+                        <a href="{{ route('cgv') }}">CGV</a>
+                    </div>
+                    <div class="col-3 verti-center horiz-center">
+                        <a href="{{ route('help') }}">Aide</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <nav class="atypiklegal">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 verti-center horiz-center">
+                        © 2018 - ATYPIK HOUSE - Tous droits réservés -&nbsp;  <a href="{{ route('cgu') }}"> conditions d'utilisation</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
     </div>
+
 
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/video.js') }}"></script>
 </body>
 </html>

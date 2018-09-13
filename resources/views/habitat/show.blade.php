@@ -6,8 +6,10 @@
 
     <div class="row">
             <div class="col-md-4">
-                <div class="card">
 
+                <!-- Affichage des informations de l'habitat -->
+
+                <div class="card">
                     <img class="card-img-top" src="{{ asset('storage/' . $habitats->photo) }}">
 
                     <ul class="list-group list-group-flush">
@@ -26,14 +28,73 @@
 
                 </div>
             </div> 
+
+            <!-- Affichage de l'interface pour réserver l'habitat -->
+
+            <div class="col-md-4">
+                <div class="card">
+                    <form method="POST" action="{{ route('reservation.create', $habitats) }}" enctype="multipart/form-data">
+                        {{ csrf_field() }}
+                        
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Prix par nuit : {{ $habitats->prix }} €</li>
+
+                            <!-- Date d'arrivée -->
+                            <li class="list-group-item">Arrivée : 
+                                <input id="date_debut" type="date" class="form-control" name="date_debut" required>
+
+                                @if ($errors->has('date_debut'))
+                                    <span class="invalide-feedback text-danger">
+                                        <small>{{ $errors->first('date_debut') }}</small>
+                                    </span>
+                                @endif
+                            </li>
+                            
+                            <!-- Date de départ  -->
+                            <li class="list-group-item">Départ : 
+                                <input id="date_fin" type="date" class="form-control" name="date_fin" required>
+
+                                @if ($errors->has('date_fin'))
+                                    <span class="invalide-feedback text-danger">
+                                        <small>{{ $errors->first('date_fin') }}</small>
+                                    </span>
+                                @endif
+                            </li>
+
+                            <!-- Nombre de voyageurs -->
+                            <li class="list-group-item">Nombre de personnes : 
+                                <select id="nb_personne" name="nb_personne" class="form-control">
+
+                                    <option value=1>1</option>
+                                    <option value=2>2</option>
+                                    <option value=3>3</option>
+                                    <option value=4>4</option>
+                                    <option value=5>5</option>
+
+                                </select>
+                            </li>
+
+                            <li class="list-group-item"> 
+                                <button type="submit" class="btn btn-primary">
+                                    Réserver
+                                </button>
+                            </li>
+                        </ul> 
+                    </form>
+                </div>
+            </div>
     </div>
     <br>
 
     <div class="row">
         <div class="col-md-12">
+
+            @auth
             
+            @if ($reservation < date_create('now')->format('Y-m-d'))
+
             <!-- Affiche le formulaire pour laisser un avis uniquement si l'user connecté est différent du proprietaire -->
-            @if(auth()->user()->id !== $habitats->proprio->id)
+            @if (auth()->user()->id !== $habitats->proprio->id)
 
             <div class="card">
                 <div class="card-header">Laisser votre avis</div>
@@ -41,7 +102,8 @@
                 <div class="card-body">
                     <form class="form-horizontal" method="POST" action="">
                         {{ csrf_field() }}
-
+                            
+                            <!-- Note du commentaire -->
                             <div class="form-group">
                                 <label for="note"> Note </label>
                                 <select id="note" name="note" class="form-control">
@@ -54,7 +116,8 @@
 
                                 </select>
                             </div> 
-
+                            
+                            <!-- contenu du commentaire -->
                             <div class="form-group">
                                 <label for="comment">Avis</label>
                                 <textarea class="form-control {{ $errors->has('comment') ? 'is-invalid' : ''}}" id="comment" name="comment" rows="3"></textarea>
@@ -77,25 +140,41 @@
             <br>
 
             @endif
+
+            @endif
+
+            @endauth
                 
-                <!-- Récupère les avis si au moins un est laissé -->
+                <!-- Récupère et affiche les avis si au moins un est laissé -->
                 @if($messages !== [])
 
                 @foreach($messages as $avis)
 
-                <div class="card">
-                    <div class="card-header">
-                        {{ $avis->from->name }}
-                        @for ($i = 0; $i < $avis->note; $i++)
-                            <i class="fas fa-star"></i>
-                        @endfor
+                    <div class="card">
+                        <div class="card-header">
+                            {{ $avis->from->pseudo }}
+                            @for ($i = 0; $i < $avis->note; $i++)
+                                <i class="fas fa-star"></i>
+                            @endfor
+                        </div>
+                        <div class="card-body">
+                            <blockquote class="blockquote mb-0">
+                                <p> {{ $avis->comment }} </p>
+                                <footer class="blockquote-footer"> {{ $avis->created_at }} </footer>
+                            </blockquote>
+                        </div>
+
+                        <div class="card-footer">
+                            <a href="{{ route('profil.signaleAvis', $avis->id) }}" class="btn btn-primary">Signaler</a>
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <blockquote class="blockquote mb-0">
-                            <p> {{ $avis->comment }} </p>
-                            <footer class="blockquote-footer"> {{ $avis->created_at }} </footer>
-                        </blockquote>
-                    </div>
+
+                    <!-- VAL - L'utilisateur authentifié ne peux pas signaler son commentaire -->
+                    @if ((auth()->user()->id) !== $avis->id_utilisateur)
+                        <div class="card-footer">
+                            <a href="{{ route('profil.signaleAvis', $avis->id) }}" class="btn btn-primary">Signaler</a>
+                        </div>
+                    @endif
                 </div>
                 <br>
 
@@ -107,6 +186,19 @@
     </div>
 
 </div>
+
+<!-- <script type="text/javascript">
+    let date_debut = document.getElementById('date_debut');
+    let date_fin = document.getElementById('date_fin');
+    let nb_personne = document.getElementById('nb_personne');
+    let detail = document.getElementById('detail');
+
+    detail.addEventListener('click', affichePrix);
+
+    function affichePrix(e) {
+        alert(date_debut);
+    }
+</script> -->
 
 
 @endsection

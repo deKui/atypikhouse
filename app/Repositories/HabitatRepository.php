@@ -30,19 +30,17 @@ class HabitatRepository {
 
         return $habitat;
     }
+    
+	
+	/** Auteur : Val
+	** Retourne les habitats d'un proprio
+	*/ 
+	public function getHabitatProprio($id_proprietaire) {
 
+        $habitat = Habitat::where('id_proprietaire', $id_proprietaire)->get();
 
-    /**
-     * Auteur : Lucas
-     * Retourne un user à partir de son id
-    */
-    public function getUser($id_user)
-    {
-        $user = User::where('id', $id_user)->first();
-
-        return $user->name;
+        return $habitat;
     }
-
 
 
 

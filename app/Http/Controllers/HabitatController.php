@@ -12,6 +12,7 @@ use App\Http\Requests\HabitatRequest;
 use App\Models\Habitat;
 use App\Models\TypeHabitats;
 use App\Models\Avis;
+use App\Models\Reservation;
 
 class HabitatController extends Controller
 {
@@ -40,15 +41,50 @@ class HabitatController extends Controller
 
 
     /**
-     * Affiche un seul habitat
+     * Auteur : Lucas
+     * Affiche un seul habitat après un recherche
      */
-    public function show(Habitat $habitat) {
+    public function showAfterSearch(Habitat $habitat, $nb_personne, $date_debut, $date_fin, $duree) {
         
     	$habitats = $this->repo->getHabitat($habitat->id);
         
         $messages = Avis::where('id_habitat', $habitat->id)->get();
 
-        return view('habitat.show', compact('habitats', 'messages'));
+        $reservation = Reservation::where('id_locataire', Auth::id())->where('id_habitat', $habitat->id)->first();
+
+        if ($reservation == []) {
+            $reservation = "2100-01-01";   
+        }else {
+            $reservation = $reservation->date_fin;
+        }
+
+        $voyageurs = $nb_personne;
+
+        $arrivee = $date_debut;
+        $depart = $date_fin;
+
+        return view('habitat.showAfterSearch', compact('habitats', 'messages', 'reservation', 'voyageurs', 'arrivee', 'depart', 'duree'));
+    }
+
+
+    /**
+     * Affiche un seul habitat
+     */
+    public function show(Habitat $habitat) {
+        
+        $habitats = $this->repo->getHabitat($habitat->id);
+        
+        $messages = Avis::where('id_habitat', $habitat->id)->get();
+
+        $reservation = Reservation::where('id_locataire', Auth::id())->where('id_habitat', $habitat->id)->first();
+
+        if ($reservation == []) {
+            $reservation = "2100-01-01";   
+        }else {
+            $reservation = $reservation->date_fin;
+        }
+
+        return view('habitat.show', compact('habitats', 'messages', 'reservation'));
     }
 
 
@@ -57,6 +93,7 @@ class HabitatController extends Controller
      */
     public function create()
     {
+
         $type_habitat = TypeHabitats::all();
 
         return view('habitat.create', compact('type_habitat'));
@@ -90,6 +127,16 @@ class HabitatController extends Controller
         ]);
 
         return redirect(route('home'));
+    }
+
+
+	/* ATT - Mettre le nom de de la variable pareil que dans (compact) */
+	
+    public function showAllProprietaire($id_proprietaire){
+
+         $habitatProprio = $this->repo->getHabitatProprio($id_proprietaire);
+
+        return view('habitat.showAllProprietaire', compact('habitatProprio'));
     }
 
 }

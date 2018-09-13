@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Avis extends Model
 {
     protected $fillable = [
-        'id_utilisateur', 'id_habitat', 'note', 'comment',
+        'id_utilisateur', 'id_habitat', 'note', 'comment', 'signale',
     ];
 
 
@@ -15,4 +15,8 @@ class Avis extends Model
     {
     	return $this->belongsTo(User::class, 'id_utilisateur');
     }
+
+
+
+
 }

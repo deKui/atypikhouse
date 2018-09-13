@@ -11,17 +11,42 @@
 |
 */
 
+// Route pour l'authentification
 Auth::routes();
 
 // Page d'accueil
 Route::get('/', 'HomeController@index')->name('home');
 
+<<<<<<< HEAD
+=======
+// CGU
+Route::get('cgu', 'AtypikController@showcgu')->name('cgu');
+
+// CGV
+Route::get('cgv', 'AtypikController@showcgv')->name('cgv');
+
+// Mention légales
+Route::get('legal', 'AtypikController@showlegal')->name('legal');
+
+// Aide
+Route::get('help', 'AtypikController@showhelp')->name('help');
+
+// En savoir plus sur nous
+Route::get('about', 'AtypikController@showabout')->name('about');
+
+>>>>>>> c20d4861943c6040d1b798025f7d2398537e4c55
 // Résultat d'une recherche
 Route::get('recherche', 'RechercheController@index')->name('recherche');
 
 // Affiche un habitat
 Route::get('habitats/{habitat}', 'HabitatController@show')->name('habitat.show');
 
+<<<<<<< HEAD
+=======
+// Affiche un habitat après une recherche
+Route::get('habitats/show/{habitat}/{nbpersonne}/{date_debut}/{date_fin}/{duree}', 'HabitatController@showAfterSearch')->name('habitat.showAfterSearch');
+
+>>>>>>> c20d4861943c6040d1b798025f7d2398537e4c55
 // Affiche tous les habitats
 Route::get('habitats', 'HabitatController@index')->name('habitat.index');
 
@@ -40,10 +65,6 @@ Route::middleware('auth')->group(function () {
 	// Page profil public
 	Route::get('profil/public/{user}', 'UserController@show')->name('profil.show');
 
-	Route::resource('profil', 'UserController', [
-        'only' => ['update'],
-    ]);
-
 	// Page noter un utilisateur
 	Route::get('profil/noter/{user}', 'UserController@noter')->name('profil.noter');
 
@@ -54,6 +75,22 @@ Route::middleware('auth')->group(function () {
 	Route::resource('profil', 'UserController', [
         'only' => ['update'],
     ]);
+
+<<<<<<< HEAD
+	// Page noter un utilisateur
+	Route::get('profil/noter/{user}', 'UserController@noter')->name('profil.noter');
+
+	// Ajoute une note
+	Route::post('profil/eval/{user}', 'UserController@eval')->name('profil.eval');
+
+	// Update les infos du profil
+	Route::resource('profil', 'UserController', [
+        'only' => ['update'],
+    ]);
+=======
+    // Réserver un habitat
+	Route::post('reserver/{habitat}','ReservationController@create')->name('reservation.create');
+>>>>>>> c20d4861943c6040d1b798025f7d2398537e4c55
 	
 	// Affiche une réservation via son id ?
 	Route::get('reservation/{id}','ReservationController@index')->name('reservation.index');
@@ -68,4 +105,20 @@ Route::middleware('auth')->group(function () {
 
     // Ajoute un habitat
     Route::post('habitat/store', 'HabitatController@store')->name('habitat.store');
+
+
+    // Accès à la page du gérant
+    Route::get('gerant', 'UserController@showInfoGerant')->name('profil.gerant');
+
+    // Mise à jour utilisateur active/ désactive
+    Route::get('gerant/{id_utilisateur}', 'UserController@updateActiveDesactiveUser')->name('profil.gerantActiveDesactive');
+
+    // Supprime avis
+    Route::get('gerant/avis/{id}', 'AvisController@deleteAvis')->name('profil.gerantAvis');
+
+    // MAj avis
+    Route::get('profil/avisSignale/{id}', 'AvisController@signaleAvis')->name('profil.signaleAvis');
+
+    // MAj utilisateur signale
+    Route::get('profil/utilSignale/{id}', 'UserController@updateSignale')->name('profil.signaleUtil');
 });

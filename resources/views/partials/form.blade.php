@@ -1,9 +1,9 @@
-<div class="form-group{{ $errors->has($name) ? ' has-error' : '' }}">
+<div class="row form-group{{ $errors->has($name) ? ' has-error' : '' }}">
 
-	<label class="col-md-4" for="{{ $name }}">{{ $title }}</label>
+	<label class="col-md-6" for="{{ $name }}">{{ $title }}</label>
 	
 	<div class="col-md-12">
-		<input id="{{ $name }}" type="{{ $type }}" class="form-control" name="{{ $name }}" value="{{ old($name, isset($value) ? $value : '') }}" {{ $required ? 'required' : ''}}>
+		<input id="{{ $name }}" type="{{ $type }}" class="form-control" placeholder="{{ $name }}" name="{{ $name }}" value="{{ old($name, isset($value) ? $value : '') }}" {{ $required ? 'required' : ''}}>
 
 		@if ($errors->has($name))
 	        <span class="invalide-feedback text-danger">
