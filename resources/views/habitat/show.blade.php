@@ -5,7 +5,7 @@
 <div class="container">
 
     <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-8">
 
                 <!-- Affichage des informations de l'habitat -->
 
