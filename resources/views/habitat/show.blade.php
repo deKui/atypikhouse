@@ -23,6 +23,7 @@
                         <li class="list-group-item">Lit(s) double(s) : {{ $habitats->nb_lit_double }} </li>
                         <li class="list-group-item">Prévu pour {{ $habitats->nb_personne_max }} personnes maximum </li>
                         <li class="list-group-item">Disponibilité : Du {{ $habitats->date_debut_dispo }} au {{ $habitats->date_fin_dispo }} </li>
+                        
                     </ul> 
 
                 </div>
@@ -162,10 +163,6 @@
                                 <footer class="blockquote-footer"> {{ $avis->created_at }} </footer>
                             </blockquote>
                         </div>
-
-                        <div class="card-footer">
-                            <a href="{{ route('profil.signaleAvis', $avis->id) }}" class="btn btn-primary">Signaler</a>
-                        </div>
                     </div>
 
                     <!-- VAL - L'utilisateur authentifié ne peux pas signaler son commentaire -->
@@ -174,15 +171,14 @@
                             <a href="{{ route('profil.signaleAvis', $avis->id) }}" class="btn btn-primary">Signaler</a>
                         </div>
                     @endif
-                </div>
+                
                 <br>
 
                 @endforeach
 
                 @endif
-
+            </div>
         </div>
-    </div>
 
 </div>
 

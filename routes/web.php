@@ -70,6 +70,17 @@ Route::middleware('auth')->group(function () {
         'only' => ['update'],
     ]);
 
+	// Page noter un utilisateur
+	Route::get('profil/noter/{user}', 'UserController@noter')->name('profil.noter');
+
+	// Ajoute une note
+	Route::post('profil/eval/{user}', 'UserController@eval')->name('profil.eval');
+
+	// Update les infos du profil
+	Route::resource('profil', 'UserController', [
+        'only' => ['update'],
+    ]);
+
     // Réserver un habitat
 	Route::post('reserver/{habitat}','ReservationController@create')->name('reservation.create');
 	

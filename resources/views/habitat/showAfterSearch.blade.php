@@ -136,7 +136,7 @@
 
             @endif
 
-            @enfif
+            @endif
 
             @endauth
                 
