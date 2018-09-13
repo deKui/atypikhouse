@@ -105,7 +105,10 @@
 
                                     <li class="dropdown-item">
                                         <a href="{{ route('habitat.create') }}"> Enregistrer un habitat </a>
+                                    </li>
 
+                                    <li class="dropdown-item">
+                                        <a href="{{ route('planning.index') }}"> Mon planning </a>
                                     </li>
 
                                 <!-- Permet d'afficher uniquement cette page pour les gérant -->

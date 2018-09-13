@@ -98,7 +98,6 @@ Route::middleware('auth')->group(function () {
     // Ajoute un habitat
     Route::post('habitat/store', 'HabitatController@store')->name('habitat.store');
 
-
     // Accès à la page du gérant
     Route::get('gerant', 'UserController@showInfoGerant')->name('profil.gerant');
 
@@ -113,4 +112,7 @@ Route::middleware('auth')->group(function () {
 
     // MAj utilisateur signale
     Route::get('profil/utilSignale/{id}', 'UserController@updateSignale')->name('profil.signaleUtil');
+
+    // Affichage du plannig
+    Route::get('planning', 'PlanningController@index')->name('planning.index');
 });
