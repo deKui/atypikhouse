@@ -165,6 +165,18 @@
                     </div>
                     <br>
 
+                    <div class="card-body">
+                        <blockquote class="blockquote mb-0">
+                            <p> {{ $avis->comment }} </p>
+                            <footer class="blockquote-footer"> {{ $avis->created_at }} </footer>
+                        </blockquote>
+                    </div>
+                    <div class="card-footer">
+                        <a href="{{ route('profil.signaleAvis', $avis->id) }}" class="btn btn-primary">Signaler</a>
+                    </div>
+                </div>
+                <br>
+
                 @endforeach
 
                 @endif

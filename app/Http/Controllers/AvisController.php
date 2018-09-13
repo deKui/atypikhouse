@@ -8,6 +8,7 @@ use App\Http\Requests\AvisRequest;
 use App\Models\User;
 use App\Models\Habitat;
 use App\Models\Avis;
+use DB;
 
 class AvisController extends Controller
 {
@@ -63,6 +64,40 @@ class AvisController extends Controller
     }
 
     /**
+     * Auteur : Valériane
+     * Supprime un avis
+     */
+    public function deleteAvis($id) 
+    {
+
+        $avis = Avis::find($id);
+        $avis->delete($id);
+
+        return redirect('gerant'); 
+
+    }
+
+    /**
+     * Auteur : Valériane
+     * update un avis - Signale
+     */
+    public function signaleAvis($id, Habitat $habitat) 
+    {
+
+        $avis = Avis::find($id);
+        $avis->update([
+            'signale' => true
+        ]);
+
+        //dd($avis);
+
+        $avis->save();
+        return redirect(route('habitat.show', ['id' => $habitat->id]));
+
+    }
+
+
+    /**
      * Display the specified resource.
      *
      * @param  int  $id
@@ -106,4 +141,6 @@ class AvisController extends Controller
     {
         //
     }
+
+
 }

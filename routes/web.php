@@ -92,6 +92,14 @@ Route::middleware('auth')->group(function () {
     Route::get('gerant', 'UserController@showInfoGerant')->name('profil.gerant');
 
     // Mise à jour utilisateur active/ désactive
-    Route::get('gerant/{id_utilisateur}', 'UserController@updateActiveDesactiveUser')->name('profil.gerantActive');
+    Route::get('gerant/{id_utilisateur}', 'UserController@updateActiveDesactiveUser')->name('profil.gerantActiveDesactive');
 
+    // Supprime avis
+    Route::get('gerant/avis/{id}', 'AvisController@deleteAvis')->name('profil.gerantAvis');
+
+    // MAj avis
+    Route::get('profil/avisSignale/{id}', 'AvisController@signaleAvis')->name('profil.signaleAvis');
+
+    // MAj utilisateur signale
+    Route::get('profil/utilSignale/{id}', 'UserController@updateSignale')->name('profil.signaleUtil');
 });
