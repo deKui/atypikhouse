@@ -91,7 +91,7 @@
             @if ($reservation < date_create('now')->format('Y-m-d'))
             
             <!-- Affiche le formulaire pour laisser un avis uniquement si l'user connecté est différent du proprietaire -->
-            @if(auth()->user()->id !== $habitats->proprio->id)
+            @if (auth()->user()->id !== $habitats->proprio->id)
 
             <div class="card">
                 <div class="card-header">Laisser votre avis</div>
@@ -136,18 +136,19 @@
 
             @endif
 
-            @enfif
+            @endif
 
             @endauth
                 
                 <!-- Récupère les avis si au moins un est laissé -->
-                @if($messages !== [])
+                @if ($messages !== [])
 
-                @foreach($messages as $avis)
+                @foreach ($messages as $avis)
 
                 <div class="card">
                     <div class="card-header">
                         {{ $avis->from->name }}
+                        <br>
                         @for ($i = 0; $i < $avis->note; $i++)
                             <i class="fas fa-star"></i>
                         @endfor
@@ -169,19 +170,5 @@
     </div>
 
 </div>
-
-<!-- <script type="text/javascript">
-    let date_debut = document.getElementById('date_debut');
-    let date_fin = document.getElementById('date_fin');
-    let nb_personne = document.getElementById('nb_personne');
-    let detail = document.getElementById('detail');
-
-    detail.addEventListener('click', affichePrix);
-
-    function affichePrix(e) {
-        alert(date_debut);
-    }
-</script> -->
-
 
 @endsection

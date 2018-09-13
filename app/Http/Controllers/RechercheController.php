@@ -24,12 +24,7 @@ class RechercheController extends Controller
                             ->distinct()
                             ->get();
 
-        $i = 0;
-        foreach ($habitats as $habitat) {
-            $i++;
-        }
-
-        if ($i == 0) {
+        if ($habitats->isEmpty()) {
             return redirect('/')->with(['ok' => __("Désolé, aucun logement ne correspond à vos critères, veuillez modifier votre recherche !")]);
         }
 
