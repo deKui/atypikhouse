@@ -16,6 +16,7 @@
 						    <li class="list-group-item">
 						    	<a class="btn btn-primary" href="{{ route('profil.noter', $users->id) }}"> Noter </a>
 						    </li>
+						    <li class="list-group-item"><a href="{{ route('profil.signaleUtil', $users->id) }}" class="btn btn-primary">Signaler</a></li>
 						</ul>
 					</div>
 				</div>

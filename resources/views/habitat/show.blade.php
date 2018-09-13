@@ -148,6 +148,9 @@
                             <footer class="blockquote-footer"> {{ $avis->created_at }} </footer>
                         </blockquote>
                     </div>
+                    <div class="card-footer">
+                        <a href="{{ route('profil.signaleAvis', $avis->id) }}" class="btn btn-primary">Signaler</a>
+                    </div>
                 </div>
                 <br>
 

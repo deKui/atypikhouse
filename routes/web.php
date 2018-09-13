@@ -89,4 +89,9 @@ Route::middleware('auth')->group(function () {
     // Supprime avis
     Route::get('gerant/avis/{id}', 'AvisController@deleteAvis')->name('profil.gerantAvis');
 
+    // MAj avis
+    Route::get('profil/avisSignale/{id}', 'AvisController@signaleAvis')->name('profil.signaleAvis');
+
+    // MAj utilisateur signale
+    Route::get('profil/utilSignale/{id}', 'UserController@updateSignale')->name('profil.signaleUtil');
 });

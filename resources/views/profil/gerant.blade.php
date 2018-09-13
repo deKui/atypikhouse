@@ -12,7 +12,7 @@
 
 			 	<h2>Derniers utilisateurs signalés</h2>
 
-				<table class="table">
+				<table class="table table-striped">
 				  <thead>
 				    <tr>
 				      <th scope="col">Avatar</th>
@@ -43,15 +43,11 @@
 
 </div>
 
-
-
-
-
 <div class="row">
 			 	<h2>Derniers avis signalés</h2>
 
 
-				<table class="table">
+				<table class="table table-striped">
 				  <thead>
 				    <tr>
 				      <th scope="col">Utilisateur</th>
@@ -67,7 +63,7 @@
 							      <td> {{ $avis->pseudo }} </td>
 							      <td> {{ $avis->titre }} </td>
 							      <td> {{ $avis->comment }} </td>
-							      <td><a href="{{ route('profil.gerantAvis', $avis->id) }}" class="btn btn-primary">Supprimer</a></td>
+							      <td><a href="{{ route('profil.gerantAvis', $avis->id) }}" class="btn btn-primary">Supprimer l'avis</a></td>
 							    </tr>
 			            @endforeach
 

@@ -67,7 +67,24 @@ class AvisController extends Controller
 
     }
 
+    /**
+     * Auteur : Valériane
+     * update un avis - Signale
+     */
+    public function signaleAvis($id, Habitat $habitat) 
+    {
 
+        $avis = Avis::find($id);
+        $avis->update([
+            'signale' => true
+        ]);
+
+        //dd($avis);
+
+        $avis->save();
+        return redirect(route('habitat.show', ['id' => $habitat->id]));
+
+    }
 
 
     /**

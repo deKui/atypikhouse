@@ -151,6 +151,26 @@ class UserController extends Controller
     	return redirect('profil/' . $user->id);	
     }
 
+   /**
+     * Auteur : Valériane
+     * Update utilisateur signale
+     */
+    public function updateSignale($id_user) 
+    {
+        $user = $this->user->getUser($id_user);
+
+        // on remplace les anciens champs par les nouveaux dans la bdd
+        $user->update([
+            'signale' => true,
+        ]);
+        
+        // Enregistre les modifications de la bdd
+        $user->save();
+
+        return redirect('profil/' . $user->id); 
+    }
+
+
 
 /****** GERANT ******/
 
