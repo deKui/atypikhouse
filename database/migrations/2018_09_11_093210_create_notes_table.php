@@ -32,19 +32,11 @@ class CreateNotesTable extends Migration
     public function down()
     {
         Schema::table('notes', function(Blueprint $table) {
-<<<<<<< HEAD
-            $table->dropForeign('avis_from_id_foreign');
-        });
-
-        Schema::table('notes', function(Blueprint $table) {
-            $table->dropForeign('avis_to_id_foreign');
-=======
             $table->dropForeign('notes_from_id_foreign');
         });
 
         Schema::table('notes', function(Blueprint $table) {
             $table->dropForeign('notes_to_id_foreign');
->>>>>>> c20d4861943c6040d1b798025f7d2398537e4c55
         });
 
         Schema::dropIfExists('notes');

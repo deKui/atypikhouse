@@ -17,8 +17,6 @@ Auth::routes();
 // Page d'accueil
 Route::get('/', 'HomeController@index')->name('home');
 
-<<<<<<< HEAD
-=======
 // CGU
 Route::get('cgu', 'AtypikController@showcgu')->name('cgu');
 
@@ -34,19 +32,15 @@ Route::get('help', 'AtypikController@showhelp')->name('help');
 // En savoir plus sur nous
 Route::get('about', 'AtypikController@showabout')->name('about');
 
->>>>>>> c20d4861943c6040d1b798025f7d2398537e4c55
 // Résultat d'une recherche
 Route::get('recherche', 'RechercheController@index')->name('recherche');
 
 // Affiche un habitat
 Route::get('habitats/{habitat}', 'HabitatController@show')->name('habitat.show');
 
-<<<<<<< HEAD
-=======
 // Affiche un habitat après une recherche
 Route::get('habitats/show/{habitat}/{nbpersonne}/{date_debut}/{date_fin}/{duree}', 'HabitatController@showAfterSearch')->name('habitat.showAfterSearch');
 
->>>>>>> c20d4861943c6040d1b798025f7d2398537e4c55
 // Affiche tous les habitats
 Route::get('habitats', 'HabitatController@index')->name('habitat.index');
 
@@ -76,7 +70,6 @@ Route::middleware('auth')->group(function () {
         'only' => ['update'],
     ]);
 
-<<<<<<< HEAD
 	// Page noter un utilisateur
 	Route::get('profil/noter/{user}', 'UserController@noter')->name('profil.noter');
 
@@ -87,10 +80,9 @@ Route::middleware('auth')->group(function () {
 	Route::resource('profil', 'UserController', [
         'only' => ['update'],
     ]);
-=======
+
     // Réserver un habitat
 	Route::post('reserver/{habitat}','ReservationController@create')->name('reservation.create');
->>>>>>> c20d4861943c6040d1b798025f7d2398537e4c55
 	
 	// Affiche une réservation via son id ?
 	Route::get('reservation/{id}','ReservationController@index')->name('reservation.index');

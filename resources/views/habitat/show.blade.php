@@ -163,10 +163,6 @@
                                 <footer class="blockquote-footer"> {{ $avis->created_at }} </footer>
                             </blockquote>
                         </div>
-
-                        <div class="card-footer">
-                            <a href="{{ route('profil.signaleAvis', $avis->id) }}" class="btn btn-primary">Signaler</a>
-                        </div>
                     </div>
 
                     <!-- VAL - L'utilisateur authentifié ne peux pas signaler son commentaire -->
@@ -175,15 +171,14 @@
                             <a href="{{ route('profil.signaleAvis', $avis->id) }}" class="btn btn-primary">Signaler</a>
                         </div>
                     @endif
-                </div>
+                
                 <br>
 
                 @endforeach
 
                 @endif
-
+            </div>
         </div>
-    </div>
 
 </div>
 
