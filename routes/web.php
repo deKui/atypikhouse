@@ -47,6 +47,9 @@ Route::get('habitats/show/{habitat}/{nbpersonne}/{date_debut}/{date_fin}/{duree}
 // Affiche tous les habitats
 Route::get('habitats', 'HabitatController@index')->name('habitat.index');
 
+// Affiche les dernières trouvailles
+Route::get('showLastHabitats', 'HabitatController@showLastHabitats')->name('showLastHabitats');
+
 // Accessible uniquement aux users connectés
 Route::middleware('auth')->group(function () {
 
