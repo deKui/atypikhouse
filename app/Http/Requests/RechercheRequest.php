@@ -27,7 +27,7 @@ class RechercheRequest extends FormRequest
             'destination' => 'required|string|max:255',
             'voyageurs' => 'required|integer|max:50',
             'depart' => 'required|date_format:Y-m-d',
-            'retour' => 'required|date_format:Y-m-d',
+            'retour' => 'required|date_format:Y-m-d|after:depart',
         ];
     }
 }

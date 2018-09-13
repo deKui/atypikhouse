@@ -63,19 +63,24 @@
                                 </div>
                         </div> 
                         <div class="form-group row">
-                        @include('partials.form2', [
-                            'title' => __('Départ'),
-                            'type' => 'date',
-                            'name' => 'depart',
-                            'required' => true,
-                            ])
 
-                        @include('partials.form2', [
-                            'title' => __('Retour'),
-                            'type' => 'date',
-                            'name' => 'retour',
-                            'required' => true,
-                            ])
+                            <div class="col-md-6">
+                            <label class="col-md-12 atypikform2" for="depart">Départ :</label>
+                                <input id="depart" type="date" class="form-control" name="depart" min="{{ date_create('now')->format('Y-m-d') }}">
+
+                                @if ($errors->has('depart'))
+                                    <span class="invalide-feedback text-danger">
+                                        <small>{{ $errors->first('depart') }}</small>
+                                    </span>
+                                @endif
+                            </div>
+
+                            @include('partials.form2', [
+                                'title' => __('Retour'),
+                                'type' => 'date',
+                                'name' => 'retour',
+                                'required' => true,
+                                ])
                         </div>
                         
 

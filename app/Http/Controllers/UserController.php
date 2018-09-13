@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 use App\Models\User;
 use App\Models\Note;
@@ -30,7 +31,11 @@ class UserController extends Controller
      */
     public function index($id_user) 
     {
-    	$user = $this->user->getUser($id_user);
+    	if (Auth::id() !== intval($id_user)) {
+            return redirect('/')->with(['ok' => __("Vous n'avez pas accès à cette page !")]);
+        }
+
+        $user = $this->user->getUser($id_user);
 
     	return view('profil.index', compact('user'));	
     }
