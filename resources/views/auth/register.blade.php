@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card atypikcard">
-                <div class="card-header">Register</div>
+                <div class="card-header">M'inscrire</div>
 
                 <div class="card-body">
                     <form class="form-horizontal" method="POST" action="{{ route('register') }}">
@@ -91,8 +91,8 @@
 
                         <div class="form-group">
                             <div class="col-md-12 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Register
+                                <button type="submit" class="btn btn-primary atypikbutton">
+                                    M'inscrire
                                 </button>
                             </div>
                         </div>

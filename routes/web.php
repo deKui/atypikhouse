@@ -23,9 +23,11 @@ Route::get('cgv', 'AtypikController@showcgv')->name('cgv');
 
 Route::get('legal', 'AtypikController@showlegal')->name('legal');
 
-Route::get('help', 'AtypikController@showhelp')->name('help');
+Route::get('contact', 'AtypikController@showcontact')->name('contact');
 
 Route::get('about', 'AtypikController@showabout')->name('about');
+
+Route::get('behost', 'AtypikController@showbehost')->name('behost');
 
 // Résultat d'une recherche
 Route::get('recherche', 'RechercheController@index')->name('recherche');
@@ -35,6 +37,9 @@ Route::get('habitats/{habitat}', 'HabitatController@show')->name('habitat.show')
 
 // Affiche tous les habitats
 Route::get('habitats', 'HabitatController@index')->name('habitat.index');
+
+// Affiche les dernières trouvailles
+Route::get('showLastHabitats', 'HabitatController@showLastHabitats')->name('showLastHabitats');
 
 // Accessible uniquement aux users connectés
 Route::middleware('auth')->group(function () {

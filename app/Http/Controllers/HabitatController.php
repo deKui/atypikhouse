@@ -29,13 +29,23 @@ class HabitatController extends Controller
     }
 
     /**
-     * Affiche toutes les habitats
+     * Affiche tous les habitats
      */
     public function index() {
 
     	$habitats = Habitat::all();
 
         return view('habitat.index', compact('habitats'));
+    }
+
+    /**
+     * Affiche les dernières habitats
+     */
+    public function showLastHabitats() {
+
+    	$habitats = Habitat::all();
+
+        return view('habitat.showLastHabitats', compact('habitats'));
     }
 
 

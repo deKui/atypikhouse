@@ -51,9 +51,9 @@ class AtypikController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function showhelp()
+    public function showcontact()
     {
-        return view('atypik.help');
+        return view('atypik.contact');
     }
 
                     /**
@@ -64,5 +64,15 @@ class AtypikController extends Controller
     public function showabout()
     {
         return view('atypik.about');
+    }
+
+                        /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showbehost()
+    {
+        return view('atypik.behost');
     }
 }

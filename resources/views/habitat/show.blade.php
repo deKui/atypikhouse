@@ -5,13 +5,12 @@
 <div class="container">
 
     <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-8">
                 <div class="card">
 
-                    <img class="card-img-top" src="{{ asset('storage/' . $habitats->photo) }}">
+                    <img class="card-img-top" src="{{ asset('../storage/app/public/' . $habitats->photo) }}">
 
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Nous sommes sur la page de cet habitat </li>
                         <li class="list-group-item">Titre : {{ $habitats->titre }} </li>
                         <li class="list-group-item">Description : {{ $habitats->description }} </li>
                         <li class="list-group-item">Propriétaire : <a href="{{ route('profil.show', $habitats->id_proprietaire) }}"> {{ $habitats->proprio->pseudo }} </a></li>

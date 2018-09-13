@@ -12,7 +12,7 @@
 			<div class="row justify-content-md-center">
 
 				<div class="col-md-4">
-					<img class="card-img-top" src="{{ asset('storage/' . $user->avatar) }}">
+					<img class="card-img-top" src="{{ asset('../storage/app/public/' . $user->avatar) }}">
 					<input id="avatar" type="file" class="form-control" name="avatar" required>
 
 					@if ($errors->has('avatar'))
