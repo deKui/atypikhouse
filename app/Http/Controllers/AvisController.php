@@ -36,20 +36,30 @@ class AvisController extends Controller
      * Auteur : lucas
      * Création d'un nouvel avis
      *
-     * @param $user
+     * @param $request
      * @param $habitat
      * @return \Illuminate\Http\Response
      */
     public function store(AvisRequest $request, Habitat $habitat)
     {
-        Avis::create([
-            'id_utilisateur' => Auth::user()->id,
-            'id_habitat' => $habitat->id,
-            'comment' => $request->comment,
-            'note' => $request->note,
-        ]);
+        $avis = Avis::where('id_utilisateur', Auth::id())->where('id_habitat', $habitat->id)->first();
 
-        return redirect(route('habitat.show', ['id' => $habitat->id]));
+        // si un avis existe déjà, on ne peut pas en laissé un second
+        if ($avis == []) {
+            
+            Avis::create([
+                'id_utilisateur' => Auth::user()->id,
+                'id_habitat' => $habitat->id,
+                'comment' => $request->comment,
+                'note' => $request->note,
+            ]);
+
+            return redirect(route('habitat.show', ['id' => $habitat->id]))->with(['ok' => __("Merci pour votre avis !")]);
+
+        }else {
+
+            return redirect(route('habitat.show', ['id' => $habitat->id]))->with(['ok' => __("Désolé, vous avez déjà laissé un avis !")]);
+        }
     }
 
     /**
