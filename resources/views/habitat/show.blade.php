@@ -167,7 +167,15 @@
                             <a href="{{ route('profil.signaleAvis', $avis->id) }}" class="btn btn-primary">Signaler</a>
                         </div>
                     </div>
-                    <br>
+
+                    <!-- VAL - L'utilisateur authentifié ne peux pas signaler son commentaire -->
+                    @if ((auth()->user()->id) !== $avis->id_utilisateur)
+                        <div class="card-footer">
+                            <a href="{{ route('profil.signaleAvis', $avis->id) }}" class="btn btn-primary">Signaler</a>
+                        </div>
+                    @endif
+                </div>
+                <br>
 
                 @endforeach
 
