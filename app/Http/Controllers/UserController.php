@@ -151,6 +151,26 @@ class UserController extends Controller
     	return redirect('profil/' . $user->id);	
     }
 
+   /**
+     * Auteur : Valériane
+     * Update utilisateur signale
+     */
+    public function updateSignale($id_user) 
+    {
+        $user = $this->user->getUser($id_user);
+
+        // on remplace les anciens champs par les nouveaux dans la bdd
+        $user->update([
+            'signale' => true,
+        ]);
+        
+        // Enregistre les modifications de la bdd
+        $user->save();
+
+        return redirect('profil/' . $user->id); 
+    }
+
+
 
 /****** GERANT ******/
 
@@ -170,20 +190,32 @@ class UserController extends Controller
 
     }
 
-
+    /**
+     * Auteur : Valériane
+     * Active ou désactive les utilisateurs
+     */
     public function updateActiveDesactiveUser($id_user) 
     {
         $user = $this->user->getUser($id_user); 
         // on remplace les anciens champs par les nouveaux dans la bdd
-        $user->update([
+       
+        if($user->active == true){
+                    $user->update([
             'active' => false
         ]);
-        
+        }
+        elseif ($user->active == false){
+
+                    $user->update([
+            'active' => true
+        ]);
+        }
         // Enregistre les modifications de la bdd
         $user->save();
-        return redirect('profil.gerant'); 
+        return redirect('gerant'); 
 
     }
+
 /****** FIN GERANT ******/
 
 }

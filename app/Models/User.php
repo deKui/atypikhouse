@@ -7,6 +7,7 @@ use App\Models\Habitat;
 use App\Models\Note;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\DB;
 
 class User extends Authenticatable
 {
@@ -18,7 +19,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'pseudo', 'prenom', 'nom', 'email', 'password', 'avatar', 'date_naissance', 'note_eval', 'active',
+        'pseudo', 'prenom', 'nom', 'email', 'password', 'avatar', 'date_naissance', 'note_eval', 'active', 'signale',
     ];
 
     /**
@@ -60,7 +61,15 @@ class User extends Authenticatable
     */
     public function getAvisSignale()
     {
-        $avisSignale = Avis::where('signale', true)->get();
+        //$avisSignale = Avis::where('signale', true)->get();
+
+
+      $avisSignale =  DB::table('avis')
+                        ->join('users', 'avis.id_utilisateur', '=', 'users.id')
+                        ->join('habitats', 'avis.id_habitat', '=', 'habitats.id')
+                        ->select('users.id','habitats.id','users.pseudo', 'habitats.titre', 'avis.*')
+                        ->where('avis.signale', true)
+                        ->get();
 
         return $avisSignale;
     }

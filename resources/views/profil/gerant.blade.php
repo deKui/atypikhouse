@@ -10,44 +10,69 @@
 <!-- Faire des foreach pour afficher les différentes infos -->
 			 <div class="row">
 
-
 			 	<h2>Derniers utilisateurs signalés</h2>
 
+				<table class="table table-striped">
+				  <thead>
+				    <tr>
+				      <th scope="col">Avatar</th>
+				      <th scope="col">Pseudo</th>
+				      <th scope="col">Description</th>
+				      <th scope="col">Signalé</th>
+				      <th scope="col">Activé / Désactivé</th>
+				    </tr>
+				  </thead>
+				  <tbody>
+
 			            @foreach($userSignale as $user)
-
-			            <div class="col-md-4">
-			                <div class="card">
-			                    <ul class="list-group list-group-flush">
-			                    	<img class="card-img-top" src="{{ asset('storage/' . $user->avatar) }}">
-			                        <li class="list-group-item">Pseudo : {{ $user->pseudo }} </li>
-			                        <li class="list-group-item">Description : {{ $user->description }} </li>
-			                        <li class="list-group-item"> <a href="{{ route('profil.index', $user->id) }}" class="btn btn-primary">Voir</a></li>
-			                        <li class="list-group-item"> <a href="{{ route('profil.gerantActive', $user->id) }}" class="btn btn-primary">Désactivé</a></li>
-			                    </ul> 
-			                </div>
-			            </div> 
-
+							    <tr>
+							      <td><img class="card-img-top" style="width:10%" src="{{ asset('storage/' . $user->avatar) }}"></td>
+							      <td> {{ $user->pseudo }} </td>
+							      <td> {{ $user->description }} </td>
+									<td><a href="{{ route('profil.index', $user->id) }}" class="btn btn-primary">Voir</a></td>
+									@if ($user->active == false)
+							      	<td><a href="{{ route('profil.gerantActiveDesactive', $user->id) }}" class="btn btn-primary" style="background:green">Activé</a></td>
+							      @else 
+							      	<td><a href="{{ route('profil.gerantActiveDesactive', $user->id) }}" class="btn btn-primary" style="background:red">Désactivé</a></td>
+							      @endif
+							    </tr>
 			            @endforeach
+
+				  </tbody>
+				</table>
+
 </div>
+
 <div class="row">
 			 	<h2>Derniers avis signalés</h2>
 
+
+				<table class="table table-striped">
+				  <thead>
+				    <tr>
+				      <th scope="col">Utilisateur</th>
+				      <th scope="col">Habitat</th>
+				      <th scope="col">Avis laissés</th>
+				      <th scope="col">Supprimer avis</th>
+				    </tr>
+				  </thead>
+				  <tbody>
+
 			            @foreach($avisSignale as $avis)
-
-			            <div class="col-md-4">
-			                <div class="card">
-			                    <ul class="list-group list-group-flush">
-			                        <li class="list-group-item">Utilisateur : {{ $avis->id_utilisateur }} </li>
-			                        <li class="list-group-item">Habitat : {{ $avis->id_habitat }} </li>
-			                        <li class="list-group-item">Commentaire / Avis : {{ $avis->comment }} </li>
-			                        <!--<li class="list-group-item"> <a href="{{ route('profil.index', $user->id) }}" class="btn btn-primary">Supprimé</a></li>-->
-			                    </ul> 
-			                </div>
-			            </div> 
-
+							    <tr>
+							      <td> {{ $avis->pseudo }} </td>
+							      <td> {{ $avis->titre }} </td>
+							      <td> {{ $avis->comment }} </td>
+							      <td><a href="{{ route('profil.gerantAvis', $avis->id) }}" class="btn btn-primary">Supprimer l'avis</a></td>
+							    </tr>
 			            @endforeach
 
+				  </tbody>
+				</table>
+
 </div>
+
+
 <div class="row">
 			    <h2>Dernieres photos signalées</h2>
 
