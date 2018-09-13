@@ -85,6 +85,10 @@
 
     <div class="row">
         <div class="col-md-12">
+
+            @auth
+
+            @if ($reservation < date_create('now')->format('Y-m-d'))
             
             <!-- Affiche le formulaire pour laisser un avis uniquement si l'user connecté est différent du proprietaire -->
             @if(auth()->user()->id !== $habitats->proprio->id)
@@ -131,6 +135,10 @@
             <br>
 
             @endif
+
+            @enfif
+
+            @endauth
                 
                 <!-- Récupère les avis si au moins un est laissé -->
                 @if($messages !== [])

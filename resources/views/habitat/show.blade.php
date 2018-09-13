@@ -90,8 +90,10 @@
 
             @auth
             
+            @if ($reservation < date_create('now')->format('Y-m-d'))
+
             <!-- Affiche le formulaire pour laisser un avis uniquement si l'user connecté est différent du proprietaire -->
-            @if(auth()->user()->id !== $habitats->proprio->id)
+            @if (auth()->user()->id !== $habitats->proprio->id)
 
             <div class="card">
                 <div class="card-header">Laisser votre avis</div>
@@ -135,6 +137,8 @@
                 </div>
             </div>
             <br>
+
+            @endif
 
             @endif
 

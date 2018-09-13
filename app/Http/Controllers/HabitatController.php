@@ -12,6 +12,7 @@ use App\Http\Requests\HabitatRequest;
 use App\Models\Habitat;
 use App\Models\TypeHabitats;
 use App\Models\Avis;
+use App\Models\Reservation;
 
 class HabitatController extends Controller
 {
@@ -49,12 +50,20 @@ class HabitatController extends Controller
         
         $messages = Avis::where('id_habitat', $habitat->id)->get();
 
+        $reservation = Reservation::where('id_locataire', Auth::id())->where('id_habitat', $habitat->id)->first();
+
+        if ($reservation == []) {
+            $reservation = "2100-01-01";   
+        }else {
+            $reservation = $reservation->date_fin;
+        }
+
         $voyageurs = $nb_personne;
 
         $arrivee = $date_debut;
         $depart = $date_fin;
 
-        return view('habitat.showAfterSearch', compact('habitats', 'messages', 'voyageurs', 'arrivee', 'depart', 'duree'));
+        return view('habitat.showAfterSearch', compact('habitats', 'messages', 'reservation', 'voyageurs', 'arrivee', 'depart', 'duree'));
     }
 
 
@@ -67,7 +76,15 @@ class HabitatController extends Controller
         
         $messages = Avis::where('id_habitat', $habitat->id)->get();
 
-        return view('habitat.show', compact('habitats', 'messages'));
+        $reservation = Reservation::where('id_locataire', Auth::id())->where('id_habitat', $habitat->id)->first();
+
+        if ($reservation == []) {
+            $reservation = "2100-01-01";   
+        }else {
+            $reservation = $reservation->date_fin;
+        }
+
+        return view('habitat.show', compact('habitats', 'messages', 'reservation'));
     }
 
 
