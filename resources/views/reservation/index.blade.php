@@ -15,7 +15,7 @@
 
         @if ( $reservFuture->isEmpty()  )
             <p>Quel sera votre prochain logement atypique ? </p>
-            <a href="{{ route('recherche')}}"> Effectuer une recherche</a>
+            <a href="{{ route('home')}}"> Effectuer une recherche</a>
         @else
             @foreach($reservFuture as $reserv)
                 <div class="col-md-4">
