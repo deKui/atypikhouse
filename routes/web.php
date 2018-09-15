@@ -120,5 +120,6 @@ Route::middleware('auth')->group(function () {
     Route::get('profil/utilSignale/{id}', 'UserController@updateSignale')->name('profil.signaleUtil');
 
     // Affichage du plannig
-    Route::get('planning', 'PlanningController@index')->name('planning.index');
+    Route::get('planning/{month}/{year}', 'PlanningController@index')->name('planning.index');
+
 });
