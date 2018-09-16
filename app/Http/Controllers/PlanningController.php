@@ -9,10 +9,18 @@ use App\Models\Planning;
 class PlanningController extends Controller
 {
     
-	public function index() {
+	/**
+	 * Affiche le calendrier
+	 * @param  int $month 
+	 * @param  int $year
+	 * @return Planning
+	 */
+	public function index($month, $year) {
 
-		$month = new Planning();
+		$planning = new Planning($month, $year);
 
-    	return view('planning.index', compact('month'));
+		$start = $planning->getStartingDay()->modify('last monday');
+
+    	return view('planning.index', compact('planning', 'start'));
     }
 }
