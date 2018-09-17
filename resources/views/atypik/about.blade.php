@@ -1,9 +1,6 @@
 @extends('layouts.app')
-
 @section('content')
-
 <main role="main">
-
 <div class="jumbotron">
   <div class="container">
     <h2 class="display-3">A propos</h2>
@@ -13,15 +10,10 @@
     les voyages, les habitats alternatifs et la vie en harmonie avec la nature.    <br/>
     <br/>
     NOM : AtypikHouse    <br/>
-
     ADRESSE : 29 rue Napoléon 60350 Pierrefonds    <br/>
-
     RAISON SOCIAL SIRET : 43819870700012    <br/>
-
     CAPITAL SOCIAL : 10 000€    <br/>
-
     STATUT CODE APE (NAF) : 6820A – Location de logements    <br/>
-
     DATE DE CRÉATION : 01-07-2017</p>
   </div>
 </div>
@@ -32,11 +24,9 @@
         <div class="col-md-12">
         <h2 class="display-3">L'équipe</h2>
         <br/>
-
         </div>
         <br/>
         <br/>
-
         <div class="col-md-4">
         <img class="rounded-circle"  width="100%">
         <h4>ALEXIS BOURGEAU</h4>
@@ -61,12 +51,7 @@
         g.simard@atypikhouse.com</p>
         </div>
     </div>
-
-
     </div> <!-- /container -->
 </div>
 </main>
-
-
-
 @endsection

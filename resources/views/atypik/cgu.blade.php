@@ -3,7 +3,6 @@
 @section('content')
 
 <main role="main">
-
 <div class="jumbotron">
   <div class="container">
     <h2 class="display-3">Conditions D'utilisation</h2>
@@ -121,11 +120,8 @@ Veuillez imprimer une copie de tout message important pour vous (reçus de paiem
         <br/>Alternativement, Vous pouvez aussi soumettre Vos litiges avec AtypikHouse à la plateforme de la Commission européenne relative au règlement en ligne de litiges accessible à http://ec.europa.eu/odr.
 
     </p>
-
   </div>
 </div>
 </main>
-
-
 
 @endsection

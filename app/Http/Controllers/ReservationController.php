@@ -28,9 +28,11 @@ class ReservationController extends Controller
      */
     public function index($id_locataire)
     {
-        $reservation = $this->reservation->getReservation($id_locataire);
+        $reservPassee = $this->reservation->getReservationPassee($id_locataire);
         
-        return view('reservation.index', compact('reservation'));
+        $reservFuture = $this->reservation->getReservationFuture($id_locataire);
+
+        return view('reservation.index', compact('reservPassee', 'reservFuture'));
     }
 
     /**

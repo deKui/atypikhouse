@@ -17,16 +17,23 @@ Auth::routes();
 // Page d'accueil
 Route::get('/', 'HomeController@index')->name('home');
 
+// CGU
 Route::get('cgu', 'AtypikController@showcgu')->name('cgu');
 
+// CGV
 Route::get('cgv', 'AtypikController@showcgv')->name('cgv');
 
+// Mention légales
 Route::get('legal', 'AtypikController@showlegal')->name('legal');
 
+
+// Contact
 Route::get('contact', 'AtypikController@showcontact')->name('contact');
 
+// En savoir plus sur nous
 Route::get('about', 'AtypikController@showabout')->name('about');
 
+// Devenir hôte
 Route::get('behost', 'AtypikController@showbehost')->name('behost');
 
 // Résultat d'une recherche
@@ -34,6 +41,9 @@ Route::get('recherche', 'RechercheController@index')->name('recherche');
 
 // Affiche un habitat
 Route::get('habitats/{habitat}', 'HabitatController@show')->name('habitat.show');
+
+// Affiche un habitat après une recherche
+Route::get('habitats/show/{habitat}/{nbpersonne}/{date_debut}/{date_fin}/{duree}', 'HabitatController@showAfterSearch')->name('habitat.showAfterSearch');
 
 // Affiche tous les habitats
 Route::get('habitats', 'HabitatController@index')->name('habitat.index');
@@ -67,6 +77,17 @@ Route::middleware('auth')->group(function () {
         'only' => ['update'],
     ]);
 
+	// Page noter un utilisateur
+	Route::get('profil/noter/{user}', 'UserController@noter')->name('profil.noter');
+
+	// Ajoute une note
+	Route::post('profil/eval/{user}', 'UserController@eval')->name('profil.eval');
+
+	// Update les infos du profil
+	Route::resource('profil', 'UserController', [
+        'only' => ['update'],
+    ]);
+
     // Réserver un habitat
 	Route::post('reserver/{habitat}','ReservationController@create')->name('reservation.create');
 	
@@ -84,11 +105,21 @@ Route::middleware('auth')->group(function () {
     // Ajoute un habitat
     Route::post('habitat/store', 'HabitatController@store')->name('habitat.store');
 
-
     // Accès à la page du gérant
     Route::get('gerant', 'UserController@showInfoGerant')->name('profil.gerant');
 
     // Mise à jour utilisateur active/ désactive
-    Route::get('gerant/{id_utilisateur}', 'UserController@updateActiveDesactiveUser')->name('profil.gerantActive');
+    Route::get('gerant/{id_utilisateur}', 'UserController@updateActiveDesactiveUser')->name('profil.gerantActiveDesactive');
 
+    // Supprime avis
+    Route::get('gerant/avis/{id}', 'AvisController@deleteAvis')->name('profil.gerantAvis');
+
+    // MAj avis
+    Route::get('profil/avisSignale/{id}', 'AvisController@signaleAvis')->name('profil.signaleAvis');
+
+    // MAj utilisateur signale
+    Route::get('profil/utilSignale/{id}', 'UserController@updateSignale')->name('profil.signaleUtil');
+
+    // Affichage du plannig
+    Route::get('planning', 'PlanningController@index')->name('planning.index');
 });

@@ -5,7 +5,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8">
-            <div class="card">
+            <div class="card atypikcard">
                 <div class="card-header">Enregistrer un nouvel habitat</div>
 
                 <div class="card-body">

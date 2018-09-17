@@ -8,6 +8,7 @@ use App\Http\Requests\AvisRequest;
 use App\Models\User;
 use App\Models\Habitat;
 use App\Models\Avis;
+use DB;
 
 class AvisController extends Controller
 {
@@ -36,21 +37,65 @@ class AvisController extends Controller
      * Auteur : lucas
      * Création d'un nouvel avis
      *
-     * @param $user
+     * @param $request
      * @param $habitat
      * @return \Illuminate\Http\Response
      */
     public function store(AvisRequest $request, Habitat $habitat)
     {
-        Avis::create([
-            'id_utilisateur' => Auth::user()->id,
-            'id_habitat' => $habitat->id,
-            'comment' => $request->comment,
-            'note' => $request->note,
+        $avis = Avis::where('id_utilisateur', Auth::id())->where('id_habitat', $habitat->id)->first();
+
+        // si un avis existe déjà, on ne peut pas en laissé un second
+        if ($avis == []) {
+            
+            Avis::create([
+                'id_utilisateur' => Auth::user()->id,
+                'id_habitat' => $habitat->id,
+                'comment' => $request->comment,
+                'note' => $request->note,
+            ]);
+
+            return redirect(route('habitat.show', ['id' => $habitat->id]))->with(['ok' => __("Merci pour votre avis !")]);
+
+        }else {
+
+            return redirect(route('habitat.show', ['id' => $habitat->id]))->with(['ok' => __("Désolé, vous avez déjà laissé un avis !")]);
+        }
+    }
+
+    /**
+     * Auteur : Valériane
+     * Supprime un avis
+     */
+    public function deleteAvis($id) 
+    {
+
+        $avis = Avis::find($id);
+        $avis->delete($id);
+
+        return redirect('gerant'); 
+
+    }
+
+    /**
+     * Auteur : Valériane
+     * update un avis - Signale
+     */
+    public function signaleAvis($id, Habitat $habitat) 
+    {
+
+        $avis = Avis::find($id);
+        $avis->update([
+            'signale' => true
         ]);
 
+        //dd($avis);
+
+        $avis->save();
         return redirect(route('habitat.show', ['id' => $habitat->id]));
+
     }
+
 
     /**
      * Display the specified resource.
@@ -96,4 +141,6 @@ class AvisController extends Controller
     {
         //
     }
+
+
 }

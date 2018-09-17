@@ -110,14 +110,12 @@
     Pour chaque bien, le propriétaire est libre de fixer le montant caution qu’il souhaite.
     Le loueur devra apporter un chèque de caution du montant défini lors de la rencontre avec le propriétaire afin de contracter la location. Sans cela le propriétaire peut annuler la location.
     Le chèque sera restitué en fin de location, après que les parties aient pris soin de vérifier l’état du bien loué.</p>
-
     <p>8 Informatique et libertés<br/><br/>
     L’inscription au compte membre nécessite la communication par l’utilisateur de données à caractère personnel.
     atypik-house.com se conforme aux lois sur la collecte et le traitement des données à caractère personnel, elles sont recueillies exclusivement pour atypik-house.com.
     En application des dispositions de la loi n°78-17 Informatique et Libertés du 6 janvier 1978, telle que modifiée par la loi nº 2004-801 du 6 août 2004, les membres du site atypik-house.com ont la possibilité d’un droit d’accès, de modification, de rectification et de suppression des données le concernant.
     Le membre à la possibilité de rectifiées, complétées ou encore effacées ses données à caractère personnel.
     Chaque membre peut exercer ses droits en écrivant à atypik-house.com par email à l’adresse contact@atypik-house.com .</p>
-
     <p>9 Cookies<br/><br/>
     atypik-house.com est susceptible de mettre en place des cookies sur la plateforme. Il s’agit d’un procédé automatique de traçage automatique qui enregistre des informations relatives à la navigation des utilisateurs sur la plateforme, et stocke des informations saisies lors des visites afin de faciliter la procédure d’inscription et l’utilisation de la Plateforme.
     L’Utilisateur peut s’opposer à leur mise en place et/ou les supprimer en suivant la procédure indiquée sur leur navigateur.</p>
@@ -125,16 +123,10 @@
     <p>10 Modifications des CGV<br/><br/>
     atypik-house.com se réserve le droit sans limite ou restriction de modifier à tout moment les conditions générales du site atypik-house.com
     Les changements seront effectifs immédiatement après la publication de celles-ci sur le site.</p>
-
     <p>11 Déclaration revenus<br/><br/>
     Les revenus générés sur atypik-house.com doivent faire l’objet d’une déclaration à l’administration fiscale lors de la déclaration annuelle des revenus.
     Le membre s’engage à s’informer sur les aspects fiscaux des transactions en cause, de manière à respecter la législation, atypik-house.com se décharge de toute responsabilité.</p>
-
-
   </div>
 </div>
 </main>
-
-
-
 @endsection

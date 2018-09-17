@@ -1,17 +1,14 @@
 @extends('layouts.app')
-
 @section('content')
-
 <main role="main">
-
 <div class="jumbotron">
   <div class="container">
+    <img src="../public/images/habitat_1.png" width="25%">
     <h2 class="display-3">Devenir hôte</h2>
     <br/>
     <p>Partagez votre logement pour financer votre retraite, votre prochain voyage, ou simplement rencontrer des voyageurs.
     </p>
     <a class="btn btn-secondary atypikbutton" style="text-align:right;" href="#" role="button">Devenir hôte »</a>
-
   </div>
 </div>
 <hr>
@@ -21,11 +18,9 @@
         <div class="col-md-12">
         <h2 class="display-3">L'hébergement de voyageurs en 3 étapes</h2>
         <br/>
-
         </div>
         <br/>
         <br/>
-
         <div class="col-md-4">
         <img class="rounded-circle"  width="100%">
         <h4>1. Vous publiez votre annonce gratuitement</h4>
@@ -47,12 +42,7 @@
         <p>Une fois votre annonce publiée, les voyageurs admissibles pourront vous contacter. Si vous avez des questions à leur poser avant leur séjour, envoyez-leur un message.</p>
         </div>
     </div>
-
-
     </div> <!-- /container -->
 </div>
 </main>
-
-
-
 @endsection

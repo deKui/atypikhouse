@@ -26,7 +26,7 @@ class AtypikController extends Controller
         return view('atypik.cgu');
     }
 
-        /**
+    /**
      * Show the application dashboard.
      *
      * @return \Illuminate\Http\Response
@@ -36,7 +36,7 @@ class AtypikController extends Controller
         return view('atypik.cgv');
     }
 
-            /**
+    /**
      * Show the application dashboard.
      *
      * @return \Illuminate\Http\Response
@@ -46,7 +46,7 @@ class AtypikController extends Controller
         return view('atypik.legal');
     }
 
-                /**
+    /**
      * Show the application dashboard.
      *
      * @return \Illuminate\Http\Response
@@ -56,7 +56,7 @@ class AtypikController extends Controller
         return view('atypik.contact');
     }
 
-                    /**
+    /**
      * Show the application dashboard.
      *
      * @return \Illuminate\Http\Response
@@ -66,7 +66,8 @@ class AtypikController extends Controller
         return view('atypik.about');
     }
 
-                        /**
+
+    /**
      * Show the application dashboard.
      *
      * @return \Illuminate\Http\Response
