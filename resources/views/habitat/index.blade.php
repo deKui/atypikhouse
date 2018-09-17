@@ -11,7 +11,7 @@
             <div class="col-md-4">
                 <div class="card atypikcard">
 
-                    <img class="card-img-top" src="{{ asset('../storage/app/public/' . $habitat->photo) }}">
+                    <img class="card-img-top" src="{{ asset('storage/' . $habitat->photo) }}">
 
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">Titre : {{ $habitat->titre }} </li>

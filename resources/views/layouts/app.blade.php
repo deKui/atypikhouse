@@ -40,7 +40,12 @@
                     @else
                         <div class="login"></div>
                         <a class="atypiklinks" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                            document.getElementById('logout-form').submit();">Déconnexion</a>
+                            document.getElementById('logout-form').submit();">Déconnexion
+                        </a>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            {{ csrf_field() }}
+                        </form>
                     @endguest
                     </div>
                 </div>
@@ -80,7 +85,7 @@
 
                             <li class="nav-item dropdown">
                                 <a href="#" id="navbarDropdown" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
-{{ Auth::user()->pseudo }} <span class="caret"></span>
+                                    {{ Auth::user()->pseudo }} <span class="caret"></span>
                                 </a>
 
                                 <ul class="dropdown-menu">
