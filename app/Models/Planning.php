@@ -17,7 +17,7 @@ class Planning extends Model
      * @param int $month Mois compris entre 1 et 12
      * @param int $year Année
      */
-    public function __construct(?int $month = null, ?int $year = null) {
+    public function __construct(int $month = null, int $year = null) {
     	
     	if ($month === null || $month < 1 || $month > 12) {
     		$month = intval(date('m'));

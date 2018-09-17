@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Planning;
+use App\Models\Reservation;
 
 class PlanningController extends Controller
 {
@@ -19,8 +20,18 @@ class PlanningController extends Controller
 
 		$planning = new Planning($month, $year);
 
-		$start = $planning->getStartingDay()->modify('last monday');
+		$reservations = new Reservation();
 
-    	return view('planning.index', compact('planning', 'start'));
+		$start = $planning->getStartingDay();
+
+		$start = $start->format('N') === '1' ? $start : $planning->getStartingDay()->modify('last monday');
+
+		$weeks = $planning->getWeeks();
+
+		$end = (clone $start)->modify('+' . (6 + 7 * ($weeks -1)) . 'days');
+
+		$reservations = $reservations->getReservBetweenByDay($start, $end);
+
+    	return view('planning.index', compact('planning', 'start', 'weeks', 'reservations'));
     }
 }
