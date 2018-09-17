@@ -42,12 +42,15 @@
 			
 			<table class="calendar_table">
 
-				@for ($i = 0; $i < $planning->getWeeks(); $i++)
+				@for ($i = 0; $i < $weeks; $i++)
 
 				    <tr>
 
 				    	@foreach ($planning->days as $k => $day)
-				    		<?php $date = (clone $start)->modify('+' . ($k + $i * 7) . ' days');  ?>
+				    		<?php 
+				    		$date = (clone $start)->modify('+' . ($k + $i * 7) . ' days');  
+				    		$eventsForDay = $reservations[$date->format('Y-m-d')] ?? [];
+				    		?>
 
 					    	<td class="{{ $planning->withinMonth($date) ? '' : 'calendar_othermonth' }}">
 
@@ -60,6 +63,18 @@
 					    		<div class="calendar_day"> 
 					    			{{ $date->format('d') }}			
 					    		</div>
+					    		<br>
+
+					    		@foreach ($eventsForDay as $event)
+									
+									<div class="calendar_event">
+										<a href="{{ route('reservation.show', auth()->user()->id) }}"> {{ $event->habitats->titre}} </a>
+										<br>
+										<a href="{{ route('profil.show', $event->id_locataire) }}"> {{ $event->users->pseudo}} </a>
+									</div>
+
+					    		@endforeach
+
 					    	</td>
 
 				    	@endforeach

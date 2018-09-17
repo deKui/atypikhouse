@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
+use DateTime;
+
 class Reservation extends Model
 {
 	/**
@@ -15,6 +17,63 @@ class Reservation extends Model
     protected $fillable = [
         'id_locataire', 'id_habitat', 'date_debut', 'date_fin', 'montant',
     ];
+
+    /**
+     * Récupère toutes les réservations entre 2 dates
+     * @param DateTime $start
+     * @param DateTime $end
+     * @return array
+     */
+    public function getReservBetween(DateTime $start, DateTime $end) {
+        $reservations = Reservation::where('date_debut', '>=', $start)->where('date_fin', '<=', $end)->get();
+    
+        return $reservations; 
+    }
+
+
+    /**
+     * Récupère toutes les réservations entre 2 dates indexé par jour
+     * @param DateTime $start
+     * @param DateTime $end
+     * @return array
+     */
+    public function getReservBetweenByDay(DateTime $start, DateTime $end) {
+        $reservations = $this->getReservBetween($start, $end);
+
+        $days = []; 
+
+        foreach ($reservations as $event) {
+            $date = $event->date_debut;
+
+            if (!isset($days[$date])) {
+                $days[$date] = [$event]; 
+            } else {
+                $days[$date][] = $event;
+            }
+        }
+
+        return $days;
+    }
+
+
+    /**
+     * Auteur : Lucas 
+     * Joint la table reservations et habitats
+     */
+    public function habitats()
+    {
+        return $this->belongsTo(Habitat::class, 'id_habitat');
+    }
+
+
+    /**
+     * Auteur : Lucas 
+     * Joint la table reservations et users
+     */
+    public function users()
+    {
+        return $this->belongsTo(User::class, 'id_locataire');
+    }
 
 
 	 /**
