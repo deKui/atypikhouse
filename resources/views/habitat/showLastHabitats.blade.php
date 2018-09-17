@@ -1,18 +1,30 @@
 @extends('layouts.app')
-
 @section('content')
-
-<div class="container">
-
+<main role="main">
+<div class="jumbotron">
+  <div class="container">
+    <img src="{{ asset('images/habitat_2.png') }}" width="25%">
+    <h2 class="display-3">Dernières trouvailles</h2>
+    <br/>
+    <p>Découvrez la selection atypik et réservez votre séjour inoubliable
+    </p>
+  </div>
+</div>
+<hr>
+<div class="jumbotron">
+    <div class="container">
     <div class="row">
-
-            @foreach($habitats as $habitat)
-
+        <div class="col-md-12">
+        <h2 class="display-3">Les logements</h2>
+        <br/>
+        </div>
+        <br/>
+        <br/>
+            @foreach($habitats->sortBy('created_at') as $habitat)
             <div class="col-md-4">
                 <div class="card atypikcard">
-
                     <img class="card-img-top" src="{{ asset('storage/' . $habitat->photo) }}">
-
+                    <h4>{{ $habitat->titre }}</h4>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">Titre : {{ $habitat->titre }} </li>
                         <li class="list-group-item">Description : {{ $habitat->description }} </li>
@@ -27,12 +39,9 @@
                     </ul> 
                 </div>
             </div> 
-
             @endforeach
-
     </div>
-
+    </div> <!-- /container -->
 </div>
-
-
+</main>
 @endsection

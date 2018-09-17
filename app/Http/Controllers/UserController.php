@@ -37,9 +37,8 @@ class UserController extends Controller
 
         $user = $this->user->getUser($id_user);
 
-    	return view('profil.index', compact('user'));	
+        return view('profil.index', compact('user'));	
     }
-
 
     /**
      * Auteur : Lucas
@@ -49,7 +48,8 @@ class UserController extends Controller
     {
         $users = User::find($user->id);
         
-        return view('profil.show', compact('users'));   
+        return view('profil.show', compact('users'));
+
     }
 
     /**

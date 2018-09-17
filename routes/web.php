@@ -26,11 +26,15 @@ Route::get('cgv', 'AtypikController@showcgv')->name('cgv');
 // Mention légales
 Route::get('legal', 'AtypikController@showlegal')->name('legal');
 
-// Aide
-Route::get('help', 'AtypikController@showhelp')->name('help');
+
+// Contact
+Route::get('contact', 'AtypikController@showcontact')->name('contact');
 
 // En savoir plus sur nous
 Route::get('about', 'AtypikController@showabout')->name('about');
+
+// Devenir hôte
+Route::get('behost', 'AtypikController@showbehost')->name('behost');
 
 // Résultat d'une recherche
 Route::get('recherche', 'RechercheController@index')->name('recherche');
@@ -43,6 +47,9 @@ Route::get('habitats/show/{habitat}/{nbpersonne}/{date_debut}/{date_fin}/{duree}
 
 // Affiche tous les habitats
 Route::get('habitats', 'HabitatController@index')->name('habitat.index');
+
+// Affiche les dernières trouvailles
+Route::get('showLastHabitats', 'HabitatController@showLastHabitats')->name('showLastHabitats');
 
 // Accessible uniquement aux users connectés
 Route::middleware('auth')->group(function () {
@@ -98,7 +105,6 @@ Route::middleware('auth')->group(function () {
     // Ajoute un habitat
     Route::post('habitat/store', 'HabitatController@store')->name('habitat.store');
 
-
     // Accès à la page du gérant
     Route::get('gerant', 'UserController@showInfoGerant')->name('profil.gerant');
 
@@ -113,4 +119,8 @@ Route::middleware('auth')->group(function () {
 
     // MAj utilisateur signale
     Route::get('profil/utilSignale/{id}', 'UserController@updateSignale')->name('profil.signaleUtil');
+
+    // Affichage du plannig
+    Route::get('planning/{month}/{year}', 'PlanningController@index')->name('planning.index');
+
 });

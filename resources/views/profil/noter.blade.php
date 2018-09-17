@@ -6,7 +6,7 @@
 	<div class="container">
 		<div class="row justify-content-md-center">
 			<div class="col-md-4">
-				<div class="card">
+				<div class="card atypikcard">
 					<form method="POST" action="{{ route('profil.eval', $users->id) }}">
 	            		{{ csrf_field() }}
 
@@ -23,7 +23,7 @@
 
 	                                </select>
 							    </li>
-							    	<button type="submit" class="btn btn-primary">
+							    	<button type="submit" class="btn btn-primary atypikbutton">
 			                            Valider
 			                        </button>
 							    </li>

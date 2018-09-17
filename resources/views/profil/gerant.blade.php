@@ -5,12 +5,10 @@
 
 	<div class="container">
 
-		<h1> Gérant </h1>
-
 <!-- Faire des foreach pour afficher les différentes infos -->
-			 <div class="row">
+			 <div class="row card atypikcard">
 
-			 	<h2>Derniers utilisateurs signalés</h2>
+			 	<div class="card-header"><h3>Derniers utilisateurs signalés : </h3></div>
 
 				<table class="table table-striped">
 				  <thead>
@@ -26,14 +24,14 @@
 
 			            @foreach($userSignale as $user)
 							    <tr>
-							      <td><img class="card-img-top" style="width:10%" src="{{ asset('storage/' . $user->avatar) }}"></td>
+							      <td><img class="card-img" style="width:10%" src="{{ asset('storage/' . $user->avatar) }}"></td>
 							      <td> {{ $user->pseudo }} </td>
 							      <td> {{ $user->description }} </td>
-									<td><a href="{{ route('profil.index', $user->id) }}" class="btn btn-primary">Voir</a></td>
+									<td><a href="{{ route('profil.index', $user->id) }}" class="btn btn-primary atypikbutton">Voir</a></td>
 									@if ($user->active == false)
-							      	<td><a href="{{ route('profil.gerantActiveDesactive', $user->id) }}" class="btn btn-primary" style="background:green">Activé</a></td>
+							      	<td><a href="{{ route('profil.gerantActiveDesactive', $user->id) }}" class="btn btn-primary atypikbutton" style="background:green">Activé</a></td>
 							      @else 
-							      	<td><a href="{{ route('profil.gerantActiveDesactive', $user->id) }}" class="btn btn-primary" style="background:red">Désactivé</a></td>
+							      	<td><a href="{{ route('profil.gerantActiveDesactive', $user->id) }}" class="btn btn-primary atypikbutton" style="background:red">Désactivé</a></td>
 							      @endif
 							    </tr>
 			            @endforeach
@@ -43,8 +41,8 @@
 
 </div>
 
-<div class="row">
-			 	<h2>Derniers avis signalés</h2>
+<div class="row card atypikcard">
+			<div class="card-header"><h3>Derniers avis signalés : </h3></div>
 
 
 				<table class="table table-striped">
@@ -63,7 +61,7 @@
 							      <td> {{ $avis->pseudo }} </td>
 							      <td> {{ $avis->titre }} </td>
 							      <td> {{ $avis->comment }} </td>
-							      <td><a href="{{ route('profil.gerantAvis', $avis->id) }}" class="btn btn-primary">Supprimer l'avis</a></td>
+							      <td><a href="{{ route('profil.gerantAvis', $avis->id) }}" class="btn btn-primary atypikbutton">Supprimer l'avis</a></td>
 							    </tr>
 			            @endforeach
 
@@ -73,8 +71,8 @@
 </div>
 
 
-<div class="row">
-			    <h2>Dernieres photos signalées</h2>
+<div class="row card atypikcard">
+				<div class="card-header"><h3>Dernieres photos signalées : </h3></div>
 
 			            @foreach($habitatSignale as $photo)
 

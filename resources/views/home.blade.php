@@ -30,8 +30,8 @@
     </div> -->
 
 
-    <div class="row">
-        <div class="col-md-12">
+    <div class="row justify-content-lg-center">
+        <div class="col-sm-12 col-lg-6">
             <div class="card atypikcard">
                 <div class="card-header"><h3>Réservez votre logement insolite :</h3> </div>
 

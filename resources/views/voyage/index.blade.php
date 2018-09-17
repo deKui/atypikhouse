@@ -24,7 +24,7 @@
                     </ul> 
 
                     <div class="card-body">
-                        <a href="{{ route('habitat.show', $habitat->id) }}" class="btn btn-primary">Voir</a>
+                        <a href="{{ route('habitat.show', $habitat->id) }}" class="btn btn-primary atypikbutton">Voir</a>
                     </div>
 
                 </div>

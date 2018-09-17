@@ -8,10 +8,10 @@
 
  <!-- Réservation futures -->
 
-    <div class="row">
+    <div class="row atypikcard">
 
 <!-- Si aucunes données : Ecrire :: Quel sera votre prochain logement atypique ? + lien vers la recherche -->
-        <h2> Vos futures réservations </h2>
+        <div class="col-md-12 card-header"> Vos futures réservations<br/></div>
 
         @if ( $reservFuture->isEmpty()  )
             <p>Quel sera votre prochain logement atypique ? </p>
@@ -19,7 +19,7 @@
         @else
             @foreach($reservFuture as $reserv)
                 <div class="col-md-4">
-                    <div class="card">
+                    <div class="card atypikcard">
 
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">Habitat : {{ $reserv->titre }} </li>
@@ -37,8 +37,8 @@
 
  <!-- Réservation précèdentes -->
 
-    <div class="row">
-           <h2> Vos voyages précédents  </h2>
+    <div class="row atypikcard">
+        <div class="col-md-12 card-header"> Vos voyages précédents<br/></div>
         <!-- Si aucunes données : Ecrire :: Vous n'avez pas encore effectué de voyage -->
 
 
@@ -47,7 +47,7 @@
     @else
             @foreach($reservPassee as $reserv)
                 <div class="col-md-4">
-                    <div class="card">
+                    <div class="card atypikcard">
 
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">Habitat : {{ $reserv->titre }} </li>

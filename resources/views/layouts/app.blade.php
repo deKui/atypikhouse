@@ -11,8 +11,9 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=East+Sea+Dokdo|Roboto" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=East+Sea+Dokdo|Roboto" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/style_2.css') }}">
@@ -24,28 +25,33 @@
     <nav class="atypiktools">
             <div class="container">
                 <div class="row">
-                    <div class="col-2">
+                    <div class="col-sm-12 col-lg-2 verti-center horiz-center">
                     <a href="https://www.facebook.com/voyageavecatypik"><div class="facebook"></div></a>
                     <a href="https://www.instagram.com/atypik_house_voyage"><div class="instagram"></div></a>
                     </div>
-                    <div class="col-8 verti-center">
+                    <div class="col-sm-12 col-lg-8 verti-center horiz-center">
                     Découvrez des logements adaptés à tous types de voyage
                     </div>
 
-                    <div class="col-2 verti-center">
+                    <div class="col-sm-12 col-lg-2 verti-center horiz-center">
                     @guest
                         <div class="login"></div>
                         <a class="atypiklinks" href="{{ route('login') }}">Connexion</a>
                     @else
                         <div class="login"></div>
                         <a class="atypiklinks" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                            document.getElementById('logout-form').submit();">Déconnexion</a>
+                            document.getElementById('logout-form').submit();">Déconnexion
+                        </a>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            {{ csrf_field() }}
+                        </form>
                     @endguest
                     </div>
                 </div>
             </div>
         </nav>
-        <nav class="navbar navbar-expand-lg atypikmenu" style="margin-bottom: 40px;">
+        <nav class="navbar navbar-expand-lg shadow atypikmenu" style="margin-bottom: 40px;">
             <div class="container">
                 <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
@@ -64,15 +70,15 @@
                     </ul>
 
                     <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav">
+                    <ul class="navbar-nav verti-center">
                         <!-- Authentication Links -->
                         @guest
-                            <li class="nav-item"><a href="{{ route('register') }}" class="nav-link"> Dernières trouvailles </a></li>
-                            <li class="nav-item"><a href="{{ route('register') }}" class="nav-link"> Devenir hôte </a></li>
+                            <li class="nav-item"><a href="{{ route('showLastHabitats') }}" class="nav-link"> Dernières trouvailles </a></li>
+                            <li class="nav-item"><a href="{{ route('behost') }}" class="nav-link"> Devenir hôte </a></li>
                             <li class="nav-item"><a href="{{ route('register') }}" class="nav-link"> M'inscrire </a></li>
                         @else
-                            <li class="nav-item"><a href="{{ route('register') }}" class="nav-link"> Dernières trouvailles </a></li>
-                            <li class="nav-item"><a href="{{ route('register') }}" class="nav-link"> Devenir hôte </a></li>
+                            <li class="nav-item"><a href="{{ route('showLastHabitats') }}" class="nav-link"> Dernières trouvailles </a></li>
+                            <li class="nav-item"><a href="{{ route('behost') }}" class="nav-link"> Devenir hôte </a></li>
                             <li class="nav-item">
                                 <a href="{{ route('habitat.index') }}" class="nav-link"> Habitats </a>
                             </li>
@@ -83,17 +89,6 @@
                                 </a>
 
                                 <ul class="dropdown-menu">
-                                    <li class="dropdown-item">
-                                        <a href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                            document.getElementById('logout-form').submit();">
-                                            Logout
-                                        </a>
-
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </li>
 
                                     <li class="dropdown-item">
                                         <a href="{{ route('profil.index', auth()->user()->id) }}"> Mon profil </a>
@@ -105,7 +100,10 @@
 
                                     <li class="dropdown-item">
                                         <a href="{{ route('habitat.create') }}"> Enregistrer un habitat </a>
+                                    </li>
 
+                                    <li class="dropdown-item">
+                                        <a href="{{ route('planning.index', [intval(date('m')), intval(date('Y'))]) }}"> Mon planning </a>
                                     </li>
 
                                 <!-- Permet d'afficher uniquement cette page pour les gérant -->
@@ -114,8 +112,11 @@
                                         <a href="{{ route('profil.gerant') }}"> Gestion du site </a>
                                     </li>
                                 @endgerant
+
                                 </ul>
                             </li>
+                            <div class="avatar" style="background-image:url({{ asset('../storage/app/public/' . Auth::user()->avatar) }});"></div>
+
                         @endguest
                     </ul>
                 </div>
@@ -151,7 +152,7 @@
                         <a href="{{ route('cgv') }}">CGV</a>
                     </div>
                     <div class="col-3 verti-center horiz-center">
-                        <a href="{{ route('help') }}">Aide</a>
+                        <a href="{{ route('contact') }}">Contact</a>
                     </div>
                 </div>
             </div>
@@ -173,8 +174,6 @@
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
-    <script src="{{ asset('js/app.js') }}"></script>
-    <script src="{{ asset('js/video.js') }}"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </body>
 </html>

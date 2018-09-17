@@ -2,10 +2,10 @@
 
 @section('content')
 <div class="container">
-    <div class="row">
-        <div class="col-md-12">
+    <div class="row justify-content-lg-center">
+        <div class="col-sm-12 col-lg-6">
             <div class="card atypikcard">
-                <div class="card-header">Register</div>
+                <div class="card-header"><h3>M'inscrire</h3></div>
 
                 <div class="card-body">
                     <form class="form-horizontal" method="POST" action="{{ route('register') }}">
@@ -40,7 +40,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
+                            <label for="email" class="col-md-4 control-label">Adresse mail</label>
 
                             <div class="col-md-12">
                                 <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
@@ -54,7 +54,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">Password</label>
+                            <label for="password" class="col-md-4 control-label">Mot de passe</label>
 
                             <div class="col-md-12">
                                 <input id="password" type="password" class="form-control" name="password" required>
@@ -68,7 +68,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="password-confirm" class="col-md-4 control-label">Confirm Password</label>
+                            <label for="password-confirm" class="col-md-4 control-label">Confirmer le mot de passe</label>
 
                             <div class="col-md-12">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
@@ -79,7 +79,7 @@
                             <label for="date_naissance" class="col-md-4 control-label">Date de naissance</label>
 
                             <div class="col-md-12">
-                                <input id="pseudo" type="date" class="form-control" name="date_naissance" value="{{ old('date_naissance') }}" required autofocus>
+                                <input id="birthdate" type="date" class="form-control" name="date_naissance" value="{{ old('date_naissance') }}" required autofocus>
 
                                 @if ($errors->has('date_naissance'))
                                     <span class="help-block">
@@ -91,8 +91,8 @@
 
                         <div class="form-group">
                             <div class="col-md-12 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Register
+                                <button type="submit" class="btn btn-primary atypikbutton">
+                                    M'inscrire
                                 </button>
                             </div>
                         </div>
