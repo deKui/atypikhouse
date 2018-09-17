@@ -30,8 +30,10 @@ class PlanningController extends Controller
 
 		$end = (clone $start)->modify('+' . (6 + 7 * ($weeks -1)) . 'days');
 
-		$reservations = $reservations->getReservBetweenByDay($start, $end);
+		$reservations_start = $reservations->getReservBetweenByStartingDay($start, $end);
 
-    	return view('planning.index', compact('planning', 'start', 'weeks', 'reservations'));
+		$reservations_end = $reservations->getReservBetweenByEndingDay($start, $end);
+
+    	return view('planning.index', compact('planning', 'start', 'weeks', 'reservations_start', 'reservations_end'));
     }
 }

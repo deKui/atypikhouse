@@ -32,18 +32,47 @@ class Reservation extends Model
 
 
     /**
-     * Récupère toutes les réservations entre 2 dates indexé par jour
+     * Récupère toutes les réservations entre 2 dates indexé par date de début
      * @param DateTime $start
      * @param DateTime $end
      * @return array
      */
-    public function getReservBetweenByDay(DateTime $start, DateTime $end) {
+    public function getReservBetweenByStartingDay(DateTime $start, DateTime $end) {
         $reservations = $this->getReservBetween($start, $end);
 
         $days = []; 
 
         foreach ($reservations as $event) {
+            //$interval = (new DateTime($event->date_debut))->diff(new DateTime($event->date_fin));
+            //dd($interval->format('%R%a jours'));
+
             $date = $event->date_debut;
+
+            if (!isset($days[$date])) {
+                $days[$date] = [$event]; 
+            } else {
+                $days[$date][] = $event;
+            }
+        }
+
+        return $days;
+    }
+
+
+    /**
+     * Récupère toutes les réservations entre 2 dates indexé par date de fin
+     * @param DateTime $start
+     * @param DateTime $end
+     * @return array
+     */
+    public function getReservBetweenByEndingDay(DateTime $start, DateTime $end) {
+        $reservations = $this->getReservBetween($start, $end);
+
+        $days = []; 
+
+        foreach ($reservations as $event) {
+
+            $date = $event->date_fin;
 
             if (!isset($days[$date])) {
                 $days[$date] = [$event]; 
