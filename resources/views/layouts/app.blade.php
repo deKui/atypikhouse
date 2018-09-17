@@ -40,7 +40,12 @@
                     @else
                         <div class="login"></div>
                         <a class="atypiklinks" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                            document.getElementById('logout-form').submit();">Déconnexion</a>
+                            document.getElementById('logout-form').submit();">Déconnexion
+                        </a>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            {{ csrf_field() }}
+                        </form>
                     @endguest
                     </div>
                 </div>
