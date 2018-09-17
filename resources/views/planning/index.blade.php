@@ -49,7 +49,8 @@
 				    	@foreach ($planning->days as $k => $day)
 				    		<?php 
 				    		$date = (clone $start)->modify('+' . ($k + $i * 7) . ' days');  
-				    		$eventsForDay = $reservations[$date->format('Y-m-d')] ?? [];
+				    		$event_start = $reservations_start[$date->format('Y-m-d')] ?? [];
+				    		$event_end = $reservations_end[$date->format('Y-m-d')] ?? [];
 				    		?>
 
 					    	<td class="{{ $planning->withinMonth($date) ? '' : 'calendar_othermonth' }}">
@@ -65,13 +66,57 @@
 					    		</div>
 					    		<br>
 
-					    		@foreach ($eventsForDay as $event)
+					    		@foreach ($event_start as $event)
 									
-									<div class="calendar_event">
-										<a href="{{ route('reservation.show', auth()->user()->id) }}"> {{ $event->habitats->titre}} </a>
-										<br>
-										<a href="{{ route('profil.show', $event->id_locataire) }}"> {{ $event->users->pseudo}} </a>
+									@if ($event->id_locataire == Auth()->user()->id)
+
+									<div>
+										<h5>Début de votre séjour</h5>
+										<a href="{{ route('reservation.show', auth()->user()->id) }}"> {{ $event->habitats->titre}} 
+										</a>
+										
 									</div>
+									
+									@else
+
+										<div>
+											<h5>Début</h5>
+											<a href="{{ route('reservation.show', auth()->user()->id) }}"> {{ $event->habitats->titre}} </a>
+											<br>
+											locataire : 
+											<a href="{{ route('profil.show', $event->id_locataire) }}"> 
+												{{ $event->users->pseudo}} 
+											</a>
+										</div>
+
+									@endif
+
+					    		@endforeach
+
+					    		@foreach ($event_end as $event)
+									
+									@if ($event->id_locataire == Auth()->user()->id)
+
+									<div>
+										<h5>Fin de votre séjour</h5>
+										<a href="{{ route('reservation.show', auth()->user()->id) }}"> {{ $event->habitats->titre}} 
+										</a>
+										
+									</div>
+									
+									@else
+
+										<div>
+											<h5>Fin</h5>
+											<a href="{{ route('reservation.show', auth()->user()->id) }}"> {{ $event->habitats->titre}} </a>
+											<br>
+											locataire : 
+											<a href="{{ route('profil.show', $event->id_locataire) }}"> 
+												{{ $event->users->pseudo}} 
+											</a>
+										</div>
+
+									@endif
 
 					    		@endforeach
 
