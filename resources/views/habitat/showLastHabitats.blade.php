@@ -3,7 +3,7 @@
 <main role="main">
 <div class="jumbotron">
   <div class="container">
-    <img src="../public/images/habitat_2.png" width="25%">
+    <img src="{{ asset('images/habitat_2.png') }}" width="25%">
     <h2 class="display-3">Dernières trouvailles</h2>
     <br/>
     <p>Découvrez la selection atypik et réservez votre séjour inoubliable
