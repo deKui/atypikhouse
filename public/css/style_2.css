@@ -6,7 +6,6 @@
     font-size: 0.7rem;
     text-transform: uppercase;
     flex-direction: row;
-    padding: 0.2rem;
 }
 .verti-center{
     display: flex;
@@ -15,6 +14,7 @@
 
 .horiz-center{
     justify-content: center;
+    text-align: center;
 }
 
 .atypikicons{
@@ -103,7 +103,7 @@
 }
 
 .atypikfooter{
-    margin-top: 0.7rem;
+    margin-top: 2rem;
     background-color: #f8f9fa;
     font-family: 'Roboto';
     letter-spacing: 0.2rem;
@@ -140,8 +140,10 @@ body{
 }
 
 .atypikcard{
-    margin-left: 20rem;
-    margin-right: 20rem;
+    /**margin-left: 20rem;**/
+    /**margin-right: 20rem;**/
+    margin-top: 1em; 
+    margin-bottom: 1em; 
     color:#f8f9fa;
     background-color: rgba(32, 143, 164, .8);
     font-family: 'Roboto';
@@ -151,6 +153,8 @@ body{
     padding: 0.4rem;  
     text-align: center;
     border-radius: 0;
+    border: none;
+
 }
 
 h1{
@@ -198,7 +202,7 @@ p{
 
 ::placeholder {
     color: rgb(32, 143, 164)!important;
-    text-transform: uppercase;
+    text-transform: none;
     font-size: 1em;
     letter-spacing: 0.2rem;
     line-height: 1.4rem;
@@ -213,11 +217,11 @@ p{
 }
 
 .form-control{
+    text-transform: none;
     color: rgb(32, 143, 164)!important;
     border-radius: 1.5rem;
     background-color:#f8f9fa;
     padding-left: 2.5rem;
-    text-transform: uppercase;
     font-size: 1.2em;
     letter-spacing: 0.2rem;
     font-weight: bold;
@@ -230,26 +234,43 @@ p{
     border-bottom:none;
 }
 
+
 h3{
     font-family: 'Roboto'!important;
-    text-align: justify;
+    text-align: center;
     text-transform: none;
     color:#f8f9fa;
     font-size: 1.8em;
     letter-spacing: 0.2rem;
     margin:0;
-    padding-top: 1em;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+
 }
 
-#retour{
+#retour,#birthdate,#depart,#date_debut,#date_fin{
     background-image:url(../images/calendrier.png);
     background-position: center left;
     background-repeat: no-repeat;
     background-size: auto 100%;
 }
 
-#depart{
-    background-image:url(../images/calendrier.png);
+#pseudo{
+    background-image:url(../images/id.png);
+    background-position: center left;
+    background-repeat: no-repeat;
+    background-size: auto 100%;
+}
+
+#email{
+    background-image:url(../images/mail.png);
+    background-position: center left;
+    background-repeat: no-repeat;
+    background-size: auto 100%;
+}
+
+#prenom{
+    background-image:url(../images/prenom.png);
     background-position: center left;
     background-repeat: no-repeat;
     background-size: auto 100%;
@@ -262,7 +283,14 @@ h3{
     background-size: auto 100%;
 }
 
-#voyageurs{
+#password, #password-confirm{
+    background-image:url(../images/password.png);
+    background-position: center left;
+    background-repeat: no-repeat;
+    background-size: auto 100%;
+}
+
+#voyageurs,#nb_personne{
     background-image:url(../images/voyageurs.png), url(../images/arrow.png);
     background-position: center left, center right;
     background-repeat: no-repeat;
@@ -287,4 +315,30 @@ h3{
 
 .jumbotron{
     background-color:#f8f9faa4!important;
+    text-align: center;
+}
+
+.list-group-item{
+    background-color: transparent;
+}
+
+.navbar-toggler-icon{
+    background-image:url(../images/menu.png);
+    background-position: center left;
+    background-repeat: no-repeat;
+    background-size: auto 100%;   
+}
+
+.avatar{
+    width: 2rem;
+    height: 2rem;
+    float: right;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    margin-right: 1em;
+    border-radius:100%;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+
 }

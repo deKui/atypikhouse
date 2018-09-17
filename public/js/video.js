@@ -5,7 +5,7 @@ var firstScriptTag = document.getElementsByTagName('script')[0];
 var tv,
 		playerDefaults = {autoplay: 0, autohide: 1, modestbranding: 0, rel: 0, showinfo: 0, controls: 0, disablekb: 1, enablejsapi: 0};
 var vid = [
-			{'videoId': 'Z6IgWL7nKi4', 'startSeconds': 40, 'endSeconds': 300, 'suggestedQuality': 'hd720'},
+			{'videoId': 'vdgNQ1MEmzo', 'startSeconds': 15, 'endSeconds': 140, 'suggestedQuality': 'hd720'},
 		],
 		randomVid = Math.floor(Math.random() * vid.length),
     currVid = randomVid;

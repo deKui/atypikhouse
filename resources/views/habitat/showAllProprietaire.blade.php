@@ -9,7 +9,7 @@
             @foreach($habitatProprio as $habitat)
 
             <div class="col-md-4">
-                <div class="card">
+                <div class="card atypikcard">
 
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">Titre : {{ $habitat->titre }} </li>

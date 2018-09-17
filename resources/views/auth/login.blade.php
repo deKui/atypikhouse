@@ -2,10 +2,10 @@
 
 @section('content')
 <div class="container">
-    <div class="row">
-        <div class="col-md-12">
+    <div class="row justify-content-lg-center">
+        <div class="col-sm-12 col-lg-6">
             <div class="card atypikcard">
-                <div class="card-header">Login</div>
+                <div class="card-header"><h3>Connexion</h3></div>
 
                 <div class="card-body">
                     <form class="form-horizontal" method="POST" action="{{ route('login') }}">
@@ -49,14 +49,14 @@
                         </div> -->
 
                         @include('partials.form', [
-                            'title' => __('Password'),
+                            'title' => __('Mot de passe'),
                             'type' => 'password',
                             'name' => 'password',
                             'required' => true,
                             ])
 
                         <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
+                            <div class="col-md-12">
                                 <div class="checkbox">
                                     <label>
                                         <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
@@ -66,13 +66,13 @@
                         </div>
 
                         <div class="form-group">
-                            <div class="col-md-8 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Login
+                            <div class="col-md-12">
+                                <button type="submit" class="btn btn-primary atypikbutton">
+                                    Connexion
                                 </button>
-
+                                <br/>
                                 <a class="btn btn-link" href="{{ route('password.request') }}">
-                                    Forgot Your Password?
+                                    Mot de passe oublié ?
                                 </a>
                             </div>
                         </div>

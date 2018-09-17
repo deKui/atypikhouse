@@ -26,6 +26,7 @@ Route::get('cgv', 'AtypikController@showcgv')->name('cgv');
 // Mention légales
 Route::get('legal', 'AtypikController@showlegal')->name('legal');
 
+
 // Contact
 Route::get('contact', 'AtypikController@showcontact')->name('contact');
 

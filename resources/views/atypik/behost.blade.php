@@ -3,6 +3,7 @@
 <main role="main">
 <div class="jumbotron">
   <div class="container">
+    <img src="../public/images/habitat_1.png" width="25%">
     <h2 class="display-3">Devenir hôte</h2>
     <br/>
     <p>Partagez votre logement pour financer votre retraite, votre prochain voyage, ou simplement rencontrer des voyageurs.

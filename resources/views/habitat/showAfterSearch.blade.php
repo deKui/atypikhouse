@@ -6,7 +6,7 @@
 
     <div class="row">
             <div class="col-md-4">
-                <div class="card">
+                <div class="card atypikcard">
 
                     <img class="card-img-top" src="{{ asset('storage/' . $habitats->photo) }}">
 
@@ -27,7 +27,7 @@
             </div> 
 
             <div class="col-md-4">
-                <div class="card">
+                <div class="card atypikcard">
                     <form method="POST" action="{{ route('reservation.create', $habitats) }}" enctype="multipart/form-data">
                         {{ csrf_field() }}
 

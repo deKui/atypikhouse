@@ -1,6 +1,9 @@
 @extends('layouts.app')
+
 @section('content')
+
 <main role="main">
+
 <div class="jumbotron">
   <div class="container">
     <h2 class="display-3">Conditions générales de vente</h2>
@@ -90,9 +93,11 @@
     4.2 Suppression compte
     Si un Membre souhaite clôturer son compte, il doit adresser sa demande par e-mail à contact@atypik-house.com .
     </p>
+
     <p>5 Notations<br/><br/>
     atypik-house.com met en place un système de notation et de commentaires permettant au propriétaire et au loueur, à l’issue de la location de noter l’expérience via leur compte, sous forme d’attribution « d’étoiles » complété de la possibilité de laisser des commentaires. La note maximum est de 5 (cinq) étoiles.
     Les Membres s’engagent à utiliser de manière loyale, honnête et objective le système de notation, toute utilisation abusive étant susceptible d’entraîner la responsabilité de celui qui en abuse.</p>
+
     <p>6 Déclaration d’un incident<br/><br/>
     En cas de litige divers (ex : un dommage a été constaté sur le bien et le loueur refuse la réparation/le remboursement) chacune des parties peut déclarer un incident via la plateforme afin que l’incident puisse être déclaré et une solution puisse être trouvée.
     Les litiges intervenants entre membres doivent être réglés entre les membres et atypik-house.com n'est pas requis d'intervenir et/ou de régler ledit litige, sa responsabilité ne pouvant en tout état de cause pas être engagée par l’un ou l’autre des membres impliqués dans ledit litige.

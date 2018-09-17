@@ -51,6 +51,44 @@
         position: absolute;
         bottom: 1rem;
     }
+
+    .atypiklegal a{
+        color:#f8f9fa;
+    }  
+
+@media (max-width: 1100px){
+
+    .atypikfooter{
+        margin-top: 0.7rem;
+        background-color: #f8f9fa;
+        font-family: 'Roboto';
+        letter-spacing: 0.2rem;
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        flex-direction: row;
+        padding: 0.4rem;  
+        text-align: center;
+        width: 100%;
+        position: static;
+    }
+
+
+    .atypiklegal{
+        margin-top: 0.7rem;
+        background-color: rgba(32, 143, 164, .8);
+        font-family: 'Roboto';
+        letter-spacing: 0.2rem;
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        flex-direction: row;
+        padding: 0.4rem;  
+        text-align: center;
+        width: 100%;
+        position: static;
+        color: #f8f9fa;
+
+    }
+}
     </style>
 </head>
 <body>
@@ -58,15 +96,15 @@
     <nav class="atypiktools">
             <div class="container">
                 <div class="row">
-                    <div class="col-2">
+                    <div class="col-sm-12 col-lg-2 verti-center horiz-center">
                     <a href="https://www.facebook.com/voyageavecatypik"><div class="facebook"></div></a>
                     <a href="https://www.instagram.com/atypik_house_voyage"><div class="instagram"></div></a>
                     </div>
-                    <div class="col-8 verti-center">
+                    <div class="col-sm-12 col-lg-8 verti-center horiz-center">
                     Découvrez des logements adaptés à tous types de voyage
                     </div>
 
-                    <div class="col-2 verti-center">
+                    <div class="col-sm-12 col-lg-2 verti-center horiz-center">
                     @guest
                         <div class="login"></div>
                         <a class="atypiklinks" href="{{ route('login') }}">Connexion</a>
@@ -98,7 +136,7 @@
                     </ul>
 
                     <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav">
+                    <ul class="navbar-nav verti-center">
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item"><a href="{{ route('showLastHabitats') }}" class="nav-link"> Dernières trouvailles </a></li>
@@ -117,17 +155,6 @@
                                 </a>
 
                                 <ul class="dropdown-menu">
-                                    <li class="dropdown-item">
-                                        <a href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                            document.getElementById('logout-form').submit();">
-                                            Logout
-                                        </a>
-
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </li>
 
                                     <li class="dropdown-item">
                                         <a href="{{ route('profil.index', auth()->user()->id) }}"> Mon profil </a>
@@ -152,6 +179,7 @@
                                  @endgerant
                                 </ul>
                             </li>
+                            <div class="avatar" style="background-image:url({{ asset('../storage/app/public/' . Auth::user()->avatar) }});"></div>
                         @endguest
                     </ul>
                 </div>
