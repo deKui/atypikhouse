@@ -26,6 +26,7 @@ Route::get('cgv', 'AtypikController@showcgv')->name('cgv');
 // Mention légales
 Route::get('legal', 'AtypikController@showlegal')->name('legal');
 
+
 // Contact
 Route::get('contact', 'AtypikController@showcontact')->name('contact');
 
@@ -120,6 +121,7 @@ Route::middleware('auth')->group(function () {
     Route::get('profil/utilSignale/{id}', 'UserController@updateSignale')->name('profil.signaleUtil');
 
     // Affichage du plannig
+
     Route::get('planning', 'PlanningController@index')->name('planning.index');
 
     // Affichage de la page proprio
@@ -133,5 +135,7 @@ Route::middleware('auth')->group(function () {
 
   // Update habitat
     Route::put('proprio/habitatUpdate/{id}', 'HabitatController@update')->name('habitat.update');
+
+    Route::get('planning/{month}/{year}', 'PlanningController@index')->name('planning.index');
 
 });

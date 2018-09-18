@@ -12,7 +12,7 @@
 			<div class="row justify-content-md-center">
 
 				<div class="col-md-4">
-					<img class="card-img-top" src="{{ asset('storage/' . $user->avatar) }}">
+					<img class="card-img" src="{{ asset('storage/' . $user->avatar) }}">
 					<input id="avatar" type="file" class="form-control" name="avatar" required>
 
 					@if ($errors->has('avatar'))
@@ -22,7 +22,7 @@
 					@endif
 				</div>
 
-				<div class="card col-md-6">
+				<div class="card atypikcard col-md-6">
 
 					<div class="card-body">
 						<ul class="list-group list-group-flush">
@@ -52,7 +52,7 @@
 					</div>
 
 					<div class="card-footer">
-						<button type="submit" class="btn btn-primary">
+						<button type="submit" class="btn btn-primary atypikbutton">
                             Valider
                         </button>
 					</div>

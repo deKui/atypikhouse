@@ -9,11 +9,10 @@
 
                 <!-- Affichage des informations de l'habitat -->
 
-                <div class="card">
+                <div class="card atypikcard">
                     <img class="card-img-top" src="{{ asset('storage/' . $habitats->photo) }}">
 
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Nous sommes sur la page de cet habitat </li>
                         <li class="list-group-item">Titre : {{ $habitats->titre }} </li>
                         <li class="list-group-item">Description : {{ $habitats->description }} </li>
                         <li class="list-group-item">Propriétaire : <a href="{{ route('profil.show', $habitats->id_proprietaire) }}"> {{ $habitats->proprio->pseudo }} </a></li>
@@ -32,7 +31,7 @@
             <!-- Affichage de l'interface pour réserver l'habitat -->
 
             <div class="col-md-4">
-                <div class="card">
+                <div class="card atypikcard">
                     <form method="POST" action="{{ route('reservation.create', $habitats) }}" enctype="multipart/form-data">
                         {{ csrf_field() }}
                         
