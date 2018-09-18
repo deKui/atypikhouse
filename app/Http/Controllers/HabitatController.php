@@ -142,11 +142,82 @@ class HabitatController extends Controller
 
 	/* ATT - Mettre le nom de de la variable pareil que dans (compact) */
 	
-    public function showAllProprietaire($id_proprietaire){
+   /* public function showAllProprietaire($id_proprietaire){
 
          $habitatProprio = $this->repo->getHabitatProprio($id_proprietaire);
 
         return view('habitat.showAllProprietaire', compact('habitatProprio'));
+    }*/
+
+    /* 
+     * Auteur : Valériane
+     * Récupére les habitats en fonction du propriétaire
+    */
+    public function showHabitatProprio($id_proprio){
+
+        $habitatProprio = $this->repo->getHabitatProprio($id_proprio);
+
+        return view('habitat.proprio', compact('habitatProprio'));
+    } 
+
+    /**
+     * Auteur : Valériane
+     * Supprime un habitat
+     */
+    public function delete($id_habitat){
+
+        $proprio = Auth::user()->id;
+
+        $habitat = Habitat::find($id_habitat);
+        $habitat->delete($id_habitat);
+
+        //return redirect('proprio/' + $proprio); 
+
+        return redirect(route('profil.proprio', ['id_utilisateur' => $proprio]));
+
+    }
+
+    /**
+     * Auteur : Valériane
+     * Affiche la page pour éditer un habitat
+     */
+    public function edit($id_habitat) 
+    {
+        $habitat = $this->repo->getHabitat($id_habitat);
+
+        return view('habitat.edit', compact('habitat'));    
+    }
+
+
+    /**
+     * Auteur : Valériane
+     * Mise à jour d'un un habitat
+     */
+    public function update(Request $request, $id_habitat) 
+    {
+
+       $proprio = Auth::user()->id;
+
+        $habitat = $this->repo->getHabitat($id_habitat);
+
+        //$avatar = Storage::disk('public')->put('', $request->file('avatar'));
+        
+        // on remplace les anciens champs par les nouveaux dans la bdd
+        $habitat->update([
+            'titre' => $request->titre,
+            'description' => $request->description,
+            'adresse' => $request->adresse,
+            'code_postal' => $request->code_postal,
+            'ville' => $request->ville,
+            'nb_lit_simple' => $request->nb_lit_simple,
+            'nb_lit_double' => $request->nb_lit_double,
+            'nb_personne_max' => $request->nb_personne_max,
+        ]);
+        
+        // Enregistre les modifications de la bdd
+        $habitat->save();
+
+        return redirect(route('profil.proprio', ['id_utilisateur' => $proprio]));
     }
 
 }

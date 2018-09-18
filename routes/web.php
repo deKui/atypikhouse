@@ -121,4 +121,17 @@ Route::middleware('auth')->group(function () {
 
     // Affichage du plannig
     Route::get('planning', 'PlanningController@index')->name('planning.index');
+
+    // Affichage de la page proprio
+    Route::get('proprio/{id_utilisateur}', 'HabitatController@showHabitatProprio')->name('profil.proprio');
+
+    // Supprime habitat
+    Route::get('proprio/habitat/{id}', 'HabitatController@delete')->name('habitat.delete');
+
+    // Edit habitat
+    Route::get('proprio/habitatEdit/{id}', 'HabitatController@edit')->name('habitat.edit');
+
+  // Update habitat
+    Route::put('proprio/habitatUpdate/{id}', 'HabitatController@update')->name('habitat.update');
+
 });
