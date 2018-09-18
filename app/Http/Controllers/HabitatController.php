@@ -200,12 +200,13 @@ class HabitatController extends Controller
 
         $habitat = $this->repo->getHabitat($id_habitat);
 
-        //$avatar = Storage::disk('public')->put('', $request->file('avatar'));
+        $photo = Storage::disk('public')->put('', $request->file('photo'));
         
         // on remplace les anciens champs par les nouveaux dans la bdd
         $habitat->update([
             'titre' => $request->titre,
             'description' => $request->description,
+            'photo' => $photo,
             'adresse' => $request->adresse,
             'code_postal' => $request->code_postal,
             'ville' => $request->ville,

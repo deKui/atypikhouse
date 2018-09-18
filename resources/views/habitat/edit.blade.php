@@ -15,6 +15,14 @@
 
 					<div class="card-body">
 						<ul class="list-group list-group-flush">
+							<img class="card-img" src="{{ asset('storage/' . $habitat->photo) }}">
+								<input id="photo" type="file" class="form-control" name="photo" required>
+
+								@if ($errors->has('photo'))
+									<span class="invalide-feedback text-danger">
+										<small>{{ $errors->first('photo') }}</small>
+									</span>
+								@endif
 							<li class="list-group-item">Titre :
 								<input id="titre" type="text" class="form-control" name="titre" value="{{ $habitat->titre}}" required>
 

@@ -14,6 +14,7 @@
                 <div class="card">
 
                     <ul class="list-group list-group-flush">
+                        <img class="card-img" src="{{ asset('storage/' . $habitat->photo) }}">
                         <li class="list-group-item">Titre : {{ $habitat->titre }} </li>
                         <li class="list-group-item">Description : {{ $habitat->description }} </li>
                         <li class="list-group-item">Adresse : {{ $habitat->adresse }} {{ $habitat->code_postal }} {{ $habitat->ville }} </li>
