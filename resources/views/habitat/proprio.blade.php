@@ -4,9 +4,40 @@
 
 <div class="container">
 
-	Page propriétaire - Mes habitats
+        <a href="{{ route('habitat.create') }}" class="btn btn-primary">Proposer votre habitat</a> 
+<div class="row">
+    Mes dernières demande de réservation
 
-                <a href="{{ route('habitat.create') }}" class="btn btn-primary">Proposer votre habitat</a> 
+    <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th scope="col">Pseudo</th>
+                      <th scope="col">Logement </th>
+                      <th scope="col">Date</th>
+                      <th scope="col">Statut</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+
+                        @foreach($reservationProprio as $reserv)
+                                <tr>
+                                  <td> {{ $reserv->pseudo }} </td>
+                                  <td> {{ $reserv->titre }}  -  {{ $reserv->ville }} </td>
+                                  <td> Du {{ $reserv->date_debut }}  au  {{ $reserv->date_fin }} </td>
+                                  <td> Wwaiting / Accepted / Refused </td>
+                                </tr>
+                        @endforeach
+
+                  </tbody>
+    </table>
+
+
+</div>
+<div class="row">
+	Mes habitats
+
+               
+
 
 	    @foreach($habitatProprio as $habitat)
 
@@ -35,6 +66,6 @@
             @endforeach
 
 </div>
-
+</div>
 
 @endsection

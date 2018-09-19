@@ -140,24 +140,17 @@ class HabitatController extends Controller
     }
 
 
-	/* ATT - Mettre le nom de de la variable pareil que dans (compact) */
-	
-   /* public function showAllProprietaire($id_proprietaire){
-
-         $habitatProprio = $this->repo->getHabitatProprio($id_proprietaire);
-
-        return view('habitat.showAllProprietaire', compact('habitatProprio'));
-    }*/
-
     /* 
      * Auteur : Valériane
      * Récupére les habitats en fonction du propriétaire
     */
-    public function showHabitatProprio($id_proprio){
+    public function showHabitatProprio(Reservation $reservation, $id_proprio){
 
         $habitatProprio = $this->repo->getHabitatProprio($id_proprio);
 
-        return view('habitat.proprio', compact('habitatProprio'));
+        $reservationProprio = $reservation->getReservationProprio($id_proprio);
+
+        return view('habitat.proprio', compact('habitatProprio','reservationProprio'));
     } 
 
     /**
