@@ -27,5 +27,21 @@ class UsersTableSeeder extends Seeder
             'password' => bcrypt('celia'),
             'date_naissance' => '1998-05-28',
         ]);
+
+        User::create([
+            'pseudo' => 'sister2',
+            'prenom' => 'celia',
+            'email' => 'celia2@test.fr',
+            'password' => bcrypt('celia'),
+            'date_naissance' => '1998-05-28',
+        ]);
+
+        User::create([
+            'pseudo' => 'sister3',
+            'prenom' => 'celia',
+            'email' => 'celia3@test.fr',
+            'password' => bcrypt('celia'),
+            'date_naissance' => '1998-05-28',
+        ]);
     }
 }
