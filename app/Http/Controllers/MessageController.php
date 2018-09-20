@@ -54,6 +54,11 @@ class MessageController extends Controller
 
     	$unread = $this->repository->unreadCount(Auth::id());
 
+    	if (isset($unread[$user->id])) {
+    		$this->repository->readAllFrom($user->id, Auth::id());
+    		unset($unread[$user->id]);
+    	}
+
     	return view('messages.show', compact('users', 'user', 'messages', 'unread'));
     }
 

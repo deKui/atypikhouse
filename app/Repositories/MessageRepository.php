@@ -4,6 +4,8 @@ namespace App\Repositories;
 
 use App\Models\User;
 use App\Models\Message;
+
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -30,14 +32,22 @@ class MessageRepository {
 	}
 
 	/**
-	 * Récupère tous les utilisateurs
+	 * Récupère tous les utilisateurs dont au moins un message à été envoyé
 	 * @param  int    $userId
 	 * @return 
 	 */
 	public function getConversations(int $userId) {
-		$conversations = $this->user->newQuery()
-			->select('pseudo', 'id')
-			->where('id', '!=', $userId)
+		
+		$conversationTo = $this->message->newQuery()
+			->join('users', 'messages.to_id', '=', 'users.id')
+			->select('users.id', 'users.pseudo')
+			->where('messages.from_id', '=', $userId);
+
+		$conversations = $this->message->newQuery()
+			->join('users', 'messages.from_id', '=', 'users.id')
+			->select('users.id', 'users.pseudo')
+			->where('messages.to_id', '=', Auth::id())
+			->union($conversationTo)
 			->get();
 
 		return $conversations;
@@ -91,5 +101,15 @@ class MessageRepository {
 			->whereRaw('read_at IS NULL')
 			->get()
 			->pluck('count', 'from_id');
+	}
+
+	/**
+	 * Marque tous les messages comme lus pour un utilisateur
+	 * @param  int    $from 
+	 * @param  int    $to   
+	 * @return        
+	 */
+	public function readAllFrom(int $from, int $to) {
+		$this->message->where('from_id', $from)->where('to_id', $to)->update(['read_at' => Carbon::now()]);
 	}
 }
