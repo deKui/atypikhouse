@@ -32,13 +32,14 @@
 
             <div class="col-md-4">
                 <div class="card atypikcard">
-                    <form method="POST" action="{{ route('reservation.create', $habitats) }}" enctype="multipart/form-data">
+
+                    <form method="POST" action="{{ route('paypal', $habitats->id) }}" enctype="multipart/form-data">
                         {{ csrf_field() }}
                         
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Prix par nuit : {{ $habitats->prix }} €</li>
+                            <!-- <li class="list-group-item">Prix par nuit : {{ $habitats->prix }} €</li> -->
 
-                            <!-- Date d'arrivée -->
+                            <!-- Date d'arrivée 
                             <li class="list-group-item">Arrivée : 
                                 <input id="date_debut" type="date" class="form-control" name="date_debut" required>
 
@@ -47,9 +48,9 @@
                                         <small>{{ $errors->first('date_debut') }}</small>
                                     </span>
                                 @endif
-                            </li>
+                            </li> -->
                             
-                            <!-- Date de départ  -->
+                            <!-- Date de départ  
                             <li class="list-group-item">Départ : 
                                 <input id="date_fin" type="date" class="form-control" name="date_fin" required>
 
@@ -58,9 +59,9 @@
                                         <small>{{ $errors->first('date_fin') }}</small>
                                     </span>
                                 @endif
-                            </li>
+                            </li> -->
 
-                            <!-- Nombre de voyageurs -->
+                            <!--  Nombre de voyageurs 
                             <li class="list-group-item">Nombre de personnes : 
                                 <select id="nb_personne" name="nb_personne" class="form-control">
 
@@ -71,11 +72,21 @@
                                     <option value=5>5</option>
 
                                 </select>
-                            </li>
+                            </li> -->
+
+                            <li class="list-group-item">Montant : 
+                                <input id="montant" type="text" class="form-control" name="montant" required>
+
+                                @if ($errors->has('montant'))
+                                    <span class="invalide-feedback text-danger">
+                                        <small>{{ $errors->first('montant') }}</small>
+                                    </span>
+                                @endif
+                            </li> 
 
                             <li class="list-group-item"> 
                                 <button type="submit" class="btn btn-primary">
-                                    Réserver
+                                    Payer avec Paypal
                                 </button>
                             </li>
                         </ul> 

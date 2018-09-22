@@ -26,7 +26,6 @@ Route::get('cgv', 'AtypikController@showcgv')->name('cgv');
 // Mention légales
 Route::get('legal', 'AtypikController@showlegal')->name('legal');
 
-
 // Contact
 Route::get('contact', 'AtypikController@showcontact')->name('contact');
 
@@ -90,6 +89,12 @@ Route::middleware('auth')->group(function () {
 
     // Réserver un habitat
 	Route::post('reserver/{habitat}','ReservationController@create')->name('reservation.create');
+
+	// Payer avec paypal
+	Route::post('paypal/{habitat}', 'PaypalController@payWithPaypal')->name('paypal');
+
+	// Status du paiement
+	Route::get('status/{habitat}', 'PaypalController@getPaymentStatus')->name('status');
 	
 	// Affiche une réservation via son id ?
 	Route::get('reservation/{id}','ReservationController@index')->name('reservation.index');
