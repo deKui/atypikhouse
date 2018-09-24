@@ -126,7 +126,24 @@ Route::middleware('auth')->group(function () {
     Route::get('profil/utilSignale/{id}', 'UserController@updateSignale')->name('profil.signaleUtil');
 
     // Affichage du plannig
+
+    Route::get('planning', 'PlanningController@index')->name('planning.index');
+
+    // Affichage de la page proprio
+    Route::get('proprio/{id_utilisateur}', 'HabitatController@showHabitatProprio')->name('profil.proprio');
+
+    // Supprime habitat
+    Route::get('proprio/habitat/{id}', 'HabitatController@delete')->name('habitat.delete');
+
+    // Edit habitat
+    Route::get('proprio/habitatEdit/{id}', 'HabitatController@edit')->name('habitat.edit');
+
+  // Update habitat
+    Route::put('proprio/habitatUpdate/{id}', 'HabitatController@update')->name('habitat.update');
+
     Route::get('planning/{month}/{year}', 'PlanningController@index')->name('planning.index');
+
+    Route::get('proprio/reservation/{id}', 'ReservationController@reservAccepterRefuser')->name('proprio.reservAccepterRefuser');
 
     // Affiche le planning pour un habitat
     Route::get('planning/habitat/{habitat}/{month}/{year}', 'PlanningController@show')->name('planning.show');

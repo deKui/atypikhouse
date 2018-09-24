@@ -17,7 +17,9 @@ class Reservation extends Model
      * @var array
      */
     protected $fillable = [
+
         'id_locataire', 'id_proprietaire', 'id_habitat', 'date_debut', 'date_fin', 'montant',
+
     ];
 
 
@@ -182,5 +184,25 @@ class Reservation extends Model
 
         return $avisSignale;
     }
+
+    /**
+     * Auteur : Valériane
+     * Retourne les demandes de réservations 
+    */
+    public function getReservationProprio($id_proprietaire)
+    {
+
+      $reservations =  DB::table('reservations')
+                        ->join('habitats', 'reservations.id_habitat', '=', 'habitats.id')
+                        ->join('users','habitats.id_proprietaire','=','users.id')
+                        ->select('reservations.*', 'habitats.*','users.*')
+                        ->where('habitats.id_proprietaire', '=', $id_proprietaire)
+                        ->get();
+
+        return $reservations;
+
+        dd($reservations);
+    }
+
 
 }

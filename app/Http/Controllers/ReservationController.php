@@ -107,6 +107,14 @@ class ReservationController extends Controller
 
         return view('reservation.create', compact('habitat', 'date_debut', 'date_fin', 'nbpersonne', 'duree', 'prixtotal'));
 
+
+    }
+
+
+
+    public function reservAccepterRefuser($id_reservation) {
+
+
     }
 
 }
