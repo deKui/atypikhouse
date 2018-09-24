@@ -133,17 +133,43 @@ class Reservation extends Model
      */
     public function getReservationPassee($id_locataire) {
 
+        $date = date_create('now')->format('Y-m-d');
+
     	//$reservation = Reservation::where('id_locataire', $id_locataire)->get();
 
-        $reservPassee = Reservation::
-                        join('users', 'reservations.id_locataire', '=', 'users.id')
-                        ->join('habitats', 'reservations.id_habitat', '=', 'habitats.id')
-                        ->select('users.*','habitats.*','reservations.*')
-                        ->where('reservations.date_fin','>', date_create('now')->format('Y-m-d'))
-                        ->where('reservations.id_locataire','=',$id_locataire)
-                        ->get();
+        // $reservPassee = Reservation::
+        //                 join('users', 'reservations.id_locataire', '=', 'users.id')
+        //                 ->join('habitats', 'reservations.id_habitat', '=', 'habitats.id')
+        //                 ->select('users.*','habitats.*','reservations.*')
+        //                 ->where('reservations.date_fin','>', date_create('now')->format('Y-m-d'))
+        //                 ->where('reservations.id_locataire','=',$id_locataire)
+        //                 ->get();
+
+        $reservPassee = Reservation::where('id_locataire', $id_locataire)
+                                    ->where('date_fin', '<', $date)
+                                    ->get();
+
+        //dd($reservPassee);
+
         return $reservPassee;
     }
+
+
+    /**
+     * Return les locations passées en fonction d'un utisateur
+     */
+    public function getReservationEnCours($id_locataire) {
+
+        $date = date_create('now')->format('Y-m-d');
+
+        $reservEnCours = Reservation::where('id_locataire', $id_locataire)
+                                    ->where('date_debut', '<', $date)
+                                    ->where('date_fin', '>', $date)
+                                    ->get();
+
+        return $reservEnCours;
+    }
+
 
      /**
      * Return les locations passées en fonction d'un utisateur
@@ -151,14 +177,19 @@ class Reservation extends Model
     public function getReservationFuture($id_locataire) {
 
         //$reservation = Reservation::where('id_locataire', $id_locataire)->get();
+        $date = date_create('now')->format('Y-m-d');
 
-        $reservFuture = DB::table('reservations')
-                        ->join('users', 'reservations.id_locataire', '=', 'users.id')
-                        ->join('habitats', 'reservations.id_habitat', '=', 'habitats.id')
-                        ->select('users.*','habitats.*','reservations.*')
-                        ->where('reservations.date_debut','<', date_create('now')->format('Y-m-d'))
-                        ->where('reservations.id_locataire','=',$id_locataire)
-                        ->get();
+        // $reservFuture = DB::table('reservations')
+        //                 ->join('users', 'reservations.id_locataire', '=', 'users.id')
+        //                 ->join('habitats', 'reservations.id_habitat', '=', 'habitats.id')
+        //                 ->select('users.*','habitats.*','reservations.*')
+        //                 ->where('reservations.date_debut','<', date_create('now')->format('Y-m-d'))
+        //                 ->where('reservations.id_locataire','=',$id_locataire)
+        //                 ->get();
+
+        $reservFuture = Reservation::where('id_locataire', $id_locataire)
+                                    ->where('date_debut', '>', $date)
+                                    ->get();
 
         return $reservFuture;
     }
