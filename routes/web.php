@@ -1,5 +1,18 @@
 <?php
 
+use App\Models\User;
+use App\Http\Resources\UserCollection;
+use App\Http\Resources\User as UserResource;
+
+use App\Models\Habitat;
+use App\Http\Resources\Habitat as HabitatResource;
+
+use App\Models\Avis;
+use App\Http\Resources\Avis as AvisResource;
+
+use App\Models\Reservation;
+use App\Http\Resources\Reservation as ReservationResource;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,6 +27,34 @@
 // Route pour l'authentification
 Auth::routes();
 
+Route::get('/api_users', function () {
+    return new UserCollection(User::all());
+});
+
+Route::get('/api_user/{id}', function ($id) {
+    return new UserResource(User::findOrFail($id));
+});
+
+Route::get('/api_habitats', function () {
+    return HabitatResource::collection(Habitat::all());
+});
+
+Route::get('/api_habitat/{id_proprietaire}', function ($id_proprietaire) {
+    return new HabitatResource(Habitat::findOrFail($id_proprietaire));
+});
+
+Route::get('/api_avis', function () {
+    return AvisResource::collection(Avis::all());
+});
+
+Route::get('/api_reservations', function () {
+    return ReservationResource::collection(Reservation::all());
+});
+
+Route::get('/api_reservation/{id}', function ($id) {
+    return new ReservationResource(Reservation::findOrFail($id));
+});
+
 // Page d'accueil
 Route::get('/', 'HomeController@index')->name('home');
 
@@ -25,7 +66,6 @@ Route::get('cgv', 'AtypikController@showcgv')->name('cgv');
 
 // Mention légales
 Route::get('legal', 'AtypikController@showlegal')->name('legal');
-
 
 // Contact
 Route::get('contact', 'AtypikController@showcontact')->name('contact');
@@ -131,6 +171,5 @@ Route::middleware('auth')->group(function () {
 
     // Enregistre un message
     Route::post('/messages/{user}', 'MessageController@store')->middleware('can:talkTo,user');
-
 
 });
