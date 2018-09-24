@@ -24,7 +24,7 @@
                                   <td> {{ $reserv->pseudo }} </td>
                                   <td> {{ $reserv->titre }}  -  {{ $reserv->ville }} </td>
                                   <td> Du {{ $reserv->date_debut }}  au  {{ $reserv->date_fin }} </td>
-                                  <td> Wwaiting / Accepted / Refused </td>
+                                    <td> {{ $reserv->statut }} </td>
                                 </tr>
                         @endforeach
 

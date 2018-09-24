@@ -15,7 +15,7 @@ class Reservation extends Model
      * @var array
      */
     protected $fillable = [
-        'id_locataire', 'id_habitat', 'date_debut', 'date_fin', 'montant',
+        'id_locataire', 'id_habitat', 'date_debut', 'date_fin', 'montant','statut',
     ];
 
     /**

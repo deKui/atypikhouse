@@ -138,4 +138,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('planning/{month}/{year}', 'PlanningController@index')->name('planning.index');
 
+    // Mise à jour reservations
+    Route::get('proprio/reservation/{id}', 'ReservationController@reservAccepterRefuser')->name('proprio.reservAccepterRefuser');
+
 });

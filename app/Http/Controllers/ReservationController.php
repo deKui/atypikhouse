@@ -91,10 +91,18 @@ class ReservationController extends Controller
             'id_habitat' => $id_habitat,
             'date_debut' => $request->date_debut,
             'date_fin' => $request->date_fin,
-            'montant' => $montant
+            'montant' => $montant,
+            'statut' => 'accepted' // VAL  - réservation accepté par defaut
         ]);
 
         return redirect('habitats/' . $habitat->id)->with(['ok' => __("Votre réservation d'un montant de " . $montant . " euros a bien été pris en compte !")]);
+    }
+
+
+
+    public function reservAccepterRefuser($id_reservation) {
+
+
     }
 
 }
