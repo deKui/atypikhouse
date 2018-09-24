@@ -67,7 +67,7 @@
 						    </li>
 
 						    <li class="list-group-item">Nombre de lit simple : 
-								<input id="nb_lit_simple" type="text" class="form-control" name="nb_lit_simple" value="{{ $habitat->nb_lit_simple}}" required>
+								<input id="nb_lit_simple" type="number" class="form-control" name="nb_lit_simple" value="{{ $habitat->nb_lit_simple}}" required>
 
 								@if ($errors->has('nb_lit_simple'))
 							        <span class="invalide-feedback text-danger">
@@ -77,7 +77,7 @@
 						    </li>
 
 						    <li class="list-group-item">Nombre de lit double : 
-								<input id="nb_lit_double" type="text" class="form-control" name="nb_lit_double" value="{{ $habitat->nb_lit_double}}" required>
+								<input id="nb_lit_double" type="number" class="form-control" name="nb_lit_double" value="{{ $habitat->nb_lit_double}}" required>
 
 								@if ($errors->has('nb_lit_double'))
 							        <span class="invalide-feedback text-danger">
@@ -87,7 +87,7 @@
 						    </li>
 
 						    <li class="list-group-item">Nombre de personne maximum : 
-								<input id="nb_personne_max" type="text" class="form-control" name="nb_personne_max" value="{{ $habitat->nb_personne_max}}" required>
+								<input id="nb_personne_max" type="number" class="form-control" name="nb_personne_max" value="{{ $habitat->nb_personne_max}}" required>
 
 								@if ($errors->has('nb_personne_max'))
 							        <span class="invalide-feedback text-danger">
