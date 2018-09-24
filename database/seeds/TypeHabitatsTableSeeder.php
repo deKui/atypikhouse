@@ -26,5 +26,15 @@ class TypeHabitatsTableSeeder extends Seeder
         	'nom' => 'Roulotte',
         	'slug' => 'roulotte',
         ]);
+
+        TypeHabitats::create([
+            'nom' => 'Bulle',
+            'slug' => 'bulle',
+        ]);
+
+        TypeHabitats::create([
+            'nom' => 'Tipi',
+            'slug' => 'tipi',
+        ]);
     }
 }

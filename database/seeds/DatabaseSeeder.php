@@ -18,6 +18,10 @@ class DatabaseSeeder extends Seeder
         $this->call(TypeHabitatsTableSeeder::class);
         
         $this->call(HabitatsTableSeeder::class);
+
+        $this->call(ReservationsTableSeeder::class);
+
+        $this->call(AvisTableSeeder::class);
         
         //factory(App\Models\Habitat::class, 5)->create();
     }
