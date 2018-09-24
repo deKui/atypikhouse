@@ -25,7 +25,7 @@ class HabitatRequest extends FormRequest
         return [
             'titre' => 'required|string|max:255',
             'description' => 'required|string|max:255',
-            'image' => 'required|image|max:10000',
+            'image' => 'required|image|max:10000|mimes:jpg,png',
             'adresse' => 'required|string|max:255',
             'code_postal' => 'required|regex:/\b\d{5}\b/',
             'ville' => 'required|string|max:255',
@@ -33,7 +33,7 @@ class HabitatRequest extends FormRequest
             'nb_lit_double' => 'required|integer',
             'nb_personne_max' => 'required|integer',
             'date_debut_dispo' => 'required|date_format:Y-m-d',
-            'date_fin_dispo' => 'required|date_format:Y-m-d',
+            'date_fin_dispo' => 'required|date_format:Y-m-d|after:date_debut_dispo',
             'prix' => 'required|integer',
         ];
     }

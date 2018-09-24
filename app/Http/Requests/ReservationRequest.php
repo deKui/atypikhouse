@@ -25,7 +25,7 @@ class ReservationRequest extends FormRequest
     {
         return [
             'date_debut' => 'required|date_format:Y-m-d',
-            'date_fin' => 'required|date_format:Y-m-d',
+            'date_fin' => 'required|date_format:Y-m-d|after:date_debut',
             'nb_personne' => 'required|integer',
         ];
     }
