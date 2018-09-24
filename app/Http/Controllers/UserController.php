@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Note;
 use App\Models\Avis;
+use App\Models\TypeHabitats;
 use App\Models\Habitat;
 use App\Models\Reservation;
 use App\Http\Requests\UserRequest;
@@ -194,7 +195,9 @@ class UserController extends Controller
 
         $habitatSignale = $this->user->getHabitatSignale();
 
-        return view('profil.gerant', compact('userSignale','avisSignale','habitatSignale')); 
+        $typeHabitats = TypeHabitats::all();
+
+        return view('profil.gerant', compact('userSignale','avisSignale','habitatSignale', 'typeHabitats')); 
 
     }
 

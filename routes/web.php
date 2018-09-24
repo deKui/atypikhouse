@@ -113,6 +113,12 @@ Route::middleware('auth')->group(function () {
     // Accès à la page du gérant
     Route::get('gerant', 'UserController@showInfoGerant')->name('profil.gerant');
 
+    // Page pour l'ajout d'un type d'habitat
+    Route::get('gerant/type', 'HabitatController@addType')->name('habitat.addType');
+
+    // Ajoute un nouveau type d'habitat
+    Route::post('gerant/type/add', 'HabitatController@storeType')->name('habitat.storeType');
+
     // Mise à jour utilisateur active/ désactive
     Route::get('gerant/{id_utilisateur}', 'UserController@updateActiveDesactiveUser')->name('profil.gerantActiveDesactive');
 
@@ -138,7 +144,7 @@ Route::middleware('auth')->group(function () {
     // Edit habitat
     Route::get('proprio/habitatEdit/{id}', 'HabitatController@edit')->name('habitat.edit');
 
-  // Update habitat
+    //Update habitat
     Route::put('proprio/habitatUpdate/{id}', 'HabitatController@update')->name('habitat.update');
 
     Route::get('planning/{month}/{year}', 'PlanningController@index')->name('planning.index');

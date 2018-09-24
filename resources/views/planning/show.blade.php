@@ -1,4 +1,4 @@
-@extends('layouts.homepage')
+@extends('layouts.app')
 
 <style type="text/css">
 	.calendar_table{

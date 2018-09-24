@@ -18,11 +18,14 @@
 		  </div>
 		</div>
 
-		@endif
+		@elseif ($users->isEmpty() == false)
+
 		<div class="col-md-12">
 			<h1> Vos conversations </h1>
 			<br>
 		</div>
+
+		@endif
 		
 		@include('messages.users', ['users' => $users, 'unread' => $unread])
 

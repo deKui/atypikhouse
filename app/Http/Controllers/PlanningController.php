@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 use App\Models\Planning;
 use App\Models\Habitat;
@@ -31,7 +32,7 @@ class PlanningController extends Controller
 
 		$end = (clone $start)->modify('+' . (6 + 7 * ($weeks -1)) . 'days');
 
-		$reservations = $reservation->getReservBetweenByDay($start, $end);
+		$reservations = $reservation->getReservBetweenByDayByUser(Auth::id(), $start, $end);
 
     	return view('planning.index', compact('planning', 'start', 'weeks', 'reservations'));
     }

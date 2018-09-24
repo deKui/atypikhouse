@@ -189,7 +189,7 @@ class HabitatController extends Controller
     public function update(Request $request, $id_habitat) 
     {
 
-       $proprio = Auth::user()->id;
+        $proprio = Auth::user()->id;
 
         $habitat = $this->repo->getHabitat($id_habitat);
 
@@ -212,6 +212,30 @@ class HabitatController extends Controller
         $habitat->save();
 
         return redirect(route('profil.proprio', ['id_utilisateur' => $proprio]));
+    }
+
+
+    /************************************* Gérant ******************************************/
+
+
+    public function addType() {
+
+        return view('habitat.addType');
+    }
+
+
+    public function storeType(Request $request) {
+        
+        $request->validate([
+            'typeHabitat' => 'required|string|max:255',
+        ]);
+
+        TypeHabitats::create([
+            'nom' => $request->typeHabitat,
+            'slug' => str_slug($request['typeHabitat'], '-')
+        ]);
+
+        return redirect()->route('profil.gerant')->with('ok', __('Le type a bien été ajouté'));
     }
 
 }
