@@ -135,7 +135,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/messages', 'MessageController@index')->name('messages');
 
     // Affiche une conversations via son id
-    Route::get('/messages/{user}', 'MessageController@show')->middleware('can:talkTo,user')->name('messages.show');
+    Route::get('/messages/{user}', 'MessageController@show')->middleware('can:talkTo,user')->middleware('can:canTalk,user')->name('messages.show');
 
     // Enregistre un message
     Route::post('/messages/{user}', 'MessageController@store')->middleware('can:talkTo,user');

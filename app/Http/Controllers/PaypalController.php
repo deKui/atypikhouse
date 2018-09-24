@@ -129,6 +129,8 @@ class PaypalController extends Controller
 	 */
 	public function getPaymentStatus(Habitat $habitat, int $prixtotal, $date_debut, $date_fin)
     {
+    	//dd($habitat->id_proprietaire);
+
         /** Get the payment ID before session clear **/
         $payment_id = Session::get('paypal_payment_id');
 
@@ -153,6 +155,7 @@ class PaypalController extends Controller
 			// Le paiement est accepté donc la réservation est créé
 	        Reservation::create([
 	            'id_locataire' => Auth()->user()->id,
+	            'id_proprietaire' => $habitat->id_proprietaire,
 	            'id_habitat' => $habitat->id,
 	            'date_debut' => $date_debut,
 	            'date_fin' => $date_fin,
