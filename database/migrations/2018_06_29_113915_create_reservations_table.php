@@ -21,7 +21,7 @@ class CreateReservationsTable extends Migration
             $table->date('date_debut');
             $table->date('date_fin');
             $table->float('montant');
-            $table->string('statut');
+            $table->string('statut')->default('accepted');;
             $table->foreign('id_locataire')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('id_proprietaire')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('id_habitat')->references('id')->on('habitats')->onDelete('cascade');
