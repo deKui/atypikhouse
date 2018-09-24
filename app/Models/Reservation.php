@@ -168,8 +168,8 @@ class Reservation extends Model
         $date = date_create('now')->format('Y-m-d');
 
         $reservEnCours = Reservation::where('id_locataire', $id_locataire)
-                                    ->where('date_debut', '<', $date)
-                                    ->where('date_fin', '>', $date)
+                                    ->where('date_debut', '<=', $date)
+                                    ->where('date_fin', '>=', $date)
                                     ->get();
 
         return $reservEnCours;

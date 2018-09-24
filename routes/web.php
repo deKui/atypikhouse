@@ -50,6 +50,9 @@ Route::get('habitats', 'HabitatController@index')->name('habitat.index');
 // Affiche les dernières trouvailles
 Route::get('showLastHabitats', 'HabitatController@showLastHabitats')->name('showLastHabitats');
 
+// Affiche le planning pour un habitat
+Route::get('planning/habitat/{habitat}/{month}/{year}', 'PlanningController@show')->name('planning.show');
+
 // Accessible uniquement aux users connectés
 Route::middleware('auth')->group(function () {
 
@@ -150,9 +153,6 @@ Route::middleware('auth')->group(function () {
     Route::get('planning/{month}/{year}', 'PlanningController@index')->name('planning.index');
 
     Route::get('proprio/reservation/{id}', 'ReservationController@reservAccepterRefuser')->name('proprio.reservAccepterRefuser');
-
-    // Affiche le planning pour un habitat
-    Route::get('planning/habitat/{habitat}/{month}/{year}', 'PlanningController@show')->name('planning.show');
 
     // Affiche toutes les conversations
     Route::get('/messages', 'MessageController@index')->name('messages');
