@@ -90,6 +90,34 @@
 
 			            @endforeach
 
-	</div>	
+	</div>
+
+
+<div class="row card atypikcard">
+	<div class="card-header">
+		<h3> Types d'habitats </h3>
+		<a href="{{ route('habitat.addType') }}" class="btn btn-primary"> Ajouter </a>
+
+	</div>
+
+		<table class="table table-striped">
+			<tbody>
+
+			    @foreach($typeHabitats as $type)
+					<tr>
+						<td> {{ $type->nom }} </td>
+						<td>
+							<a href="#" class="btn btn-primary">
+								Supprimer
+							</a>
+						</td>
+					</tr>
+
+			    @endforeach
+
+			</tbody>
+		</table>
+	</div>
+</div>		
 
 @endsection

@@ -26,15 +26,18 @@
                 </div>
             </div> 
 
+            @if ($habitats->id_proprietaire !== Auth()->user()->id)
+
             <div class="col-md-4">
                 <div class="card atypikcard">
-                    <form method="POST" action="{{ route('reservation.create', $habitats) }}" enctype="multipart/form-data">
+                    <form method="GET" action="{{ route('reservation.create', ['habitat' => $habitats]) }}" enctype="multipart/form-data">
                         {{ csrf_field() }}
 
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">Prix par nuit : {{ $habitats->prix }} €</li>
                             <li class="list-group-item">Arrivée :
-                                <input id="date_debut" type="date" class="form-control" name="date_debut" value="{{ $arrivee }}" required>
+                                <input id="date_debut" type="date" class="form-control" name="date_debut" value="{{ $arrivee }}" 
+                                min="{{ date_create('now')->format('Y-m-d') }}" required>
 
                                 @if ($errors->has('date_debut'))
                                     <span class="invalide-feedback text-danger">
@@ -80,6 +83,8 @@
                     </form>
                 </div>
             </div>
+
+            @endif
     </div>
     <br>
 

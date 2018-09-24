@@ -99,7 +99,8 @@
 									</li> 
 
                                     <li class="dropdown-item">
-                                        <a href="{{ route('habitat.create') }}"> Enregistrer un habitat </a>
+                                        <!--<a href="{{ route('habitat.create') }}"> Enregistrer un habitat </a>-->
+                                        <a href="{{ route('profil.proprio', auth()->user()->id) }}"> Mes habitats </a>
                                     </li>
 
                                     <li class="dropdown-item">

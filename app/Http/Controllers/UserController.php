@@ -9,7 +9,9 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Note;
 use App\Models\Avis;
+use App\Models\TypeHabitats;
 use App\Models\Habitat;
+use App\Models\Reservation;
 use App\Http\Requests\UserRequest;
 
 class UserController extends Controller
@@ -47,8 +49,10 @@ class UserController extends Controller
     public function show(User $user) 
     {
         $users = User::find($user->id);
+
+        $reservations = Reservation::whereRaw("((id_locataire = " .$user->id. " AND id_proprietaire = " .Auth::id(). ") OR (id_locataire = " .Auth::id(). " AND id_proprietaire = " .$user->id. "))")->get();
         
-        return view('profil.show', compact('users'));
+        return view('profil.show', compact('users', 'reservations'));
 
     }
 
@@ -191,7 +195,9 @@ class UserController extends Controller
 
         $habitatSignale = $this->user->getHabitatSignale();
 
-        return view('profil.gerant', compact('userSignale','avisSignale','habitatSignale')); 
+        $typeHabitats = TypeHabitats::all();
+
+        return view('profil.gerant', compact('userSignale','avisSignale','habitatSignale', 'typeHabitats')); 
 
     }
 

@@ -21,26 +21,32 @@
                         <li class="list-group-item">Lit(s) simple(s) : {{ $habitats->nb_lit_simple }} </li>
                         <li class="list-group-item">Lit(s) double(s) : {{ $habitats->nb_lit_double }} </li>
                         <li class="list-group-item">Prévu pour {{ $habitats->nb_personne_max }} personnes maximum </li>
-                        <li class="list-group-item">Disponibilité : Du {{ $habitats->date_debut_dispo }} au {{ $habitats->date_fin_dispo }} </li>
+                        <li class="list-group-item">
+                            <a href="{{ route('planning.show', [$habitats, intval(date('m')), intval(date('Y'))]) }}"> Disponibilités </a>
+                        </li>
                         
                     </ul> 
 
                 </div>
             </div> 
 
-            <!-- Affichage de l'interface pour réserver l'habitat -->
+            <!-- Affichage de l'interface pour réserver l'habitat pour les utilisateurs lambda-->
+
+            @guest
 
             <div class="col-md-4">
                 <div class="card atypikcard">
-                    <form method="POST" action="{{ route('reservation.create', $habitats) }}" enctype="multipart/form-data">
+
+                    <form method="GET" action="{{ route('reservation.create', ['habitat' => $habitats]) }}" enctype="multipart/form-data">
                         {{ csrf_field() }}
                         
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">Prix par nuit : {{ $habitats->prix }} €</li>
 
-                            <!-- Date d'arrivée -->
+                            <!-- Date d'arrivée --> 
                             <li class="list-group-item">Arrivée : 
-                                <input id="date_debut" type="date" class="form-control" name="date_debut" required>
+                                <input id="date_debut" type="date" class="form-control" name="date_debut" 
+                                min="{{ date_create('now')->format('Y-m-d') }}" required>
 
                                 @if ($errors->has('date_debut'))
                                     <span class="invalide-feedback text-danger">
@@ -49,7 +55,7 @@
                                 @endif
                             </li>
                             
-                            <!-- Date de départ  -->
+                            <!-- Date de départ  --> 
                             <li class="list-group-item">Départ : 
                                 <input id="date_fin" type="date" class="form-control" name="date_fin" required>
 
@@ -60,7 +66,7 @@
                                 @endif
                             </li>
 
-                            <!-- Nombre de voyageurs -->
+                            <!-- Nombre de voyageurs  -->
                             <li class="list-group-item">Nombre de personnes : 
                                 <select id="nb_personne" name="nb_personne" class="form-control">
 
@@ -82,6 +88,71 @@
                     </form>
                 </div>
             </div>
+
+            @endguest
+
+            @auth
+
+            @if ($habitats->id_proprietaire !== Auth()->user()->id)
+
+            <div class="col-md-4">
+                <div class="card atypikcard">
+
+                    <form method="GET" action="{{ route('reservation.create', ['habitat' => $habitats]) }}" enctype="multipart/form-data">
+                        {{ csrf_field() }}
+                        
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Prix par nuit : {{ $habitats->prix }} €</li>
+
+                            <!-- Date d'arrivée --> 
+                            <li class="list-group-item">Arrivée : 
+                                <input id="date_debut" type="date" class="form-control" name="date_debut" 
+                                min="{{ date_create('now')->format('Y-m-d') }}" required>
+
+                                @if ($errors->has('date_debut'))
+                                    <span class="invalide-feedback text-danger">
+                                        <small>{{ $errors->first('date_debut') }}</small>
+                                    </span>
+                                @endif
+                            </li>
+                            
+                            <!-- Date de départ  --> 
+                            <li class="list-group-item">Départ : 
+                                <input id="date_fin" type="date" class="form-control" name="date_fin" required>
+
+                                @if ($errors->has('date_fin'))
+                                    <span class="invalide-feedback text-danger">
+                                        <small>{{ $errors->first('date_fin') }}</small>
+                                    </span>
+                                @endif
+                            </li>
+
+                            <!-- Nombre de voyageurs  -->
+                            <li class="list-group-item">Nombre de personnes : 
+                                <select id="nb_personne" name="nb_personne" class="form-control">
+
+                                    <option value=1>1</option>
+                                    <option value=2>2</option>
+                                    <option value=3>3</option>
+                                    <option value=4>4</option>
+                                    <option value=5>5</option>
+
+                                </select>
+                            </li>
+
+                            <li class="list-group-item"> 
+                                <button type="submit" class="btn btn-primary">
+                                    Réserver
+                                </button>
+                            </li>
+                        </ul> 
+                    </form>
+                </div>
+            </div>
+
+            @endif
+
+            @endauth
     </div>
     <br>
 

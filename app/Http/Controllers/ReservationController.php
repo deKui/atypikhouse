@@ -29,10 +29,12 @@ class ReservationController extends Controller
     public function index($id_locataire)
     {
         $reservPassee = $this->reservation->getReservationPassee($id_locataire);
+
+        $reservEnCours = $this->reservation->getReservationEnCours($id_locataire);
         
         $reservFuture = $this->reservation->getReservationFuture($id_locataire);
 
-        return view('reservation.index', compact('reservPassee', 'reservFuture'));
+        return view('reservation.index', compact('reservPassee', 'reservFuture', 'reservEnCours'));
     }
 
     /**
@@ -44,15 +46,15 @@ class ReservationController extends Controller
 
 
     /**
-     * Auteur : Lucas
-     * Enregistre la réservation en testant sa disponibilité
+     * Affiche les détails de la réservation pour payer
+     * @param  Habitat $habitat 
+     * @param  ReservationRequest $request 
+     * @return            
      */
     public function create(Habitat $habitat, ReservationRequest $request) {
+
         $id_locataire = Auth()->user()->id;
         $id_habitat = $habitat->id;
-
-        // montant calculé en fonction du nb de personne par nuit
-        $montant = $request->nb_personne * $habitat->prix;
 
         // récupère toutes les réservations concernant cet habitat
         $reservations = Reservation::where('id_habitat', $id_habitat)->get();
@@ -84,17 +86,37 @@ class ReservationController extends Controller
                 return redirect('habitats/' . $habitat->id)->with(['ok' => __("Désolé, ces dates ne sont pas disponibles !")]);
             }
         }
+        
+        $nbpersonne = $request->nb_personne;
 
-        // tous les cas de non disponibilité étant passés, la réservation est créé
-        Reservation::create([
-            'id_locataire' => $id_locataire,
-            'id_habitat' => $id_habitat,
-            'date_debut' => $request->date_debut,
-            'date_fin' => $request->date_fin,
-            'montant' => $montant
-        ]);
+        // conversion des dates pour le calcul de la durée
+        $date_debut = new DateTime($request->date_debut);
+        $date_fin = new DateTime($request->date_fin);
 
-        return redirect('habitats/' . $habitat->id)->with(['ok' => __("Votre réservation d'un montant de " . $montant . " euros a bien été pris en compte !")]);
+        // nombre de nuit(s) 
+        $duree = $date_fin->diff($date_debut);
+
+        // affichage du nombre de nuit(s)
+        $duree = $duree->format('%d');
+
+        // affichage des dates au format necessaire
+        $date_debut = $date_debut->format('Y-m-j');
+        $date_fin = $date_fin->format('Y-m-j');
+
+        $prixtotal = $habitat->prix * $duree;
+
+        //dd($prixtotal);
+
+        return view('reservation.create', compact('habitat', 'date_debut', 'date_fin', 'nbpersonne', 'duree', 'prixtotal'));
+
+
+    }
+
+
+
+    public function reservAccepterRefuser($id_reservation) {
+
+
     }
 
 }

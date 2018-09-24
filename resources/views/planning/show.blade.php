@@ -42,8 +42,8 @@
         	<div class="d-flex flex-row align-items-center justify-content-between mx-ms-3">
         		<h1> {{ $planning->toString() }} </h1>
         		<div>
-        			<a href="{{ route('planning.index', [$planning->previousMonth()->month, $planning->previousMonth()->year]) }}" class="btn btn-primary"> &lt; </a>  
-        			<a href="{{ route('planning.index', [$planning->nextMonth()->month, $planning->nextMonth()->year]) }}" class="btn btn-primary"> &gt; </a>  
+        			<a href="{{ route('planning.show', [$habitat, $planning->previousMonth()->month, $planning->previousMonth()->year]) }}" class="btn btn-primary"> &lt; </a>  
+        			<a href="{{ route('planning.show', [$habitat, $planning->nextMonth()->month, $planning->nextMonth()->year]) }}" class="btn btn-primary"> &gt; </a>  
         		</div>
         	</div>
 		
@@ -74,35 +74,13 @@
 					    		<br>
 
 					    		@foreach ($events as $event)
-									
-									@if ($event->id_locataire == Auth()->user()->id)
 
-										<div class="sejour">
-											<ul class="list-group list-group-flush">
-											  	<li class="list-group-item">Séjour</li>
-											  	<li class="list-group-item">
-											  		<a href="{{ route('reservation.show', auth()->user()->id) }}"> {{ $event->habitats->ville}}</a>
-											  	</li>
-											</ul>
-										</div>
-										<br>
-									
-									@else
-
-										<div class="location">
-											<ul class="list-group list-group-flush">
-											  	<li class="list-group-item"> Réservation </li>
-											  	<li class="list-group-item">
-											  		<a href="{{ route('reservation.show', auth()->user()->id) }}"> {{ $event->habitats->titre}}</a>
-											  	</li>
-											  	<li class="list-group-item">
-											  		Locataire : <a href="{{ route('reservation.show', auth()->user()->id) }}"> {{ $event->users->pseudo}}</a>
-											  	</li>
-											</ul>
-										</div>
-										<br>
-
-									@endif
+									<div class="location">
+										<ul class="list-group list-group-flush">
+											<li class="list-group-item">Non disponible</li>
+										</ul>
+									</div>
+									<br>
 
 					    		@endforeach
 
@@ -112,6 +90,9 @@
 				    </tr>
 				@endfor
 			</table>
+
+			<h3> <a href="{{ route('habitat.show', $habitat->id) }}"> Retour à la page du logement </a> </h3>
+
 		</div>
 	</div>
 </div>

@@ -22,8 +22,8 @@
                     <div class="card atypikcard">
 
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Habitat : {{ $reserv->titre }} </li>
-                            <li class="list-group-item">Loué par : {{ $reserv->pseudo }} </li>
+                            <li class="list-group-item">Habitat : {{ $reserv->habitats->titre }} </li>
+                            <li class="list-group-item">Loué par : {{ $reserv->users->pseudo }} </li>
                             <li class="list-group-item">Du : {{ $reserv->date_debut }} au : {{ $reserv->date_fin }}</li>
                             <li class="list-group-item">Montant : {{ $reserv->montant }} € </li>
                         </ul> 
@@ -50,8 +50,35 @@
                     <div class="card atypikcard">
 
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Habitat : {{ $reserv->titre }} </li>
-                            <li class="list-group-item">Loué par : {{ $reserv->pseudo }} </li>
+                            <li class="list-group-item">Habitat : {{ $reserv->habitats->titre }} </li>
+                            <li class="list-group-item">Loué par : {{ $reserv->users->pseudo }} </li>
+                            <li class="list-group-item">Du : {{ $reserv->date_debut }} au : {{ $reserv->date_fin }}</li>
+                            <li class="list-group-item">Montant : {{ $reserv->montant }} € </li>
+                        </ul> 
+
+                    </div>
+                </div> 
+              @endforeach
+    @endif
+    </div>
+
+<!-- Réservation en cours -->
+
+    <div class="row atypikcard">
+        <div class="col-md-12 card-header"> Vos réservations en cours<br/></div>
+        <!-- Si aucunes données : Ecrire :: Vous n'avez pas encore effectué de voyage -->
+
+
+    @if ( $reservEnCours->isEmpty() )
+        <p>Vous n'avez pas encore de voyages  </p>
+    @else
+            @foreach($reservEnCours as $reserv)
+                <div class="col-md-4">
+                    <div class="card atypikcard">
+
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Habitat : {{ $reserv->habitats->titre }} </li>
+                            <li class="list-group-item">Loué par : {{ $reserv->users->pseudo }} </li>
                             <li class="list-group-item">Du : {{ $reserv->date_debut }} au : {{ $reserv->date_fin }}</li>
                             <li class="list-group-item">Montant : {{ $reserv->montant }} € </li>
                         </ul> 

@@ -8,28 +8,6 @@
     </div>
     
 <div class="container">
-    
-    <!-- <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    Dashboard
-                </div>
-
-                <div class="panel-body">
-                    @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    You are logged in !
-                </div>
-            </div>
-        </div>
-    </div> -->
-
-
     <div class="row justify-content-lg-center">
         <div class="col-sm-12 col-lg-6">
             <div class="card atypikcard">
@@ -47,7 +25,7 @@
 
                         <div class="form-group row">
                                 <div class="col-md-12">
-                                    <select id="voyageurs" name="voyageurs" class="form-control">
+                                    <select id="voyageurs" name="voyageurs" class="form-control" required="true">
 
                                         <option value="" disabled selected hidden>Voyageurs</option>
                                         <option value="1">1</option>
