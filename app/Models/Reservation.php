@@ -25,25 +25,31 @@ class Reservation extends Model
 
     /**
      * Récupère toutes les réservations entre 2 dates
+     * @param int $user
      * @param DateTime $start
      * @param DateTime $end
      * @return array
      */
-    public function getReservBetween(DateTime $start, DateTime $end) {
-        $reservations = Reservation::where('date_fin', '<=', $end)->orWhere('date_debut', '>=', $start)->get();
+    public function getReservBetween(int $user, DateTime $start, DateTime $end) {
+        $reservations = Reservation::where('id_locataire', $user)
+                                    ->orWhere('id_proprietaire', $user)
+                                    ->where('date_fin', '<=', $end)
+                                    ->orWhere('date_debut', '>=', $start)
+                                    ->get();
     
         return $reservations; 
     }
 
 
     /**
-     * Récupère toutes les réservations entre 2 dates indexé par jour
+     * Récupère toutes les réservations entre 2 dates indexé par jour par user
+     * @param int $user
      * @param DateTime $start
      * @param DateTime $end
      * @return array
      */
-    public function getReservBetweenByDay(DateTime $start, DateTime $end) {
-        $reservations = $this->getReservBetween($start, $end);
+    public function getReservBetweenByDayByUser(int $user, DateTime $start, DateTime $end) {
+        $reservations = $this->getReservBetween($user, $start, $end);
 
         $days = []; 
 
