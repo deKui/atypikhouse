@@ -21,7 +21,9 @@
                         <li class="list-group-item">Lit(s) simple(s) : {{ $habitats->nb_lit_simple }} </li>
                         <li class="list-group-item">Lit(s) double(s) : {{ $habitats->nb_lit_double }} </li>
                         <li class="list-group-item">Prévu pour {{ $habitats->nb_personne_max }} personnes maximum </li>
-                        <li class="list-group-item">Disponibilité : Du {{ $habitats->date_debut_dispo }} au {{ $habitats->date_fin_dispo }} </li>
+                        <li class="list-group-item">
+                            <a href="{{ route('planning.show', [$habitats, intval(date('m')), intval(date('Y'))]) }}"> Disponibilités </a>
+                        </li>
                         
                     </ul> 
 
@@ -30,27 +32,30 @@
 
             <!-- Affichage de l'interface pour réserver l'habitat -->
 
+            @if ($habitats->id_proprietaire !== Auth()->user()->id)
+
             <div class="col-md-4">
                 <div class="card atypikcard">
 
-                    <form method="POST" action="{{ route('paypal', $habitats->id) }}" enctype="multipart/form-data">
+                    <form method="GET" action="{{ route('reservation.create', ['habitat' => $habitats]) }}" enctype="multipart/form-data">
                         {{ csrf_field() }}
                         
                         <ul class="list-group list-group-flush">
-                            <!-- <li class="list-group-item">Prix par nuit : {{ $habitats->prix }} €</li> -->
+                            <li class="list-group-item">Prix par nuit : {{ $habitats->prix }} €</li>
 
-                            <!-- Date d'arrivée 
+                            <!-- Date d'arrivée --> 
                             <li class="list-group-item">Arrivée : 
-                                <input id="date_debut" type="date" class="form-control" name="date_debut" required>
+                                <input id="date_debut" type="date" class="form-control" name="date_debut" 
+                                min="{{ date_create('now')->format('Y-m-d') }}" required>
 
                                 @if ($errors->has('date_debut'))
                                     <span class="invalide-feedback text-danger">
                                         <small>{{ $errors->first('date_debut') }}</small>
                                     </span>
                                 @endif
-                            </li> -->
+                            </li>
                             
-                            <!-- Date de départ  
+                            <!-- Date de départ  --> 
                             <li class="list-group-item">Départ : 
                                 <input id="date_fin" type="date" class="form-control" name="date_fin" required>
 
@@ -59,9 +64,9 @@
                                         <small>{{ $errors->first('date_fin') }}</small>
                                     </span>
                                 @endif
-                            </li> -->
+                            </li>
 
-                            <!--  Nombre de voyageurs 
+                            <!-- Nombre de voyageurs  -->
                             <li class="list-group-item">Nombre de personnes : 
                                 <select id="nb_personne" name="nb_personne" class="form-control">
 
@@ -72,27 +77,19 @@
                                     <option value=5>5</option>
 
                                 </select>
-                            </li> -->
-
-                            <li class="list-group-item">Montant : 
-                                <input id="montant" type="text" class="form-control" name="montant" required>
-
-                                @if ($errors->has('montant'))
-                                    <span class="invalide-feedback text-danger">
-                                        <small>{{ $errors->first('montant') }}</small>
-                                    </span>
-                                @endif
-                            </li> 
+                            </li>
 
                             <li class="list-group-item"> 
                                 <button type="submit" class="btn btn-primary">
-                                    Payer avec Paypal
+                                    Réserver
                                 </button>
                             </li>
                         </ul> 
                     </form>
                 </div>
             </div>
+
+            @endif
     </div>
     <br>
 

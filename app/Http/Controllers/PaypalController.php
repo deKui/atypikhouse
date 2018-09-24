@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
 use App\Models\Habitat;
+use App\Models\Reservation;
 
 use PayPal\Api\Amount; 
 use PayPal\Api\Details; 
@@ -37,8 +38,16 @@ class PaypalController extends Controller
         $this->api_context->setConfig($paypal_conf['settings']);
     }
 
-
-    public function payWithpaypal(Request $request, Habitat $habitat)
+    /**
+     * Payer avec une sandbox paypal (compte : scribelucas-buyer@gmail.com mdp : lucasestelle)
+     * @param  Request  $request    
+     * @param  Habitat  $habitat    
+     * @param  int      $prixtotal  
+     * @param  DateTime $date_debut 
+     * @param  DateTime $date_fin   
+     * @return                
+     */
+    public function payWithpaypal(Request $request, Habitat $habitat, int $prixtotal, $date_debut, $date_fin)
     {
 		$payer = new Payer();
         $payer->setPaymentMethod('paypal');
@@ -46,16 +55,16 @@ class PaypalController extends Controller
 		$item_1 = new Item();
 
 		$item_1->setName('Item 1') /** item name **/
-            ->setCurrency('USD')
+            ->setCurrency('EUR')
             ->setQuantity(1)
-            ->setPrice($request->get('montant')); /** unit price **/
+            ->setPrice($prixtotal); /** unit price **/
 
 		$item_list = new ItemList();
         $item_list->setItems(array($item_1));
 
 		$montant = new Amount();
-        $montant->setCurrency('USD')
-            ->setTotal($request->get('montant'));
+        $montant->setCurrency('EUR')
+            ->setTotal($prixtotal);
 
 		$transaction = new Transaction();
         $transaction->setAmount($montant)
@@ -63,8 +72,8 @@ class PaypalController extends Controller
             ->setDescription('Your transaction description');
 
 		$redirect_urls = new RedirectUrls();
-        $redirect_urls->setReturnUrl(URL::route('status', $habitat)) /** Specify return URL **/
-            ->setCancelUrl(URL::route('status', $habitat));
+        $redirect_urls->setReturnUrl(URL::route('status', [$habitat, $prixtotal, $date_debut, $date_fin])) /** Specify return URL **/
+            ->setCancelUrl(URL::route('status', [$habitat, $prixtotal, $date_debut, $date_fin]));
 
 		$payment = new Payment();
         $payment->setIntent('Sale')
@@ -80,11 +89,11 @@ class PaypalController extends Controller
 
 			if (\Config::get('app.debug')) {
 				\Session::put('error', 'Connection timeout');
-			    return Redirect::route('habitat.show', $habitat->id);
+			    return Redirect::route('habitat.show', $habitat->id)->with(['ok' => __("Une erreur a été rencontrée, merci de réessayer. ")]);
 
 			} else {
 				\Session::put('error', 'Some error occur, sorry for inconvenient');
-				return Redirect::route('habitat.show', $habitat->id);
+				return Redirect::route('habitat.show', $habitat->id)->with(['ok' => __("Une erreur a été rencontrée, merci de réessayer. ")]);
 			}
 		}
 
@@ -106,11 +115,19 @@ class PaypalController extends Controller
 		}
 
 		\Session::put('error', 'Unknown error occurred');
-        return Redirect::route('habitat.show', $habitat->id);
+        return Redirect::route('habitat.show', $habitat->id)->with(['ok' => __("Une erreur a été rencontrée, merci de réessayer. ")]);
 	}
 
 
-	public function getPaymentStatus($habitat)
+	/**
+	 * Status du paiment et création de la réservation en cas de succès
+	 * @param  Habitat  $habitat    
+	 * @param  int      $prixtotal  
+	 * @param  DateTime $date_debut 
+	 * @param  DateTime $date_fin   
+	 * @return                
+	 */
+	public function getPaymentStatus(Habitat $habitat, int $prixtotal, $date_debut, $date_fin)
     {
         /** Get the payment ID before session clear **/
         $payment_id = Session::get('paypal_payment_id');
@@ -121,7 +138,7 @@ class PaypalController extends Controller
 		if (empty(Input::get('PayerID')) || empty(Input::get('token'))) {
 
 			\Session::put('error', 'Payment failed');
-		    return Redirect::route('habitat.show', $habitat);
+		    return Redirect::route('habitat.show', $habitat)->with(['ok' => __("Une erreur a été rencontrée, merci de réessayer. ")]);
 		}
 
 		$payment = Payment::get($payment_id, $this->api_context);
@@ -133,12 +150,21 @@ class PaypalController extends Controller
 
 		if ($result->getState() == 'approved') {
 
+			// Le paiement est accepté donc la réservation est créé
+	        Reservation::create([
+	            'id_locataire' => Auth()->user()->id,
+	            'id_habitat' => $habitat->id,
+	            'date_debut' => $date_debut,
+	            'date_fin' => $date_fin,
+	            'montant' => $prixtotal
+	        ]);
+
 			\Session::put('success', 'Payment success');
-			return Redirect::route('habitat.show', $habitat)->with(['ok' => __("Paiement réussi")]);
+			return Redirect::route('habitat.show', $habitat)->with(['ok' => __("Merci, votre réservation a bien été prise en compte !")]);
 		}
 
 		\Session::put('error', 'Payment failed');
-		return Redirect::route('habitat.show', $habitat)->with(['ok' => __("Paiement refusé")]);
+		return Redirect::route('habitat.show', $habitat)->with(['ok' => __("Une erreur a été rencontrée, merci de réessayer. ")]);
 
 	}
 }

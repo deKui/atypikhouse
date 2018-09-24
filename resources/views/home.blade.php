@@ -47,7 +47,7 @@
 
                         <div class="form-group row">
                                 <div class="col-md-12">
-                                    <select id="voyageurs" name="voyageurs" class="form-control">
+                                    <select id="voyageurs" name="voyageurs" class="form-control" required="true">
 
                                         <option value="" disabled selected hidden>Voyageurs</option>
                                         <option value="1">1</option>

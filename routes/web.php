@@ -88,13 +88,13 @@ Route::middleware('auth')->group(function () {
     ]);
 
     // Réserver un habitat
-	Route::post('reserver/{habitat}','ReservationController@create')->name('reservation.create');
+	Route::get('reserver/{habitat}','ReservationController@create')->name('reservation.create');
 
 	// Payer avec paypal
-	Route::post('paypal/{habitat}', 'PaypalController@payWithPaypal')->name('paypal');
+	Route::get('paypal/{habitat}/{montant}/{date_debut}/{date_fin}', 'PaypalController@payWithPaypal')->name('paypal');
 
 	// Status du paiement
-	Route::get('status/{habitat}', 'PaypalController@getPaymentStatus')->name('status');
+	Route::get('status/{habitat}/{montant}/{date_debut}/{date_fin}', 'PaypalController@getPaymentStatus')->name('status');
 	
 	// Affiche une réservation via son id ?
 	Route::get('reservation/{id}','ReservationController@index')->name('reservation.index');
@@ -127,6 +127,9 @@ Route::middleware('auth')->group(function () {
 
     // Affichage du plannig
     Route::get('planning/{month}/{year}', 'PlanningController@index')->name('planning.index');
+
+    // Affiche le planning pour un habitat
+    Route::get('planning/habitat/{habitat}/{month}/{year}', 'PlanningController@show')->name('planning.show');
 
     // Affiche toutes les conversations
     Route::get('/messages', 'MessageController@index')->name('messages');
