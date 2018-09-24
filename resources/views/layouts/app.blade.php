@@ -107,6 +107,10 @@
                                         <a href="{{ route('planning.index', [intval(date('m')), intval(date('Y'))]) }}"> Mon planning </a>
                                     </li>
 
+                                    <li class="dropdown-item">
+                                        <a href="{{ route('messages') }}"> Mes messages </a>
+                                    </li>
+
                                 <!-- Permet d'afficher uniquement cette page pour les gérant -->
                                 @gerant
                                     <li class="dropdown-item">

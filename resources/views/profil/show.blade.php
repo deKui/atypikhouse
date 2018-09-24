@@ -13,6 +13,9 @@
 						    <li class="list-group-item">Nom : {{ $users->pseudo }}</li>
 						    <li class="list-group-item">Mail : {{ $users->email }}</li>
 						    <li class="list-group-item">
+						    	<a class="btn btn-primary atypikbutton" href="{{ route('messages.show', $users) }}"> Envoyer un message </a>
+						    </li>
+						    <li class="list-group-item">
 						    	<a class="btn btn-primary atypikbutton" href="{{ route('profil.noter', $users->id) }}"> Noter </a>
 						    </li>
 						<!-- VAL - L'utilisateur authentifié ne peux pas signaler son profil -->

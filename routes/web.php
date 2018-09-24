@@ -138,7 +138,17 @@ Route::middleware('auth')->group(function () {
 
     Route::get('planning/{month}/{year}', 'PlanningController@index')->name('planning.index');
 
-    // Mise à jour reservations
+
     Route::get('proprio/reservation/{id}', 'ReservationController@reservAccepterRefuser')->name('proprio.reservAccepterRefuser');
+
+    // Affiche toutes les conversations
+    Route::get('/messages', 'MessageController@index')->name('messages');
+
+    // Affiche une conversations via son id
+    Route::get('/messages/{user}', 'MessageController@show')->middleware('can:talkTo,user')->name('messages.show');
+
+    // Enregistre un message
+    Route::post('/messages/{user}', 'MessageController@store')->middleware('can:talkTo,user');
+
 
 });
