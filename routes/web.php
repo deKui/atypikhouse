@@ -26,7 +26,6 @@ Route::get('cgv', 'AtypikController@showcgv')->name('cgv');
 // Mention légales
 Route::get('legal', 'AtypikController@showlegal')->name('legal');
 
-
 // Contact
 Route::get('contact', 'AtypikController@showcontact')->name('contact');
 
@@ -89,7 +88,13 @@ Route::middleware('auth')->group(function () {
     ]);
 
     // Réserver un habitat
-	Route::post('reserver/{habitat}','ReservationController@create')->name('reservation.create');
+	Route::get('reserver/{habitat}','ReservationController@create')->name('reservation.create');
+
+	// Payer avec paypal
+	Route::get('paypal/{habitat}/{montant}/{date_debut}/{date_fin}', 'PaypalController@payWithPaypal')->name('paypal');
+
+	// Status du paiement
+	Route::get('status/{habitat}/{montant}/{date_debut}/{date_fin}', 'PaypalController@getPaymentStatus')->name('status');
 	
 	// Affiche une réservation via son id ?
 	Route::get('reservation/{id}','ReservationController@index')->name('reservation.index');
@@ -138,14 +143,16 @@ Route::middleware('auth')->group(function () {
 
     Route::get('planning/{month}/{year}', 'PlanningController@index')->name('planning.index');
 
-
     Route::get('proprio/reservation/{id}', 'ReservationController@reservAccepterRefuser')->name('proprio.reservAccepterRefuser');
+
+    // Affiche le planning pour un habitat
+    Route::get('planning/habitat/{habitat}/{month}/{year}', 'PlanningController@show')->name('planning.show');
 
     // Affiche toutes les conversations
     Route::get('/messages', 'MessageController@index')->name('messages');
 
     // Affiche une conversations via son id
-    Route::get('/messages/{user}', 'MessageController@show')->middleware('can:talkTo,user')->name('messages.show');
+    Route::get('/messages/{user}', 'MessageController@show')->middleware('can:talkTo,user')->middleware('can:canTalk,user')->name('messages.show');
 
     // Enregistre un message
     Route::post('/messages/{user}', 'MessageController@store')->middleware('can:talkTo,user');

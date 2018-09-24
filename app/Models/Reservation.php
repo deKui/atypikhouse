@@ -5,7 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
+use App\Models\Habitat;
 use DateTime;
+use DateInterval;
 
 class Reservation extends Model
 {
@@ -15,8 +17,11 @@ class Reservation extends Model
      * @var array
      */
     protected $fillable = [
-        'id_locataire', 'id_habitat', 'date_debut', 'date_fin', 'montant','statut',
+
+        'id_locataire', 'id_proprietaire', 'id_habitat', 'date_debut', 'date_fin', 'montant',
+
     ];
+
 
     /**
      * Récupère toutes les réservations entre 2 dates
@@ -25,33 +30,43 @@ class Reservation extends Model
      * @return array
      */
     public function getReservBetween(DateTime $start, DateTime $end) {
-        $reservations = Reservation::where('date_debut', '>=', $start)->where('date_fin', '<=', $end)->get();
+        $reservations = Reservation::where('date_fin', '<=', $end)->orWhere('date_debut', '>=', $start)->get();
     
         return $reservations; 
     }
 
 
     /**
-     * Récupère toutes les réservations entre 2 dates indexé par date de début
+     * Récupère toutes les réservations entre 2 dates indexé par jour
      * @param DateTime $start
      * @param DateTime $end
      * @return array
      */
-    public function getReservBetweenByStartingDay(DateTime $start, DateTime $end) {
+    public function getReservBetweenByDay(DateTime $start, DateTime $end) {
         $reservations = $this->getReservBetween($start, $end);
 
         $days = []; 
 
         foreach ($reservations as $event) {
-            //$interval = (new DateTime($event->date_debut))->diff(new DateTime($event->date_fin));
-            //dd($interval->format('%R%a jours'));
+            $interval = (new DateTime($event->date_debut))->diff(new DateTime($event->date_fin));
+            $nbjour = $interval->format('%d');
 
-            $date = $event->date_debut;
+            $tabjour = []; 
 
-            if (!isset($days[$date])) {
-                $days[$date] = [$event]; 
-            } else {
-                $days[$date][] = $event;
+            for ($i=1; $i < $nbjour + 1; $i++ ) { 
+                $date = new DateTime($event->date_debut);
+                $date->add(new DateInterval('P'.$i.'D')); 
+                array_push($tabjour, $date->format('Y-m-d'));   
+            }
+
+            for ($i=0 ; $i < count($tabjour); $i++) {
+
+                if (!isset($days[$tabjour[$i]])) {
+                    $days[$tabjour[$i]] = [$event]; 
+                } else {
+                    $days[$tabjour[$i]][] = $event;
+                } 
+                
             }
         }
 
@@ -60,24 +75,32 @@ class Reservation extends Model
 
 
     /**
-     * Récupère toutes les réservations entre 2 dates indexé par date de fin
-     * @param DateTime $start
-     * @param DateTime $end
-     * @return array
+     * Récupère toutes les réservations pour un habitat indexé par jour 
+     * @param  Habitat $habitat
+     * @return 
      */
-    public function getReservBetweenByEndingDay(DateTime $start, DateTime $end) {
-        $reservations = $this->getReservBetween($start, $end);
+    public function getReservByDayByHabitat(Habitat $habitat) {
+        $reservations = Reservation::where('id_habitat', $habitat->id)->get();
 
         $days = []; 
 
         foreach ($reservations as $event) {
+            $interval = (new DateTime($event->date_debut))->diff(new DateTime($event->date_fin));
+            $nbjour = $interval->format('%d');
 
-            $date = $event->date_fin;
+            $tabjour = []; 
 
-            if (!isset($days[$date])) {
-                $days[$date] = [$event]; 
-            } else {
-                $days[$date][] = $event;
+            for ($i=1; $i < $nbjour + 1; $i++ ) { 
+                $date = new DateTime($event->date_debut);
+                $date->add(new DateInterval('P'.$i.'D')); 
+                array_push($tabjour, $date->format('Y-m-d'));   
+            }
+
+            for ($i=0 ; $i < count($tabjour); $i++) {
+
+                if (!isset($days[$tabjour[$i]])) {
+                    $days[$tabjour[$i]] = [$event]; 
+                }   
             }
         }
 
