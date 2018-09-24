@@ -218,12 +218,19 @@ class HabitatController extends Controller
     /************************************* Gérant ******************************************/
 
 
+    /**
+     * Affiche la page pour ajouter un type d'habitat
+     */
     public function addType() {
 
         return view('habitat.addType');
     }
 
 
+    /**
+     * Enregistre un nouveau type d'habitat
+     * @param  Request $request            
+     */
     public function storeType(Request $request) {
         
         $request->validate([
@@ -236,6 +243,19 @@ class HabitatController extends Controller
         ]);
 
         return redirect()->route('profil.gerant')->with('ok', __('Le type a bien été ajouté'));
+    }
+
+
+    /**
+     * Supprime un type d'habitat
+     * @param  int    $idType      
+     */
+    public function deleteType(int $idType) {
+        $typeHabitat = TypeHabitats::find($idType);
+
+        $typeHabitat->delete($idType);
+
+        return redirect()->route('profil.gerant')->with('ok', __('Le type a bien été supprimé'));
     }
 
 }

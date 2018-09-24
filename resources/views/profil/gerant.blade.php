@@ -71,7 +71,7 @@
 </div>
 
 
-<div class="row card atypikcard">
+<!-- <div class="row card atypikcard">
 				<div class="card-header"><h3>Dernieres photos signalées : </h3></div>
 
 			            @foreach($habitatSignale as $photo)
@@ -83,14 +83,14 @@
 			                    	<li class="list-group-item"><img class="card-img-top" src="{{ asset('storage/' . $photo->photo) }}"></li>
 			                        <li class="list-group-item">Photo : {{ $photo->id_utilisateur }} </li>
 			                        <li class="list-group-item">Utilisateur : {{ $photo->id_habitat }} </li>
-			                        <!--<li class="list-group-item"> <a href="{{ route('profil.index', $user->id) }}" class="btn btn-primary">Voir</i>-->
+			                        <li class="list-group-item"> <a href="{{ route('profil.index', $user->id) }}" class="btn btn-primary">Voir</i>
 			                    </ul> 
 			                </div>
 			            </div> 
 
 			            @endforeach
 
-	</div>
+	</div> -->
 
 
 <div class="row card atypikcard">
@@ -107,7 +107,7 @@
 					<tr>
 						<td> {{ $type->nom }} </td>
 						<td>
-							<a href="#" class="btn btn-primary">
+							<a href="{{ route('habitat.deleteType', $type->id )}}" class="btn btn-primary">
 								Supprimer
 							</a>
 						</td>

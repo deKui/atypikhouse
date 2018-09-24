@@ -163,6 +163,9 @@ Route::middleware('auth')->group(function () {
     // Ajoute un nouveau type d'habitat
     Route::post('gerant/type/add', 'HabitatController@storeType')->name('habitat.storeType');
 
+    // Supprime un type
+    Route::get('gerant/delete/type/{id}', 'HabitatController@deleteType')->name('habitat.deleteType');
+
     // Mise à jour utilisateur active/ désactive
     Route::get('gerant/{id_utilisateur}', 'UserController@updateActiveDesactiveUser')->name('profil.gerantActiveDesactive');
 
@@ -175,10 +178,6 @@ Route::middleware('auth')->group(function () {
     // MAj utilisateur signale
     Route::get('profil/utilSignale/{id}', 'UserController@updateSignale')->name('profil.signaleUtil');
 
-    // Affichage du plannig
-
-    Route::get('planning', 'PlanningController@index')->name('planning.index');
-
     // Affichage de la page proprio
     Route::get('proprio/{id_utilisateur}', 'HabitatController@showHabitatProprio')->name('profil.proprio');
 
@@ -188,9 +187,10 @@ Route::middleware('auth')->group(function () {
     // Edit habitat
     Route::get('proprio/habitatEdit/{id}', 'HabitatController@edit')->name('habitat.edit');
 
-    //Update habitat
+    // Update habitat
     Route::put('proprio/habitatUpdate/{id}', 'HabitatController@update')->name('habitat.update');
 
+    // Affiche le planning
     Route::get('planning/{month}/{year}', 'PlanningController@index')->name('planning.index');
 
     Route::get('proprio/reservation/{id}', 'ReservationController@reservAccepterRefuser')->name('proprio.reservAccepterRefuser');
@@ -202,6 +202,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/messages/{user}', 'MessageController@show')->middleware('can:talkTo,user')->middleware('can:canTalk,user')->name('messages.show');
 
     // Enregistre un message
-    Route::post('/messages/{user}', 'MessageController@store')->middleware('can:talkTo,user');
+    Route::post('/messages/{user}', 'MessageController@store')->middleware('can:talkTo,user')->middleware('can:canTalk,user');
 
 });
