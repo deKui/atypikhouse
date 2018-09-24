@@ -31,11 +31,10 @@ class Reservation extends Model
      * @return array
      */
     public function getReservBetween(int $user, DateTime $start, DateTime $end) {
-        $reservations = Reservation::where('id_locataire', $user)
-                                    ->orWhere('id_proprietaire', $user)
-                                    ->where('date_fin', '<=', $end)
-                                    ->orWhere('date_debut', '>=', $start)
-                                    ->get();
+        
+        $reservations = Reservation::
+        whereRaw("((id_locataire = " .$user. " OR id_proprietaire = ".$user.") AND (date_fin <= " .$end->format('Y-m-d') . " OR date_debut >= " .$start->format('Y-m-d'). "))")
+        ->get();
     
         return $reservations; 
     }
@@ -59,7 +58,7 @@ class Reservation extends Model
 
             $tabjour = []; 
 
-            for ($i=1; $i < $nbjour + 1; $i++ ) { 
+            for ($i=0; $i < $nbjour; $i++ ) { 
                 $date = new DateTime($event->date_debut);
                 $date->add(new DateInterval('P'.$i.'D')); 
                 array_push($tabjour, $date->format('Y-m-d'));   
