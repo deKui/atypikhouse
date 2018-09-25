@@ -83,6 +83,9 @@
 											  	<li class="list-group-item">
 											  		<a href="{{ route('reservation.show', auth()->user()->id) }}"> {{ $event->habitats->ville}}</a>
 											  	</li>
+											  	<li class="list-group-item">
+											  		Proprietaire : <a href="{{ route('profil.show', $event->id_proprietaire) }}"> {{ $event->proprio->pseudo}}</a>
+											  	</li>
 											</ul>
 										</div>
 										<br>
