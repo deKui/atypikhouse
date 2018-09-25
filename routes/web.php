@@ -166,8 +166,11 @@ Route::middleware('auth')->group(function () {
     // Ajoute un nouveau type d'habitat
     Route::post('gerant/type/add', 'HabitatController@storeType')->name('habitat.storeType');
 
-    // Supprime un type
-    Route::get('gerant/delete/type/{id}', 'HabitatController@deleteType')->name('habitat.deleteType');
+    // Edit un type
+    Route::get('gerant/type/edit/{id}', 'HabitatController@editType')->name('habitat.editType');
+
+    // Update un type
+    Route::put('gerant/type/update/{id}', 'HabitatController@updateType')->name('habitat.updateType');
 
     // Mise à jour utilisateur active/ désactive
     Route::get('gerant/{id_utilisateur}', 'UserController@updateActiveDesactiveUser')->name('profil.gerantActiveDesactive');

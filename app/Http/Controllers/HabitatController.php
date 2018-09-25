@@ -257,6 +257,43 @@ class HabitatController extends Controller
 
 
     /**
+     * Affiche la page pour modifier un type d'habitat
+     */
+    public function editType($typeId) {
+        $typeHabitat = TypeHabitats::all();
+
+        $typeActuel = TypeHabitats::find($typeId);
+
+        //dd($typeActuel);
+
+        return view('habitat.editType', compact('typeHabitat', 'typeActuel'));
+    }
+
+
+    /**
+     * Modifie un type d'habitat
+     * @param  Request $request            
+     */
+    public function updateType(Request $request, $typeId) {
+        
+        $request->validate([
+            'typeHabitat' => 'required|string|max:255',
+        ]);
+
+        $typeActuel = TypeHabitats::find($typeId);
+
+        $typeActuel->update([
+            'nom' => $request->typeHabitat,
+            'slug' => str_slug($request['typeHabitat'], '-')
+        ]);
+
+        $typeActuel->save();
+
+        return redirect()->route('profil.gerant')->with('ok', __('Le type a bien été modifié'));
+    }
+
+
+    /**
      * Enregistre un nouveau type d'habitat
      * @param  Request $request            
      */
