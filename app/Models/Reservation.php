@@ -24,6 +24,36 @@ class Reservation extends Model
 
 
     /**
+     * Auteur : Lucas 
+     * Joint la table reservations et habitats
+     */
+    public function habitats()
+    {
+        return $this->belongsTo(Habitat::class, 'id_habitat');
+    }
+
+
+    /**
+     * Auteur : Lucas 
+     * Joint la table reservations et users
+     */
+    public function users()
+    {
+        return $this->belongsTo(User::class, 'id_locataire');
+    }
+
+
+    /**
+     * Auteur : Lucas 
+     * Joint la table reservations et users
+     */
+    public function proprio()
+    {
+        return $this->belongsTo(User::class, 'id_proprietaire');
+    }
+
+
+    /**
      * Récupère toutes les réservations entre 2 dates
      * @param int $user
      * @param DateTime $start
@@ -130,26 +160,6 @@ class Reservation extends Model
             }
 
         return $days;
-    }
-
-
-    /**
-     * Auteur : Lucas 
-     * Joint la table reservations et habitats
-     */
-    public function habitats()
-    {
-        return $this->belongsTo(Habitat::class, 'id_habitat');
-    }
-
-
-    /**
-     * Auteur : Lucas 
-     * Joint la table reservations et users
-     */
-    public function users()
-    {
-        return $this->belongsTo(User::class, 'id_locataire');
     }
 
 
