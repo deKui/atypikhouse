@@ -202,7 +202,7 @@
                                  @endgerant
                                 </ul>
                             </li>
-                            <div class="avatar" style="background-image:url({{ asset('../storage/app/public/' . Auth::user()->avatar) }});"></div>
+                            <div class="avatar" style="background-image:url({{ asset('storage/' . Auth::user()->avatar) }});"></div>
                         @endguest
                     </ul>
                 </div>

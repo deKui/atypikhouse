@@ -106,11 +106,6 @@
 			    @foreach($typeHabitats as $type)
 					<tr>
 						<td> {{ $type->nom }} </td>
-						<td>
-							<a href="{{ route('habitat.editType', $type->id )}}" class="btn btn-primary">
-								Modifier
-							</a>
-						</td>
 					</tr>
 
 			    @endforeach
