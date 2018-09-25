@@ -4,6 +4,11 @@
 
 <div class="container">
 	<div class="row">
+
+		<div class="col-md-12">
+			<h1> Vos conversations </h1>
+			<br>
+		</div>
 		
 		@include('messages.users', ['users' => $users, 'unread' => $unread])
 
