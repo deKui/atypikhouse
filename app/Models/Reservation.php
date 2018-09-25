@@ -89,13 +89,14 @@ class Reservation extends Model
 
         $days = []; 
 
+        // On boucle sur les réservations de l'habitat pour spécifier les dates non disponibles
         foreach ($reservations as $event) {
             $interval = (new DateTime($event->date_debut))->diff(new DateTime($event->date_fin));
             $nbjour = $interval->format('%d');
 
             $tabjour = []; 
 
-            for ($i=1; $i < $nbjour + 1; $i++ ) { 
+            for ($i=0; $i < $nbjour; $i++ ) { 
                 $date = new DateTime($event->date_debut);
                 $date->add(new DateInterval('P'.$i.'D')); 
                 array_push($tabjour, $date->format('Y-m-d'));   
@@ -104,10 +105,29 @@ class Reservation extends Model
             for ($i=0 ; $i < count($tabjour); $i++) {
 
                 if (!isset($days[$tabjour[$i]])) {
-                    $days[$tabjour[$i]] = [$event]; 
+                    $days[$tabjour[$i]] = ['nondispo']; 
                 }   
             }
         }
+
+        // On récupère maintenant toutes les dates libres entre la début et la fin de la disponibilité de l'habitat
+        $interval = (new DateTime($habitat->date_debut_dispo))->diff(new DateTime($habitat->date_fin_dispo));
+        $nbjour = $interval->format('%a');
+
+        $tabjour = []; 
+
+            for ($i=0; $i < $nbjour; $i++ ) { 
+                $date = new DateTime($habitat->date_debut_dispo);
+                $date->add(new DateInterval('P'.$i.'D')); 
+                array_push($tabjour, $date->format('Y-m-d'));   
+            }
+
+            for ($i=0 ; $i < count($tabjour); $i++) {
+
+                if (!isset($days[$tabjour[$i]])) {
+                    $days[$tabjour[$i]] = ['dispo']; 
+                }   
+            }
 
         return $days;
     }

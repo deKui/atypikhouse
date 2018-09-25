@@ -11,8 +11,7 @@
                     <img class="card-img-top" src="{{ asset('storage/' . $habitats->photo) }}">
 
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Nous sommes sur la page de cet habitat</li>
-                        <li class="list-group-item">Titre : {{ $habitats->titre }} </li>
+                        <li class="list-group-item">{{ $habitats->titre }} </li>
                         <li class="list-group-item">Description : {{ $habitats->description }} </li>
                         <li class="list-group-item">Propriétaire : <a href="{{ route('profil.show', $habitats->id_proprietaire) }}"> {{ $habitats->proprio->pseudo }} </a></li>
                         <li class="list-group-item">Type : {{ $habitats->type->nom }} </li>

@@ -79,3 +79,9 @@
 
 
 @endsection
+
+<script type="text/javascript">
+    
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCLiRP37J07HkPyQIQZbht_oP0_bUsuEes" async defer></script>

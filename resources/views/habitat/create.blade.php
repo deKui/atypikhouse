@@ -19,7 +19,7 @@
                             <div class="col-md-12">
                                 <select id="type_habitat" name="type_habitat" class="form-control">
 
-                                    @foreach($type_habitat as $type)
+                                    @foreach($typeHabitat as $type)
                                         <option value="{{ $type->id }}">{{ $type->nom }}</option>
                                     @endforeach
 

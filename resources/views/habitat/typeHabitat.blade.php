@@ -1,20 +1,32 @@
 @extends('layouts.app')
-
 @section('content')
-
-<div class="container">
-
+<main role="main">
+<div class="jumbotron">
+  <div class="container">
+    <img src="{{ asset('images/habitat_2.png') }}" width="25%">
+    <h2 class="display-3">{{ $typeActuel->nom }}</h2>
+    <br/>
+    <p>Découvrez tous nos logements de type {{ $typeActuel->nom }}
+    </p>
+  </div>
+</div>
+<hr>
+<div class="jumbotron">
+    <div class="container">
     <div class="row">
-
+        <div class="col-md-12">
+        <h2 class="display-3">Les logements</h2>
+        <br/>
+        </div>
+        <br/>
+        <br/>
             @foreach($habitats as $habitat)
-
             <div class="col-md-4">
                 <div class="card atypikcard">
-
                     <img class="card-img-top" src="{{ asset('storage/' . $habitat->photo) }}">
-
+                    
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item"> {{ $habitat->titre }} </li>
+                        <li class="list-group-item">{{ $habitat->titre }} </li>
                         <li class="list-group-item">Description : {{ $habitat->description }} </li>
                         <li class="list-group-item">Propriétaire : {{ $habitat->proprio->pseudo }} </li>
                         <li class="list-group-item">Type : {{ $habitat->type->nom }} </li>
@@ -27,12 +39,9 @@
                     </ul> 
                 </div>
             </div> 
-
             @endforeach
-
     </div>
-
+    </div> <!-- /container -->
 </div>
-
-
+</main>
 @endsection

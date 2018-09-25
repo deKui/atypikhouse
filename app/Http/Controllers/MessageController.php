@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 use App\Models\User;
+use App\Models\TypeHabitats;
 use App\Repositories\MessageRepository;
 use App\Http\Requests\MessageRequest;
 
@@ -33,11 +34,13 @@ class MessageController extends Controller
      */
     public function index() {
 
+        $typeHabitat = TypeHabitats::all();
+
     	$users = $this->repository->getConversations(Auth::id());
 
     	$unread = $this->repository->unreadCount(Auth::id());
 
-    	return view('messages.index', compact('users', 'unread'));
+    	return view('messages.index', compact('users', 'unread', 'typeHabitat'));
     }
 
 
@@ -47,6 +50,8 @@ class MessageController extends Controller
      * @return [type]       [description]
      */
     public function show(User $user) {
+
+        $typeHabitat = TypeHabitats::all();
 
     	$users = $this->repository->getConversations(Auth::id());
 
@@ -59,7 +64,7 @@ class MessageController extends Controller
     		unset($unread[$user->id]);
     	}
 
-    	return view('messages.show', compact('users', 'user', 'messages', 'unread'));
+    	return view('messages.show', compact('users', 'user', 'messages', 'unread', 'typeHabitat'));
     }
 
     /**

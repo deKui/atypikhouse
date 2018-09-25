@@ -91,6 +91,9 @@ Route::get('habitats', 'HabitatController@index')->name('habitat.index');
 // Affiche les dernières trouvailles
 Route::get('showLastHabitats', 'HabitatController@showLastHabitats')->name('showLastHabitats');
 
+// Affiche les habitats par type
+Route::get('type/{slug}', 'HabitatController@typeHabitat')->name('typeHabitat');
+
 // Affiche le planning pour un habitat
 Route::get('planning/habitat/{habitat}/{month}/{year}', 'PlanningController@show')->name('planning.show');
 

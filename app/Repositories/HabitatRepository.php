@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Models\User;
 use App\Models\Habitat;
+use App\Models\TypeHabitats;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -29,6 +30,15 @@ class HabitatRepository {
     	$habitat = $this->habitat->newQuery()->where('id', $id_habitat)->first();
 
         return $habitat;
+    }
+
+
+    public function getHabitatBySlug(string $slug) {
+    	$typeId = TypeHabitats::where('slug', $slug)->select('id')->first();
+
+    	$habitat = $this->habitat->newQuery()->where('id_type_habitat', $typeId->id)->get();
+
+    	return $habitat;
     }
     
 	
