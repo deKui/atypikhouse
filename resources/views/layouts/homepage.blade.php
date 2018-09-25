@@ -163,9 +163,9 @@
                         @else
                             <li class="nav-item"><a href="{{ route('showLastHabitats') }}" class="nav-link"> Dernières trouvailles </a></li>
                             <li class="nav-item"><a href="{{ route('behost') }}" class="nav-link"> Devenir hôte </a></li>
-                            <li class="nav-item">
+                            <!-- <li class="nav-item">
                                 <a href="{{ route('habitat.index') }}" class="nav-link"> Habitats </a>
-                            </li>
+                            </li> -->
 
                             <li class="nav-item dropdown">
                                 <a href="#" id="navbarDropdown" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
@@ -183,7 +183,7 @@
 									</li> 
 
                                     <li class="dropdown-item">
-                                        <!--<a href="{{ route('habitat.create') }}"> Enregistrer un habitat </a>-->
+                                        <!-- <a href="{{ route('habitat.create') }}"> Enregistrer un habitat </a> -->
                                         <a href="{{ route('profil.proprio', auth()->user()->id) }}"> Mes habitats </a>
                                     </li>
 
