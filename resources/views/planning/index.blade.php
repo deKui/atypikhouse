@@ -93,10 +93,10 @@
 											<ul class="list-group list-group-flush">
 											  	<li class="list-group-item"> Réservation </li>
 											  	<li class="list-group-item">
-											  		<a href="{{ route('reservation.show', auth()->user()->id) }}"> {{ $event->habitats->titre}}</a>
+											  		<a href="{{ route('profil.proprio', auth()->user()->id) }}"> {{ $event->habitats->titre}}</a>
 											  	</li>
 											  	<li class="list-group-item">
-											  		Locataire : <a href="{{ route('reservation.show', auth()->user()->id) }}"> {{ $event->users->pseudo}}</a>
+											  		Locataire : <a href="{{ route('profil.show', $event->id_locataire) }}"> {{ $event->users->pseudo}}</a>
 											  	</li>
 											</ul>
 										</div>

@@ -25,7 +25,7 @@ class HabitatRequest extends FormRequest
         return [
             'titre' => 'required|string|max:255',
             'description' => 'required|string|max:255',
-            'image' => 'required|image|max:10000|mimes:jpg,png',
+            'image' => 'required|image|max:10000',
             'adresse' => 'required|string|max:255',
             'code_postal' => 'required|regex:/\b\d{5}\b/',
             'ville' => 'required|string|max:255',

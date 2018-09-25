@@ -5,14 +5,13 @@
 <div class="container">
 
     <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-8">
                 <div class="card atypikcard">
 
                     <img class="card-img-top" src="{{ asset('storage/' . $habitats->photo) }}">
 
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Nous sommes sur la page de cet habitat</li>
-                        <li class="list-group-item">Titre : {{ $habitats->titre }} </li>
+                        <li class="list-group-item">{{ $habitats->titre }} </li>
                         <li class="list-group-item">Description : {{ $habitats->description }} </li>
                         <li class="list-group-item">Propriétaire : <a href="{{ route('profil.show', $habitats->id_proprietaire) }}"> {{ $habitats->proprio->pseudo }} </a></li>
                         <li class="list-group-item">Type : {{ $habitats->type->nom }} </li>
@@ -20,11 +19,75 @@
                         <li class="list-group-item">Lit(s) simple(s) : {{ $habitats->nb_lit_simple }} </li>
                         <li class="list-group-item">Lit(s) double(s) : {{ $habitats->nb_lit_double }} </li>
                         <li class="list-group-item">Prévu pour {{ $habitats->nb_personne_max }} personnes maximum </li>
-                        <li class="list-group-item">Disponibilité : Du {{ $habitats->date_debut_dispo }} au {{ $habitats->date_fin_dispo }} </li>
+                        <li class="list-group-item">
+                            <a href="{{ route('planning.show', [$habitats, intval(date('m')), intval(date('Y'))]) }}"> Disponibilités </a>
+                        </li>
                     </ul> 
 
                 </div>
             </div> 
+
+            @guest
+
+            <div class="col-md-4">
+                <div class="card atypikcard">
+                    <form method="GET" action="{{ route('reservation.create', ['habitat' => $habitats]) }}" enctype="multipart/form-data">
+                        {{ csrf_field() }}
+
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Prix par nuit : {{ $habitats->prix }} €</li>
+                            <li class="list-group-item">Arrivée :
+                                <input id="date_debut" type="date" class="form-control" name="date_debut" value="{{ $arrivee }}" 
+                                min="{{ date_create('now')->format('Y-m-d') }}" required>
+
+                                @if ($errors->has('date_debut'))
+                                    <span class="invalide-feedback text-danger">
+                                        <small>{{ $errors->first('date_debut') }}</small>
+                                    </span>
+                                @endif
+                            </li>
+
+                            <li class="list-group-item">Départ : 
+                                <input id="date_fin" type="date" class="form-control" name="date_fin" value="{{ $depart }}" required>
+
+                                @if ($errors->has('date_fin'))
+                                    <span class="invalide-feedback text-danger">
+                                        <small>{{ $errors->first('date_fin') }}</small>
+                                    </span>
+                                @endif
+                            </li>
+
+                            <li class="list-group-item">Nombre de voyageurs : 
+                                <input id="nb_personne" type="number" class="form-control" name="nb_personne" value="{{ $voyageurs }}" required>
+
+                                @if ($errors->has('nb_personne'))
+                                    <span class="invalide-feedback text-danger">
+                                        <small>{{ $errors->first('nb_personne') }}</small>
+                                    </span>
+                                @endif
+                            </li>
+
+                            <li id="prix" class="list-group-item">
+                                Prix : {{ $habitats->prix }} € x {{$duree}} nuit(s)
+                            </li>
+
+                            <li class="list-group-item">
+                                Total : {{$habitats->prix*$duree}} €
+                            </li>
+
+                            <li class="list-group-item"> 
+                                <button type="submit" class="btn btn-primary">
+                                    Réserver
+                                </button>
+                            </li>
+                        </ul> 
+                    </form>
+                </div>
+            </div>
+
+            @endguest
+
+            @auth
 
             @if ($habitats->id_proprietaire !== Auth()->user()->id)
 
@@ -85,6 +148,8 @@
             </div>
 
             @endif
+
+            @endauth
     </div>
     <br>
 
@@ -152,7 +217,7 @@
 
                 <div class="card">
                     <div class="card-header">
-                        {{ $avis->from->name }}
+                        {{ $avis->from->pseudo }}
                         <br>
                         @for ($i = 0; $i < $avis->note; $i++)
                             <i class="fas fa-star"></i>
@@ -165,6 +230,20 @@
                         </blockquote>
                     </div>
                 </div>
+
+                @auth
+
+                    @if ((auth()->user()->id) !== $avis->id_utilisateur)
+
+                        <div class="card-footer">
+                            <a href="{{ route('profil.signaleAvis', $avis->id) }}" class="btn btn-primary">Signaler</a>
+                        </div>
+                        
+                    @endif
+
+                    @endauth
+                
+                
                 <br>
 
                 @endforeach

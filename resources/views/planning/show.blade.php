@@ -75,12 +75,21 @@
 
 					    		@foreach ($events as $event)
 
-									<div class="location">
-										<ul class="list-group list-group-flush">
-											<li class="list-group-item">Non disponible</li>
-										</ul>
-									</div>
-									<br>
+									@if ($event === "dispo")
+										<div class="sejour">
+											<ul class="list-group list-group-flush">
+												<li class="list-group-item">Libre</li>
+											</ul>
+										</div>
+										<br>
+									@elseif ($event === "nondispo")
+										<div class="location">
+											<ul class="list-group list-group-flush">
+												<li class="list-group-item">Non Disponible</li>
+											</ul>
+										</div>
+										<br>
+									@endif
 
 					    		@endforeach
 

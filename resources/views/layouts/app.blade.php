@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
 <head>
@@ -26,7 +27,9 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm-12 col-lg-2 verti-center horiz-center">
-                    <a href="https://www.facebook.com/voyageavecatypik"><div class="facebook"></div></a>
+                    <a href="https://www.facebook.com/voyageavecatypik">
+                        <div class="facebook">
+                        </div></a>
                     <a href="https://www.instagram.com/atypik_house_voyage"><div class="instagram"></div></a>
                     </div>
                     <div class="col-sm-12 col-lg-8 verti-center horiz-center">
@@ -72,6 +75,18 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav verti-center">
                         <!-- Authentication Links -->
+                            <li class="nav-item dropdown">
+                                <a href="#" id="navbarDropdown" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
+                                    Type d'habitat <span class="caret"></span>
+                                </a>
+                                <div class="dropdown-menu">
+
+                                    @foreach($typeHabitat as $type)
+                                        <a class="dropdown-item" href="{{ route('typeHabitat', $type->slug) }}">{{ $type->nom }}</a>
+                                    @endforeach
+                                    
+                                </div>
+                            </li>
                         @guest
                             <li class="nav-item"><a href="{{ route('showLastHabitats') }}" class="nav-link"> Dernières trouvailles </a></li>
                             <li class="nav-item"><a href="{{ route('behost') }}" class="nav-link"> Devenir hôte </a></li>
@@ -79,9 +94,9 @@
                         @else
                             <li class="nav-item"><a href="{{ route('showLastHabitats') }}" class="nav-link"> Dernières trouvailles </a></li>
                             <li class="nav-item"><a href="{{ route('behost') }}" class="nav-link"> Devenir hôte </a></li>
-                            <li class="nav-item">
+                            <!-- <li class="nav-item">
                                 <a href="{{ route('habitat.index') }}" class="nav-link"> Habitats </a>
-                            </li>
+                            </li> -->
 
                             <li class="nav-item dropdown">
                                 <a href="#" id="navbarDropdown" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
@@ -99,7 +114,7 @@
 									</li> 
 
                                     <li class="dropdown-item">
-                                        <!--<a href="{{ route('habitat.create') }}"> Enregistrer un habitat </a>-->
+                                        <!-- <a href="{{ route('habitat.create') }}"> Enregistrer un habitat </a> -->
                                         <a href="{{ route('profil.proprio', auth()->user()->id) }}"> Mes habitats </a>
                                     </li>
 
@@ -120,7 +135,7 @@
 
                                 </ul>
                             </li>
-                            <div class="avatar" style="background-image:url({{ asset('../storage/app/public/' . Auth::user()->avatar) }});"></div>
+                            <div class="avatar" style="background-image:url({{ asset('storage/' . Auth::user()->avatar) }});"></div>
 
                         @endguest
                     </ul>

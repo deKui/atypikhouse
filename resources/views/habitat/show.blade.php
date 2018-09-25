@@ -153,6 +153,7 @@
             @endif
 
             @endauth
+            
     </div>
     <br>
 
@@ -236,11 +237,17 @@
                     </div>
 
                     <!-- VAL - L'utilisateur authentifié ne peux pas signaler son commentaire -->
+                    @auth
+
                     @if ((auth()->user()->id) !== $avis->id_utilisateur)
+
                         <div class="card-footer">
                             <a href="{{ route('profil.signaleAvis', $avis->id) }}" class="btn btn-primary">Signaler</a>
                         </div>
+                        
                     @endif
+
+                    @endauth
                 
                 <br>
 

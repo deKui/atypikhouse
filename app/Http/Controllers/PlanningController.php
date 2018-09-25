@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Planning;
 use App\Models\Habitat;
 use App\Models\Reservation;
+use App\Models\TypeHabitats;
 
 class PlanningController extends Controller
 {
@@ -19,6 +20,8 @@ class PlanningController extends Controller
 	 * @return Planning
 	 */
 	public function index(int $month, int $year) {
+
+		$typeHabitat = TypeHabitats::all();
 
 		$planning = new Planning($month, $year);
 
@@ -34,7 +37,7 @@ class PlanningController extends Controller
 
 		$reservations = $reservation->getReservBetweenByDayByUser(Auth::id(), $start, $end);
 
-    	return view('planning.index', compact('planning', 'start', 'weeks', 'reservations'));
+    	return view('planning.index', compact('planning', 'start', 'weeks', 'reservations', 'typeHabitat'));
     }
 
 
@@ -46,6 +49,8 @@ class PlanningController extends Controller
      * @return 
      */
     public function show(Habitat $habitat, int $month, int $year) {
+
+    	$typeHabitat = TypeHabitats::all();
 
 		$planning = new Planning($month, $year);
 
@@ -59,6 +64,6 @@ class PlanningController extends Controller
 
 		$reservations = $reservation->getReservByDayByHabitat($habitat);
 
-    	return view('planning.show', compact('habitat', 'planning', 'start', 'weeks', 'reservations'));
+    	return view('planning.show', compact('habitat', 'planning', 'start', 'weeks', 'reservations', 'typeHabitat'));
     }
 }

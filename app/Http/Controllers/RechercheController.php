@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use DateTime;
 use App\Http\Requests\RechercheRequest;
 use App\Models\Habitat;
+use App\Models\TypeHabitats;
 
 class RechercheController extends Controller
 {
@@ -16,6 +17,8 @@ class RechercheController extends Controller
      */
     public function index(RechercheRequest $request) 
     {
+        $typeHabitat = TypeHabitats::all();
+
         // recherche 
         $habitats = Habitat::where('ville', $request->destination)
                             ->where('nb_personne_max', '>=', $request->voyageurs)
@@ -44,6 +47,6 @@ class RechercheController extends Controller
         $date_debut = $date_debut->format('Y-m-j');
         $date_fin = $date_fin->format('Y-m-j');
 
-    	return view('recherche.recherche', compact('habitats', 'nb_personne', 'date_debut', 'date_fin', 'duree'));	
+    	return view('recherche.recherche', compact('habitats', 'nb_personne', 'date_debut', 'date_fin', 'duree', 'typeHabitat'));	
     }
 }

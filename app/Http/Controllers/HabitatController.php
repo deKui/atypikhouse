@@ -36,7 +36,9 @@ class HabitatController extends Controller
 
     	$habitats = Habitat::all();
 
-        return view('habitat.index', compact('habitats'));
+        $typeHabitat = TypeHabitats::all();
+
+        return view('habitat.index', compact('habitats', 'typeHabitat'));
     }
 
     /**
@@ -46,7 +48,26 @@ class HabitatController extends Controller
 
     	$habitats = Habitat::all();
 
-        return view('habitat.showLastHabitats', compact('habitats'));
+        $typeHabitat = TypeHabitats::all();
+
+        return view('habitat.showLastHabitats', compact('habitats', 'typeHabitat'));
+    }
+
+
+    /**
+     * Affiche les habitats par type
+     * @param  string $slug 
+     * @return               
+     */
+    public function typeHabitat(string $slug) {
+
+        $typeActuel = TypeHabitats::where('slug', $slug)->first();
+
+        $typeHabitat = TypeHabitats::all();
+
+        $habitats = $this->repo->getHabitatBySlug($slug);
+
+        return view('habitat.typeHabitat', compact('typeHabitat', 'habitats', 'typeActuel'));
     }
 
 
@@ -55,6 +76,8 @@ class HabitatController extends Controller
      * Affiche un seul habitat après un recherche
      */
     public function showAfterSearch(Habitat $habitat, $nb_personne, $date_debut, $date_fin, $duree) {
+
+        $typeHabitat = TypeHabitats::all();
         
     	$habitats = $this->repo->getHabitat($habitat->id);
         
@@ -73,7 +96,7 @@ class HabitatController extends Controller
         $arrivee = $date_debut;
         $depart = $date_fin;
 
-        return view('habitat.showAfterSearch', compact('habitats', 'messages', 'reservation', 'voyageurs', 'arrivee', 'depart', 'duree'));
+        return view('habitat.showAfterSearch', compact('habitats', 'messages', 'reservation', 'voyageurs', 'arrivee', 'depart', 'duree', 'typeHabitat'));
     }
 
 
@@ -81,6 +104,8 @@ class HabitatController extends Controller
      * Affiche un seul habitat
      */
     public function show(Habitat $habitat) {
+
+        $typeHabitat = TypeHabitats::all();
         
         $habitats = $this->repo->getHabitat($habitat->id);
         
@@ -94,7 +119,7 @@ class HabitatController extends Controller
             $reservation = $reservation->date_fin;
         }
 
-        return view('habitat.show', compact('habitats', 'messages', 'reservation'));
+        return view('habitat.show', compact('habitats', 'messages', 'reservation' ,'typeHabitat'));
     }
 
 
@@ -103,10 +128,9 @@ class HabitatController extends Controller
      */
     public function create()
     {
+        $typeHabitat = TypeHabitats::all();
 
-        $type_habitat = TypeHabitats::all();
-
-        return view('habitat.create', compact('type_habitat'));
+        return view('habitat.create', compact('typeHabitat'));
     }
 
 
@@ -146,11 +170,13 @@ class HabitatController extends Controller
     */
     public function showHabitatProprio(Reservation $reservation, $id_proprio){
 
+        $typeHabitat = TypeHabitats::all();
+
         $habitatProprio = $this->repo->getHabitatProprio($id_proprio);
 
         $reservationProprio = $reservation->getReservationProprio($id_proprio);
 
-        return view('habitat.proprio', compact('habitatProprio','reservationProprio'));
+        return view('habitat.proprio', compact('habitatProprio','reservationProprio', 'typeHabitat'));
     } 
 
     /**
@@ -176,9 +202,11 @@ class HabitatController extends Controller
      */
     public function edit($id_habitat) 
     {
+        $typeHabitat = TypeHabitats::all();
+
         $habitat = $this->repo->getHabitat($id_habitat);
 
-        return view('habitat.edit', compact('habitat'));    
+        return view('habitat.edit', compact('habitat', 'typeHabitat'));    
     }
 
 
@@ -218,12 +246,20 @@ class HabitatController extends Controller
     /************************************* Gérant ******************************************/
 
 
+    /**
+     * Affiche la page pour ajouter un type d'habitat
+     */
     public function addType() {
+        $typeHabitat = TypeHabitats::all();
 
-        return view('habitat.addType');
+        return view('habitat.addType', compact('typeHabitat'));
     }
 
 
+    /**
+     * Enregistre un nouveau type d'habitat
+     * @param  Request $request            
+     */
     public function storeType(Request $request) {
         
         $request->validate([

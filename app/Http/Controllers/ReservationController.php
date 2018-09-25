@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use DateTime;
 use App\Models\Habitat;
 use App\Models\Reservation;
+use App\Models\TypeHabitats;
 use App\Http\Requests\ReservationRequest;
 
 class ReservationController extends Controller
@@ -28,13 +29,15 @@ class ReservationController extends Controller
      */
     public function index($id_locataire)
     {
+        $typeHabitat = TypeHabitats::all();
+
         $reservPassee = $this->reservation->getReservationPassee($id_locataire);
 
         $reservEnCours = $this->reservation->getReservationEnCours($id_locataire);
         
         $reservFuture = $this->reservation->getReservationFuture($id_locataire);
 
-        return view('reservation.index', compact('reservPassee', 'reservFuture', 'reservEnCours'));
+        return view('reservation.index', compact('reservPassee', 'reservFuture', 'reservEnCours', 'typeHabitat'));
     }
 
     /**
@@ -52,6 +55,8 @@ class ReservationController extends Controller
      * @return            
      */
     public function create(Habitat $habitat, ReservationRequest $request) {
+
+        $typeHabitat = TypeHabitats::all();
 
         $id_locataire = Auth()->user()->id;
         $id_habitat = $habitat->id;
@@ -107,7 +112,7 @@ class ReservationController extends Controller
 
         //dd($prixtotal);
 
-        return view('reservation.create', compact('habitat', 'date_debut', 'date_fin', 'nbpersonne', 'duree', 'prixtotal'));
+        return view('reservation.create', compact('habitat', 'date_debut', 'date_fin', 'nbpersonne', 'duree', 'prixtotal', 'typeHabitat'));
 
 
     }

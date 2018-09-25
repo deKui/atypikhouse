@@ -33,13 +33,15 @@ class UserController extends Controller
      */
     public function index($id_user) 
     {
-    	if (Auth::id() !== intval($id_user)) {
+    	$typeHabitat = TypeHabitats::all();
+
+        if (Auth::id() !== intval($id_user)) {
             return redirect('/')->with(['ok' => __("Vous n'avez pas accès à cette page !")]);
         }
 
         $user = $this->user->getUser($id_user);
 
-        return view('profil.index', compact('user'));	
+        return view('profil.index', compact('user', 'typeHabitat'));	
     }
 
     /**
@@ -48,11 +50,13 @@ class UserController extends Controller
      */
     public function show(User $user) 
     {
+        $typeHabitat = TypeHabitats::all();
+
         $users = User::find($user->id);
 
         $reservations = Reservation::whereRaw("((id_locataire = " .$user->id. " AND id_proprietaire = " .Auth::id(). ") OR (id_locataire = " .Auth::id(). " AND id_proprietaire = " .$user->id. "))")->get();
         
-        return view('profil.show', compact('users', 'reservations'));
+        return view('profil.show', compact('users', 'reservations', 'typeHabitat'));
 
     }
 
@@ -62,13 +66,15 @@ class UserController extends Controller
      */
     public function noter(User $user) 
     {
+        $typeHabitat = TypeHabitats::all();
+
         $users = User::find($user->id);
 
         $notes = Note::where('from_id', Auth()->user()->id)->where('to_id', $user->id)->first();
 
         // Si aucune note de la part de l'utilisateur connecté pour l'user
         if ($notes == []) {
-            return view('profil.noter', compact('users'));
+            return view('profil.noter', compact('users', 'typeHabitat'));
 
         // Sinon cela veut dire que l'utilisateur connecté à déjà noté cet user        
         }else {
@@ -131,9 +137,11 @@ class UserController extends Controller
      */
     public function edit($id_user) 
     {
-    	$user = $this->user->getUser($id_user);
+    	$typeHabitat = TypeHabitats::all();
 
-    	return view('profil.edit', compact('user'));	
+        $user = $this->user->getUser($id_user);
+
+    	return view('profil.edit', compact('user', 'typeHabitat'));	
     }
 
 
@@ -187,7 +195,9 @@ class UserController extends Controller
      * Auteur : Valériane
      * Affiche les infos sur la page gérant
      */
-    public function showInfoGerant(){
+    public function showInfoGerant() {
+
+        $typeHabitat = TypeHabitats::all(); 
 
         $userSignale = $this->user->getUserSignale();
 
@@ -197,7 +207,7 @@ class UserController extends Controller
 
         $typeHabitats = TypeHabitats::all();
 
-        return view('profil.gerant', compact('userSignale','avisSignale','habitatSignale', 'typeHabitats')); 
+        return view('profil.gerant', compact('userSignale','avisSignale','habitatSignale', 'typeHabitats', 'typeHabitat')); 
 
     }
 

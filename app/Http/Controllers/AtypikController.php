@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\TypeHabitats;
 
 class AtypikController extends Controller
 {
@@ -23,7 +24,9 @@ class AtypikController extends Controller
      */
     public function showcgu()
     {
-        return view('atypik.cgu');
+        $typeHabitat = TypeHabitats::all();
+
+        return view('atypik.cgu', compact('typeHabitat'));
     }
 
     /**
@@ -33,7 +36,9 @@ class AtypikController extends Controller
      */
     public function showcgv()
     {
-        return view('atypik.cgv');
+        $typeHabitat = TypeHabitats::all();
+
+        return view('atypik.cgv', compact('typeHabitat'));
     }
 
     /**
@@ -43,7 +48,9 @@ class AtypikController extends Controller
      */
     public function showlegal()
     {
-        return view('atypik.legal');
+        $typeHabitat = TypeHabitats::all();
+
+        return view('atypik.legal', compact('typeHabitat'));
     }
 
     /**
@@ -53,7 +60,9 @@ class AtypikController extends Controller
      */
     public function showcontact()
     {
-        return view('atypik.contact');
+        $typeHabitat = TypeHabitats::all();
+
+        return view('atypik.contact', compact('typeHabitat'));
     }
 
     /**
@@ -63,7 +72,9 @@ class AtypikController extends Controller
      */
     public function showabout()
     {
-        return view('atypik.about');
+        $typeHabitat = TypeHabitats::all();
+
+        return view('atypik.about', compact('typeHabitat'));
     }
 
 
@@ -74,6 +85,8 @@ class AtypikController extends Controller
      */
     public function showbehost()
     {
-        return view('atypik.behost');
+        $typeHabitat = TypeHabitats::all();
+
+        return view('atypik.behost', compact('typeHabitat'));
     }
 }
