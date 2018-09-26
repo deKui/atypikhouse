@@ -11,8 +11,9 @@
 
 			<div class="row justify-content-md-center">
 
-				<div class="col-md-4">
-					<img class="card-img" src="{{ asset('storage/' . $user->avatar) }}">
+				<div class="col-md-4 atypikcard">
+					<img class="card-img" style="background-image:url({{ asset('storage/' . $user->avatar) }})">
+					<br/> <br/><br/>
 					<input id="avatar" type="file" class="form-control" name="avatar" required>
 
 					@if ($errors->has('avatar'))
@@ -22,7 +23,7 @@
 					@endif
 				</div>
 
-				<div class="card atypikcard col-md-6">
+				<div class="card atypikcard2 col-md-6">
 
 					<div class="card-body">
 						<ul class="list-group list-group-flush">
