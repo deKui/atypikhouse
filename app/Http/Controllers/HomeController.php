@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Habitat;
+use App\Models\TypeHabitats;
 
 class HomeController extends Controller
 {
@@ -24,6 +25,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $typeHabitat = TypeHabitats::all();
+
+        return view('home', compact('typeHabitat'));
     }
 }

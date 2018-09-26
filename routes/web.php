@@ -91,6 +91,12 @@ Route::get('habitats', 'HabitatController@index')->name('habitat.index');
 // Affiche les dernières trouvailles
 Route::get('showLastHabitats', 'HabitatController@showLastHabitats')->name('showLastHabitats');
 
+// Affiche les habitats par type
+Route::get('type/{slug}', 'HabitatController@typeHabitat')->name('typeHabitat');
+
+// Affiche le planning pour un habitat
+Route::get('planning/habitat/{habitat}/{month}/{year}', 'PlanningController@show')->name('planning.show');
+
 // Accessible uniquement aux users connectés
 Route::middleware('auth')->group(function () {
 
@@ -129,7 +135,13 @@ Route::middleware('auth')->group(function () {
     ]);
 
     // Réserver un habitat
-	Route::post('reserver/{habitat}','ReservationController@create')->name('reservation.create');
+	Route::get('reserver/{habitat}','ReservationController@create')->name('reservation.create');
+
+	// Payer avec paypal
+	Route::get('paypal/{habitat}/{montant}/{date_debut}/{date_fin}', 'PaypalController@payWithPaypal')->name('paypal');
+
+	// Status du paiement
+	Route::get('status/{habitat}/{montant}/{date_debut}/{date_fin}', 'PaypalController@getPaymentStatus')->name('status');
 	
 	// Affiche une réservation via son id ?
 	Route::get('reservation/{id}','ReservationController@index')->name('reservation.index');
@@ -148,6 +160,12 @@ Route::middleware('auth')->group(function () {
     // Accès à la page du gérant
     Route::get('gerant', 'UserController@showInfoGerant')->name('profil.gerant');
 
+    // Page pour l'ajout d'un type d'habitat
+    Route::get('gerant/type', 'HabitatController@addType')->name('habitat.addType');
+
+    // Ajoute un nouveau type d'habitat
+    Route::post('gerant/type/add', 'HabitatController@storeType')->name('habitat.storeType');
+
     // Mise à jour utilisateur active/ désactive
     Route::get('gerant/{id_utilisateur}', 'UserController@updateActiveDesactiveUser')->name('profil.gerantActiveDesactive');
 
@@ -160,16 +178,30 @@ Route::middleware('auth')->group(function () {
     // MAj utilisateur signale
     Route::get('profil/utilSignale/{id}', 'UserController@updateSignale')->name('profil.signaleUtil');
 
-    // Affichage du plannig
+    // Affichage de la page proprio
+    Route::get('proprio/{id_utilisateur}', 'HabitatController@showHabitatProprio')->name('profil.proprio');
+
+    // Supprime habitat
+    Route::get('proprio/habitat/{id}', 'HabitatController@delete')->name('habitat.delete');
+
+    // Edit habitat
+    Route::get('proprio/habitatEdit/{id}', 'HabitatController@edit')->name('habitat.edit');
+
+    // Update habitat
+    Route::put('proprio/habitatUpdate/{id}', 'HabitatController@update')->name('habitat.update');
+
+    // Affiche le planning
     Route::get('planning/{month}/{year}', 'PlanningController@index')->name('planning.index');
+
+    Route::get('proprio/reservation/{id}', 'ReservationController@reservAccepterRefuser')->name('proprio.reservAccepterRefuser');
 
     // Affiche toutes les conversations
     Route::get('/messages', 'MessageController@index')->name('messages');
 
     // Affiche une conversations via son id
-    Route::get('/messages/{user}', 'MessageController@show')->middleware('can:talkTo,user')->name('messages.show');
+    Route::get('/messages/{user}', 'MessageController@show')->middleware('can:talkTo,user')->middleware('can:canTalk,user')->name('messages.show');
 
     // Enregistre un message
-    Route::post('/messages/{user}', 'MessageController@store')->middleware('can:talkTo,user');
+    Route::post('/messages/{user}', 'MessageController@store')->middleware('can:talkTo,user')->middleware('can:canTalk,user');
 
 });

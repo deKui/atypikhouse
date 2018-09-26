@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 use App\Models\Planning;
+use App\Models\Habitat;
 use App\Models\Reservation;
+use App\Models\TypeHabitats;
 
 class PlanningController extends Controller
 {
@@ -16,11 +19,13 @@ class PlanningController extends Controller
 	 * @param  int $year
 	 * @return Planning
 	 */
-	public function index($month, $year) {
+	public function index(int $month, int $year) {
+
+		$typeHabitat = TypeHabitats::all();
 
 		$planning = new Planning($month, $year);
 
-		$reservations = new Reservation();
+		$reservation = new Reservation();
 
 		$start = $planning->getStartingDay();
 
@@ -30,10 +35,35 @@ class PlanningController extends Controller
 
 		$end = (clone $start)->modify('+' . (6 + 7 * ($weeks -1)) . 'days');
 
-		$reservations_start = $reservations->getReservBetweenByStartingDay($start, $end);
+		$reservations = $reservation->getReservBetweenByDayByUser(Auth::id(), $start, $end);
 
-		$reservations_end = $reservations->getReservBetweenByEndingDay($start, $end);
+    	return view('planning.index', compact('planning', 'start', 'weeks', 'reservations', 'typeHabitat'));
+    }
 
-    	return view('planning.index', compact('planning', 'start', 'weeks', 'reservations_start', 'reservations_end'));
+
+    /**
+     * Affiche le calendrier pour un habitat
+     * @param  Habitat $habitat [description]
+     * @param  int     $month   [description]
+     * @param  int     $year    [description]
+     * @return 
+     */
+    public function show(Habitat $habitat, int $month, int $year) {
+
+    	$typeHabitat = TypeHabitats::all();
+
+		$planning = new Planning($month, $year);
+
+		$weeks = $planning->getWeeks();
+
+		$reservation = new Reservation();
+
+		$start = $planning->getStartingDay();
+
+		$start = $start->format('N') === '1' ? $start : $planning->getStartingDay()->modify('last monday');
+
+		$reservations = $reservation->getReservByDayByHabitat($habitat);
+
+    	return view('planning.show', compact('habitat', 'planning', 'start', 'weeks', 'reservations', 'typeHabitat'));
     }
 }

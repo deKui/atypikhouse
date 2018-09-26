@@ -16,11 +16,14 @@ class CreateReservationsTable extends Migration
         Schema::create('reservations', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('id_locataire')->unsigned();
+            $table->integer('id_proprietaire')->unsigned();
             $table->integer('id_habitat')->unsigned();
             $table->date('date_debut');
             $table->date('date_fin');
             $table->float('montant');
+            $table->string('statut')->default('accepted');;
             $table->foreign('id_locataire')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('id_proprietaire')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('id_habitat')->references('id')->on('habitats')->onDelete('cascade');
             $table->timestamps();
         });
@@ -35,6 +38,10 @@ class CreateReservationsTable extends Migration
     {
         Schema::table('reservations', function(Blueprint $table) {
             $table->dropForeign('reservations_id_locataire_foreign');
+        });
+
+        Schema::table('reservations', function(Blueprint $table) {
+            $table->dropForeign('reservations_id_proprietaire_foreign');
         });
 
         Schema::table('reservations', function(Blueprint $table) {

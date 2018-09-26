@@ -39,6 +39,31 @@ class Habitat extends Model
         return $this->belongsTo(TypeHabitats::class, 'id_type_habitat');
     }
 
+    /** 
+    * Auteur : Valériane
+    *  Retourne les habitats d'un propriétaire
+    */
+    public function getHabitatProprio($id_proprietaire)
+    {
+        $habitatProprio = Habitat::where('id_proprietaire', $id_proprietaire)->get();
+
+        return $habitatProprio;
+    }
+
+
+    /** 
+    * Auteur : Valériane
+    *  Retourne les habitats d'un propriétaire
+    */
+    public function getHabitat($id_habitat)
+    {
+        $habitat = Habitat::all();
+
+        return $habitat;
+    }
+
+
+
 
 
 }

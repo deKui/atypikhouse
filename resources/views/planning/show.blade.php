@@ -42,8 +42,8 @@
         	<div class="d-flex flex-row align-items-center justify-content-between mx-ms-3">
         		<h1> {{ $planning->toString() }} </h1>
         		<div>
-        			<a href="{{ route('planning.index', [$planning->previousMonth()->month, $planning->previousMonth()->year]) }}" class="btn btn-primary"> &lt; </a>  
-        			<a href="{{ route('planning.index', [$planning->nextMonth()->month, $planning->nextMonth()->year]) }}" class="btn btn-primary"> &gt; </a>  
+        			<a href="{{ route('planning.show', [$habitat, $planning->previousMonth()->month, $planning->previousMonth()->year]) }}" class="btn btn-primary"> &lt; </a>  
+        			<a href="{{ route('planning.show', [$habitat, $planning->nextMonth()->month, $planning->nextMonth()->year]) }}" class="btn btn-primary"> &gt; </a>  
         		</div>
         	</div>
 		
@@ -74,37 +74,21 @@
 					    		<br>
 
 					    		@foreach ($events as $event)
-									
-									@if ($event->id_locataire == Auth()->user()->id)
 
+									@if ($event === "dispo")
 										<div class="sejour">
 											<ul class="list-group list-group-flush">
-											  	<li class="list-group-item">Séjour</li>
-											  	<li class="list-group-item">
-											  		<a href="{{ route('reservation.show', auth()->user()->id) }}"> {{ $event->habitats->ville}}</a>
-											  	</li>
-											  	<li class="list-group-item">
-											  		Proprietaire : <a href="{{ route('profil.show', $event->id_proprietaire) }}"> {{ $event->proprio->pseudo}}</a>
-											  	</li>
+												<li class="list-group-item">Libre</li>
 											</ul>
 										</div>
 										<br>
-									
-									@else
-
+									@elseif ($event === "nondispo")
 										<div class="location">
 											<ul class="list-group list-group-flush">
-											  	<li class="list-group-item"> Réservation </li>
-											  	<li class="list-group-item">
-											  		<a href="{{ route('profil.proprio', auth()->user()->id) }}"> {{ $event->habitats->titre}}</a>
-											  	</li>
-											  	<li class="list-group-item">
-											  		Locataire : <a href="{{ route('profil.show', $event->id_locataire) }}"> {{ $event->users->pseudo}}</a>
-											  	</li>
+												<li class="list-group-item">Non Disponible</li>
 											</ul>
 										</div>
 										<br>
-
 									@endif
 
 					    		@endforeach
@@ -115,6 +99,9 @@
 				    </tr>
 				@endfor
 			</table>
+
+			<h3> <a href="{{ route('habitat.show', $habitat->id) }}"> Retour à la page du logement </a> </h3>
+
 		</div>
 	</div>
 </div>

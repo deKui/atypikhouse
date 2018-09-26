@@ -33,7 +33,7 @@ class HabitatRequest extends FormRequest
             'nb_lit_double' => 'required|integer',
             'nb_personne_max' => 'required|integer',
             'date_debut_dispo' => 'required|date_format:Y-m-d',
-            'date_fin_dispo' => 'required|date_format:Y-m-d',
+            'date_fin_dispo' => 'required|date_format:Y-m-d|after:date_debut_dispo',
             'prix' => 'required|integer',
         ];
     }

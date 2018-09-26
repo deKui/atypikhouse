@@ -71,7 +71,7 @@
 </div>
 
 
-<div class="row card atypikcard">
+<!-- <div class="row card atypikcard">
 				<div class="card-header"><h3>Dernieres photos signalées : </h3></div>
 
 			            @foreach($habitatSignale as $photo)
@@ -83,13 +83,36 @@
 			                    	<li class="list-group-item"><img class="card-img2" style="background-image:url({{ asset('storage/' . $photo->photo) }})"></li>
 			                        <li class="list-group-item">Photo : {{ $photo->id_utilisateur }} </li>
 			                        <li class="list-group-item">Utilisateur : {{ $photo->id_habitat }} </li>
-			                        <!--<li class="list-group-item"> <a href="{{ route('profil.index', $user->id) }}" class="btn btn-primary">Voir</i>-->
+			                        <li class="list-group-item"> <a href="{{ route('profil.index', $user->id) }}" class="btn btn-primary">Voir</i>
 			                    </ul> 
 			                </div>
 			            </div> 
 
 			            @endforeach
 
-	</div>	
+	</div> -->
+
+
+<div class="row card atypikcard">
+	<div class="card-header">
+		<h3> Types d'habitats </h3>
+		<a href="{{ route('habitat.addType') }}" class="btn btn-primary"> Ajouter </a>
+
+	</div>
+
+		<table class="table table-striped">
+			<tbody>
+
+			    @foreach($typeHabitats as $type)
+					<tr>
+						<td> {{ $type->nom }} </td>
+					</tr>
+
+			    @endforeach
+
+			</tbody>
+		</table>
+	</div>
+</div>		
 
 @endsection

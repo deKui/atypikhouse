@@ -36,7 +36,9 @@ class HabitatController extends Controller
 
     	$habitats = Habitat::all();
 
-        return view('habitat.index', compact('habitats'));
+        $typeHabitat = TypeHabitats::all();
+
+        return view('habitat.index', compact('habitats', 'typeHabitat'));
     }
 
     /**
@@ -44,8 +46,28 @@ class HabitatController extends Controller
      */
     public function showLastHabitats() {
 
-        $habitats = Habitat::all();
-        return view('habitat.showLastHabitats', compact('habitats','message'));
+    	$habitats = Habitat::all();
+
+        $typeHabitat = TypeHabitats::all();
+
+        return view('habitat.showLastHabitats', compact('habitats', 'typeHabitat'));
+    }
+
+
+    /**
+     * Affiche les habitats par type
+     * @param  string $slug 
+     * @return               
+     */
+    public function typeHabitat(string $slug) {
+
+        $typeActuel = TypeHabitats::where('slug', $slug)->first();
+
+        $typeHabitat = TypeHabitats::all();
+
+        $habitats = $this->repo->getHabitatBySlug($slug);
+
+        return view('habitat.typeHabitat', compact('typeHabitat', 'habitats', 'typeActuel'));
     }
 
 
@@ -54,6 +76,8 @@ class HabitatController extends Controller
      * Affiche un seul habitat après un recherche
      */
     public function showAfterSearch(Habitat $habitat, $nb_personne, $date_debut, $date_fin, $duree) {
+
+        $typeHabitat = TypeHabitats::all();
         
     	$habitats = $this->repo->getHabitat($habitat->id);
         
@@ -72,7 +96,7 @@ class HabitatController extends Controller
         $arrivee = $date_debut;
         $depart = $date_fin;
 
-        return view('habitat.showAfterSearch', compact('habitats', 'messages', 'reservation', 'voyageurs', 'arrivee', 'depart', 'duree'));
+        return view('habitat.showAfterSearch', compact('habitats', 'messages', 'reservation', 'voyageurs', 'arrivee', 'depart', 'duree', 'typeHabitat'));
     }
 
 
@@ -80,6 +104,8 @@ class HabitatController extends Controller
      * Affiche un seul habitat
      */
     public function show(Habitat $habitat) {
+
+        $typeHabitat = TypeHabitats::all();
         
         $habitats = $this->repo->getHabitat($habitat->id);
         
@@ -93,7 +119,7 @@ class HabitatController extends Controller
             $reservation = $reservation->date_fin;
         }
 
-        return view('habitat.show', compact('habitats', 'messages', 'reservation'));
+        return view('habitat.show', compact('habitats', 'messages', 'reservation' ,'typeHabitat'));
     }
 
 
@@ -102,10 +128,9 @@ class HabitatController extends Controller
      */
     public function create()
     {
+        $typeHabitat = TypeHabitats::all();
 
-        $type_habitat = TypeHabitats::all();
-
-        return view('habitat.create', compact('type_habitat'));
+        return view('habitat.create', compact('typeHabitat'));
     }
 
 
@@ -139,13 +164,114 @@ class HabitatController extends Controller
     }
 
 
-	/* ATT - Mettre le nom de de la variable pareil que dans (compact) */
-	
-    public function showAllProprietaire($id_proprietaire){
+    /* 
+     * Auteur : Valériane
+     * Récupére les habitats en fonction du propriétaire
+    */
+    public function showHabitatProprio(Reservation $reservation, $id_proprio){
 
-         $habitatProprio = $this->repo->getHabitatProprio($id_proprietaire);
+        $typeHabitat = TypeHabitats::all();
 
-        return view('habitat.showAllProprietaire', compact('habitatProprio'));
+        $habitatProprio = $this->repo->getHabitatProprio($id_proprio);
+
+        $reservationProprio = $reservation->getReservationProprio($id_proprio);
+
+        return view('habitat.proprio', compact('habitatProprio','reservationProprio', 'typeHabitat'));
+    } 
+
+    /**
+     * Auteur : Valériane
+     * Supprime un habitat
+     */
+    public function delete($id_habitat){
+
+        $proprio = Auth::user()->id;
+
+        $habitat = Habitat::find($id_habitat);
+        $habitat->delete($id_habitat);
+
+        //return redirect('proprio/' + $proprio); 
+
+        return redirect(route('profil.proprio', ['id_utilisateur' => $proprio]));
+
+    }
+
+    /**
+     * Auteur : Valériane
+     * Affiche la page pour éditer un habitat
+     */
+    public function edit($id_habitat) 
+    {
+        $typeHabitat = TypeHabitats::all();
+
+        $habitat = $this->repo->getHabitat($id_habitat);
+
+        return view('habitat.edit', compact('habitat', 'typeHabitat'));    
+    }
+
+
+    /**
+     * Auteur : Valériane
+     * Mise à jour d'un un habitat
+     */
+    public function update(Request $request, $id_habitat) 
+    {
+
+        $proprio = Auth::user()->id;
+
+        $habitat = $this->repo->getHabitat($id_habitat);
+
+        $photo = Storage::disk('public')->put('', $request->file('photo'));
+        
+        // on remplace les anciens champs par les nouveaux dans la bdd
+        $habitat->update([
+            'titre' => $request->titre,
+            'description' => $request->description,
+            'photo' => $photo,
+            'adresse' => $request->adresse,
+            'code_postal' => $request->code_postal,
+            'ville' => $request->ville,
+            'nb_lit_simple' => $request->nb_lit_simple,
+            'nb_lit_double' => $request->nb_lit_double,
+            'nb_personne_max' => $request->nb_personne_max,
+        ]);
+        
+        // Enregistre les modifications de la bdd
+        $habitat->save();
+
+        return redirect(route('profil.proprio', ['id_utilisateur' => $proprio]));
+    }
+
+
+    /************************************* Gérant ******************************************/
+
+
+    /**
+     * Affiche la page pour ajouter un type d'habitat
+     */
+    public function addType() {
+        $typeHabitat = TypeHabitats::all();
+
+        return view('habitat.addType', compact('typeHabitat'));
+    }
+
+
+    /**
+     * Enregistre un nouveau type d'habitat
+     * @param  Request $request            
+     */
+    public function storeType(Request $request) {
+        
+        $request->validate([
+            'typeHabitat' => 'required|string|max:255',
+        ]);
+
+        TypeHabitats::create([
+            'nom' => $request->typeHabitat,
+            'slug' => str_slug($request['typeHabitat'], '-')
+        ]);
+
+        return redirect()->route('profil.gerant')->with('ok', __('Le type a bien été ajouté'));
     }
 
 }
