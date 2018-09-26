@@ -6,7 +6,7 @@
 	<div class="container">
 		<div class="row justify-content-md-center">
 			<div class="col-md-4">
-				<div class="card atypikcard">
+				<div class="card atypikcard2">
 					<form method="POST" action="{{ route('profil.eval', $users->id) }}">
 	            		{{ csrf_field() }}
 
