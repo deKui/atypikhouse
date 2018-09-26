@@ -8,7 +8,7 @@
 <!-- Faire des foreach pour afficher les différentes infos -->
 			 <div class="row card atypikcard2">
 
-			 	<div class="card-header"><h3>Derniers utilisateurs signalés : </h3></div>
+			 	<div class="card-header"><h4>Derniers utilisateurs signalés : </h4></div>
 
 				<table class="table table-striped">
 				  <thead>
@@ -41,8 +41,8 @@
 
 </div>
 
-<div class="row card atypikcard">
-			<div class="card-header"><h3>Derniers avis signalés : </h3></div>
+<div class="row card atypikcard2">
+			<div class="card-header"><h4>Derniers avis signalés : </h4></div>
 
 
 				<table class="table table-striped">
@@ -93,9 +93,9 @@
 	</div> -->
 
 
-<div class="row card atypikcard">
+<div class="row card atypikcard2">
 	<div class="card-header">
-		<h3> Types d'habitats </h3>
+		<h4> Types d'habitats </h4>
 		<a href="{{ route('habitat.addType') }}" class="btn btn-primary"> Ajouter </a>
 
 	</div>
