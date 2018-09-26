@@ -6,7 +6,7 @@
 	<div class="container">
 		<div class="row justify-content-md-center">
 			<div class="col-md-10">
-				<div class="card atypikcard">
+				<div class="card atypikcard2">
 				<div class="card-header"><h4>Informations personnelles</h4></div>
 					<div class="card-body">
 						<ul class="list-group list-group-flush">

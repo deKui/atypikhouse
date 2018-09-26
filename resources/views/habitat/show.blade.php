@@ -9,21 +9,22 @@
 
                 <!-- Affichage des informations de l'habitat -->
 
-                <div class="card atypikcard">
-                    <img class="card-img-top" src="{{ asset('storage/' . $habitats->photo) }}">
+                <div class="card atypikcard2">
+                    <img class="card-img2" style="background-image:url({{ asset('storage/' . $habitats->photo) }})">
 
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Titre : {{ $habitats->titre }} </li>
-                        <li class="list-group-item">Description : {{ $habitats->description }} </li>
-                        <li class="list-group-item">Propriétaire : <a href="{{ route('profil.show', $habitats->id_proprietaire) }}"> {{ $habitats->proprio->pseudo }} </a></li>
-                        <li class="list-group-item">Type : {{ $habitats->type->nom }} </li>
-                        <li class="list-group-item">Adresse : {{ $habitats->adresse }} {{ $habitats->code_postal }} {{ $habitats->ville }} </li>
-                        <li class="list-group-item">Lit(s) simple(s) : {{ $habitats->nb_lit_simple }} </li>
-                        <li class="list-group-item">Lit(s) double(s) : {{ $habitats->nb_lit_double }} </li>
-                        <li class="list-group-item">Prévu pour {{ $habitats->nb_personne_max }} personnes maximum </li>
-                        <li class="list-group-item">Disponibilité : Du {{ $habitats->date_debut_dispo }} au {{ $habitats->date_fin_dispo }} </li>
+                        <h4 class="logement-titre ">{{ $habitats->titre }}</h4>
+                        <p class="logement-description">{{ $habitats->description }} </p>
+                        <br/>
+                        <br/>
+                        <h4 class="logement-titre ">Caractéristiques</h4>
+                        <span class="label logement-label">Propriétaire : <a href="{{ route('profil.show', $habitats->id_proprietaire) }}"> {{ $habitats->proprio->pseudo }} </a></span>
+                        <span class="label logement-label">Type : {{ $habitats->type->nom }} </span>
+                        <span class="label logement-label">Adresse : {{ $habitats->adresse }} {{ $habitats->code_postal }} {{ $habitats->ville }} </span>
+                        <span class="label logement-label">Lit(s) simple(s) : {{ $habitats->nb_lit_simple }} </span>
+                        <span class="label logement-label">Lit(s) double(s) : {{ $habitats->nb_lit_double }} </span>
+                        <span class="label logement-label">Prévu pour {{ $habitats->nb_personne_max }} personnes maximum </span>
+                        <span class="label logement-label">Disponibilité : Du {{ $habitats->date_debut_dispo }} au {{ $habitats->date_fin_dispo }} </span>
                         
-                    </ul> 
 
                 </div>
             </div> 
@@ -80,6 +81,13 @@
                             </li>
                         </ul> 
                     </form>
+                </div>
+                <div class="card atypikcard">
+                    <img class="card-img" style="background-image:url({{ asset('storage/' . $habitats->proprio->avatar) }})">
+                    <div class="card-header">
+                        <h3 style="text-align:center;">Votre hôte</h3>
+                    <span class="label label-default atypik-badge2"><a href="{{ route('profil.show', $habitats->id_proprietaire) }}">{{ $habitats->proprio->pseudo }}</a></span>
+                    </div>
                 </div>
             </div>
     </div>

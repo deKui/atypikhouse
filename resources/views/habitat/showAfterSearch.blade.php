@@ -8,7 +8,7 @@
             <div class="col-md-4">
                 <div class="card atypikcard">
 
-                    <img class="card-img-top" src="{{ asset('storage/' . $habitats->photo) }}">
+                    <img class="card-img2" style="background-image:url({{ asset('storage/' . $habitats->photo) }})">
 
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">Nous sommes sur la page de cet habitat</li>

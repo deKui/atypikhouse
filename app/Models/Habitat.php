@@ -29,6 +29,7 @@ class Habitat extends Model
         return $this->belongsTo(User::class, 'id_proprietaire');
     }
 
+    
     /**
      * Auteur : Lucas 
      * Obtient le type d'un habitat

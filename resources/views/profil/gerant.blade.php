@@ -6,7 +6,7 @@
 	<div class="container">
 
 <!-- Faire des foreach pour afficher les différentes infos -->
-			 <div class="row card atypikcard">
+			 <div class="row card atypikcard2">
 
 			 	<div class="card-header"><h3>Derniers utilisateurs signalés : </h3></div>
 
@@ -24,7 +24,7 @@
 
 			            @foreach($userSignale as $user)
 							    <tr>
-							      <td><img class="card-img" style="width:10%" src="{{ asset('storage/' . $user->avatar) }}"></td>
+							      <td><img class="card-img" style="width:10%" style="background-image:url({{ asset('storage/' . $user->avatar) }})"></td>
 							      <td> {{ $user->pseudo }} </td>
 							      <td> {{ $user->description }} </td>
 									<td><a href="{{ route('profil.index', $user->id) }}" class="btn btn-primary atypikbutton">Voir</a></td>
@@ -80,7 +80,7 @@
 			                <div class="card">
 
 			                    <ul class="list-group list-group-flush">
-			                    	<li class="list-group-item"><img class="card-img-top" src="{{ asset('storage/' . $photo->photo) }}"></li>
+			                    	<li class="list-group-item"><img class="card-img2" style="background-image:url({{ asset('storage/' . $photo->photo) }})"></li>
 			                        <li class="list-group-item">Photo : {{ $photo->id_utilisateur }} </li>
 			                        <li class="list-group-item">Utilisateur : {{ $photo->id_habitat }} </li>
 			                        <!--<li class="list-group-item"> <a href="{{ route('profil.index', $user->id) }}" class="btn btn-primary">Voir</i>-->

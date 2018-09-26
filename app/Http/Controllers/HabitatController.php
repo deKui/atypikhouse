@@ -44,9 +44,8 @@ class HabitatController extends Controller
      */
     public function showLastHabitats() {
 
-    	$habitats = Habitat::all();
-
-        return view('habitat.showLastHabitats', compact('habitats'));
+        $habitats = Habitat::all();
+        return view('habitat.showLastHabitats', compact('habitats','message'));
     }
 
 
