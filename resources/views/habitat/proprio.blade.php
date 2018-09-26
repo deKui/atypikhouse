@@ -43,25 +43,35 @@
                 @foreach($habitatProprio as $habitat)
 
                     <div class="col-md-4">
-                        <div class="card">
-
-                            <ul class="list-group list-group-flush">
-                                <img class="card-img" src="{{ asset('storage/' . $habitat->photo) }}">
-                                <li class="list-group-item">Titre : {{ $habitat->titre }} </li>
-                                <li class="list-group-item">Description : {{ $habitat->description }} </li>
-                                <li class="list-group-item">Adresse : {{ $habitat->adresse }} {{ $habitat->code_postal }} {{ $habitat->ville }} </li>
-                                <li class="list-group-item">Lit(s) simple(s) : {{ $habitat->nb_lit_simple }} </li>
-                                <li class="list-group-item">Lit(s) double(s) : {{ $habitat->nb_lit_double }} </li>
-                                <li class="list-group-item">Prévu pour {{ $habitat->nb_personne_max }} personnes maximum </li>
-                                <li class="list-group-item">Disponibilité : Du {{ $habitat->date_debut_dispo }} au {{ $habitat->date_fin_dispo }} </li>
-                            </ul> 
-
-                            <div class="card-body">
-                                <a href="{{ route('habitat.edit', $habitat->id) }}" class="btn btn-primary">Modifier</a>
-                                <a href="{{ route('habitat.delete', $habitat->id) }}" class="btn btn-primary">Supprimer</a>
+                        
+                        <a href="{{ route('habitat.show', $habitat->id) }}">
+                            <div class="card atypikcard2">
+                            <div class="item">
+                                <span class="notify-badge">{{ $habitat->prix }}€</span>
+                                <div class="hovereffect">
+                                <img class="card-img2" style="background-image:url({{ asset('storage/' . $habitat->photo) }})">
+                                <div class="overlay">
+                                    <h2>{{ $habitat->titre }}</h2>
+                                    <p>
+                                        <a href="{{ route('habitat.show', $habitat->id) }}">VOIR LE LOGEMENT</a>
+                                    </p>
+                                </div>
                             </div>
-
+                            </div>   
+                                <span class="label logement-label">{{ $habitat->nb_personne_max }} voyageurs</span>
+                                <h4 class="logement-titre ">{{ $habitat->titre }}</h4>
+                                <span class="label logement-label">{{ $habitat->type->nom }}</span>
+                                <span class="label logement-label">{{ $habitat->prix }}€ par nuit - {{ $habitat->ville }}</span>
+                                
+                            </div>
+                        </a>
+                         
+                        <div>
+                            <a href="{{ route('habitat.edit', $habitat->id) }}" class="btn btn-primary">Modifier</a>
+                            <a href="{{ route('habitat.delete', $habitat->id) }}" class="btn btn-primary">Supprimer</a>
                         </div>
+
+                        
                     </div> 
 
                 @endforeach

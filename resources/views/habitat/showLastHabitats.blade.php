@@ -21,7 +21,7 @@
         </div>
         <br/>
         <br/>
-            @foreach($habitats->sortBy('created_at') as $habitat)
+            @foreach($habitats->sortByDesc('created_at')->take(3) as $habitat)
             
             <div class="col-md-4">
             <a href="{{ route('habitat.show', $habitat->id) }}">

@@ -28,7 +28,11 @@
                             <li class="list-group-item">Loué par : {{ $reserv->users->pseudo }} </li>
                             <li class="list-group-item">Du : {{ $reserv->date_debut }} au : {{ $reserv->date_fin }}</li>
                             <li class="list-group-item">Montant : {{ $reserv->montant }} € </li>
-                        </ul> 
+                        </ul>
+
+                        <div class="card-footer">
+                            <a href="{{ route('habitat.show', $reserv->habitats->id)}}" class="btn atypikbutton"> Voir </a>
+                        </div> 
 
                     </div>
                 </div> 
@@ -61,6 +65,10 @@
                             <li class="list-group-item">Montant : {{ $reserv->montant }} € </li>
                         </ul> 
 
+                        <div class="card-footer">
+                            <a href="{{ route('habitat.show', $reserv->habitats->id)}}" class="btn atypikbutton"> Voir </a>
+                        </div>
+
                     </div>
                 </div> 
               @endforeach
@@ -90,6 +98,10 @@
                             <li class="list-group-item">Du : {{ $reserv->date_debut }} au : {{ $reserv->date_fin }}</li>
                             <li class="list-group-item">Montant : {{ $reserv->montant }} € </li>
                         </ul> 
+
+                        <div class="card-footer">
+                            <a href="{{ route('habitat.show', $reserv->habitats->id)}}" class="btn atypikbutton"> Voir </a>
+                        </div>
 
                     </div>
                 </div> 

@@ -184,7 +184,7 @@ class UserController extends Controller
         // Enregistre les modifications de la bdd
         $user->save();
 
-        return redirect('profil/' . $user->id); 
+        return redirect('profil/public/' . $user->id); 
     }
 
 

@@ -23,15 +23,15 @@
 				  <tbody>
 
 			            @foreach($userSignale as $user)
-							    <tr>
-							      <td><img class="card-img" style="width:10%" style="background-image:url({{ asset('storage/' . $user->avatar) }})"></td>
+							    <tr style="text-align: left">
+							      <td><img class="avatar" style="float: none; background-image:url({{ asset('storage/' . $user->avatar) }})"></td>
 							      <td> {{ $user->pseudo }} </td>
 							      <td> {{ $user->description }} </td>
-									<td><a href="{{ route('profil.index', $user->id) }}" class="btn btn-primary atypikbutton">Voir</a></td>
+									<td><a href="{{ route('profil.index', $user->id) }}" class="atypik-badge">Voir</a></td>
 									@if ($user->active == false)
-							      	<td><a href="{{ route('profil.gerantActiveDesactive', $user->id) }}" class="btn btn-primary atypikbutton" style="background:green">Activé</a></td>
+							      	<td><a href="{{ route('profil.gerantActiveDesactive', $user->id) }}" class="atypik-badge" style="background:green">Activé</a></td>
 							      @else 
-							      	<td><a href="{{ route('profil.gerantActiveDesactive', $user->id) }}" class="btn btn-primary atypikbutton" style="background:red">Désactivé</a></td>
+							      	<td><a href="{{ route('profil.gerantActiveDesactive', $user->id) }}" class="atypik-badge" style="background:red">Désactivé</a></td>
 							      @endif
 							    </tr>
 			            @endforeach
@@ -57,11 +57,11 @@
 				  <tbody>
 
 			            @foreach($avisSignale as $avis)
-							    <tr>
+							    <tr style="text-align: left">
 							      <td> {{ $avis->pseudo }} </td>
 							      <td> {{ $avis->titre }} </td>
 							      <td> {{ $avis->comment }} </td>
-							      <td><a href="{{ route('profil.gerantAvis', $avis->id) }}" class="btn btn-primary atypikbutton">Supprimer l'avis</a></td>
+							      <td><a href="{{ route('profil.gerantAvis', $avis->id) }}" class="atypik-badge">Supprimer l'avis</a></td>
 							    </tr>
 			            @endforeach
 
@@ -104,7 +104,7 @@
 			<tbody>
 
 			    @foreach($typeHabitats as $type)
-					<tr>
+					<tr style="text-align: left">
 						<td> {{ $type->nom }} </td>
 					</tr>
 

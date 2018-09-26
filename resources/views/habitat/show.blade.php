@@ -11,7 +11,7 @@
 
                 <div class="card atypikcard2">
                     <img class="card-img2" style="background-image:url({{ asset('storage/' . $habitats->photo) }})">
-
+                        <br>
                         <h4 class="logement-titre ">{{ $habitats->titre }}</h4>
                         <p class="logement-description">{{ $habitats->description }} </p>
                         <br/>
