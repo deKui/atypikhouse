@@ -187,6 +187,13 @@ class HabitatController extends Controller
 
         $proprio = Auth::user()->id;
 
+        $reservationForHbitat = Reservation::where('id_habitat', $id_habitat)->get();
+
+        if ($reservationForHbitat->isNotEmpty()) {
+            return redirect(route('profil.proprio', ['id_utilisateur' => $proprio]))->with('ok', __('Désolé, vous ne pouvez pas supprimer cet habitat car des réservations sont en cours sur celui-ci !'));;
+
+        }
+
         $habitat = Habitat::find($id_habitat);
         $habitat->delete($id_habitat);
 

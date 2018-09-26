@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 <style type="text/css">
+	
 	.calendar_table{
 		width: 100%;
 		height: calc(100vh - 350px);

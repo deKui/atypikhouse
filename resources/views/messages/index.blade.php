@@ -2,8 +2,7 @@
 
 @section('content')
 
-<div class="container">
-	<div class="row">
+<main role="main">
 
 		@if ($users->isEmpty() == true)
 
@@ -19,7 +18,8 @@
 		</div>
 
 		@elseif ($users->isEmpty() == false)
-
+<div class="container">
+	<div class="row">
 		<div class="col-md-12">
 			<h1> Vos conversations </h1>
 			<br>
@@ -31,5 +31,6 @@
 
 	</div>
 </div>
+</main>
 
 @endsection

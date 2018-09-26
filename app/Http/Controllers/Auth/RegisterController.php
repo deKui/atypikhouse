@@ -93,6 +93,12 @@ class RegisterController extends Controller
     {
         $typeHabitat = TypeHabitats::all();
 
-        return view('auth.register', compact('typeHabitat'));
+        $date = new DateTime(date_create('now')->format('Y-m-d'));
+
+        $date->sub(new DateInterval('P18Y'));
+
+        $date = $date->format('Y-m-d');
+
+        return view('auth.register', compact('typeHabitat', 'date'));
     }
 }

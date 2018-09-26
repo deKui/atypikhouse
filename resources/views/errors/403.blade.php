@@ -1,3 +1,7 @@
+<?php
+	$typeHabitat = "";
+?>
+
 @extends('layouts.app')
 
 @section('content')

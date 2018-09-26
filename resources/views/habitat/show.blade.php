@@ -11,7 +11,7 @@
 
                 <div class="card atypikcard2">
                     <img class="card-img2" style="background-image:url({{ asset('storage/' . $habitats->photo) }})">
-
+                        <br>
                         <h4 class="logement-titre ">{{ $habitats->titre }}</h4>
                         <p class="logement-description">{{ $habitats->description }} </p>
                         <br/>
@@ -24,6 +24,8 @@
                         <span class="label logement-label">Lit(s) double(s) : {{ $habitats->nb_lit_double }} </span>
                         <span class="label logement-label">Prévu pour {{ $habitats->nb_personne_max }} personnes maximum </span>
                         <span class="label logement-label">Disponibilité : Du {{ $habitats->date_debut_dispo }} au {{ $habitats->date_fin_dispo }} </span>
+                        <span class="label logement-label"><a href="{{ route('planning.show', [$habitats, intval(date('m')), intval(date('Y'))]) }}"> Voir le planning de disponibilité </a></span>
+
                         
 
                 </div>

@@ -8,7 +8,13 @@
     <br/>
     <p>Partagez votre logement pour financer votre retraite, votre prochain voyage, ou simplement rencontrer des voyageurs.
     </p>
+    @guest
     <a class="btn btn-secondary atypikbutton" style="text-align:right;" href="{{ route('register') }}" role="button">Devenir hôte »</a>
+    @endguest
+
+    @auth
+    <a class="btn btn-secondary atypikbutton" style="text-align:right;" href="{{ route('profil.proprio', auth()->user()->id) }}" role="button">Devenir hôte »</a>
+    @endauth
   </div>
 </div>
 <hr>

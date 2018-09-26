@@ -40,12 +40,12 @@ class MessageRepository {
 		
 		$conversationTo = $this->message->newQuery()
 			->join('users', 'messages.to_id', '=', 'users.id')
-			->select('users.id', 'users.pseudo')
+			->select('users.id', 'users.pseudo', 'users.avatar')
 			->where('messages.from_id', '=', $userId);
 
 		$conversations = $this->message->newQuery()
 			->join('users', 'messages.from_id', '=', 'users.id')
-			->select('users.id', 'users.pseudo')
+			->select('users.id', 'users.pseudo', 'users.avatar')
 			->where('messages.to_id', '=', Auth::id())
 			->union($conversationTo)
 			->get();
